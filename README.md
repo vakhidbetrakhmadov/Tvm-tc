@@ -1,4 +1,4 @@
 # Tvm-tc
 
 
-./opt/conda/anaconda/envs/tc_build/bin/python3
+/opt/conda/anaconda/envs/tc/bin/python3
