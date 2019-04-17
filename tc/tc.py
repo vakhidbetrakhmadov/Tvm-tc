@@ -7,6 +7,8 @@ from generate_options import generate_options
 parser = get_argument_parser()
 args, extra_args = parser.parse_known_args()
 
+torch.backends.cudnn.benchmark = True
+
 MATMUL = """
 def matmul(float(M, K) A, float(K, N) B) -> (C) {
     C(m, n) +=! A(m, r_k) * B(r_k, n)

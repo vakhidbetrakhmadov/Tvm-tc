@@ -1,16 +1,16 @@
 import argparse
 import torch
-import tensor_comprehensions as tc 
+import tensor_comprehensions as tc
 
 def generate_options(args: argparse.Namespace):
 
     tuner_config = (
-    tc.TunerConfig()
-    .threads(args.tuner_threads)
-    .generations(args.tuner_generations)
-    .pop_size(args.tuner_pop_size)
-    .number_elites(args.tuner_number_elites)
-    .devices(args.tuner_devices))
+        tc.TunerConfig()
+        .threads(args.tuner_threads)
+        .generations(args.tuner_generations)
+        .pop_size(args.tuner_pop_size)
+        .number_elites(args.tuner_number_elites)
+        .devices(args.tuner_devices))
 
     def _generate_options(tc_str: str,
                         entry_point: str,
