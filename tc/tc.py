@@ -1,3 +1,4 @@
+import time
 import torch
 import tensor_comprehensions as tc 
 
@@ -22,5 +23,10 @@ M, K, N = 50, 50, 50
 A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
 
 torch.cuda.synchronize()
-
+start = time.clock()
 C = TC.matmul(A, B)
+torch.cuda.synchronize()
+end = time.clock()
+
+print('Result: ', C)
+print('Execution time: ', start - end)
