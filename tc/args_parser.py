@@ -6,16 +6,17 @@ def get_argument_parser():
     )
 
     parser.add_argument(
-        '--debug', action='store_true', help='Run in debug mode.',
+        '--debug', type=lambda x: (str(x) == 'True'), default=False,
+         help='Run in debug mode.',
     )
 
     parser.add_argument(
-        '--autotuner', action='store_true', default=False,
+        '--autotuner', type=lambda x: (str(x) == 'True'), default=False,
         help='Use autotuner to find best mapping options',
     )
 
     parser.add_argument(
-        '--reinforce', action='store_true', default=False,
+        '--reinforce', type=lambda x: (str(x) == 'True'), default=False,
         help='Reinforce the tuning process over time without paying a longer startup cost.',
     )
     parser.add_argument(
@@ -58,7 +59,7 @@ def get_argument_parser():
         help='Perform loop tiling on the generated code with the given sizes. Independent of mapping to a grid of thread blocks.',
     )
     parser.add_argument(
-        '--useSharedMemory', action='store_true',
+        '--useSharedMemory', type=lambda x: (str(x) == 'True'),
         help='Create block-local copies of data in shared memory when this can leverage data reuse or global memory access coalescing.',
     )
     parser.add_argument(
@@ -70,19 +71,19 @@ def get_argument_parser():
         help='Perform loop unrolling on the generated code and produce at most the given number of statements.',
     )
     parser.add_argument(
-        '--unrollCopyShared', action='store_true',
+        '--unrollCopyShared', type=lambda x: (str(x) == 'True'),
         help='Also unroll the copies to and from shared memory introduced by the TC mapper. If unroll value is not provided, has no effect.',
     )
     parser.add_argument(
-        '--useReaOnlyCache', action='store_true',
+        '--useReaOnlyCache', type=lambda x: (str(x) == 'True'),
         help='Emit loads to the readonly cache when appropriate.',
     )
     parser.add_argument(
-        '--matchLibraryCalls', action='store_true',
+        '--matchLibraryCalls', type=lambda x: (str(x) == 'True'),
         help='Replace computation patterns with calls to highly optimized libraries (such as CUB, CUTLASS) when possible.',
     )
     parser.add_argument(
-        '--fixParametersBeforeScheduling', action='store_true',
+        '--fixParametersBeforeScheduling', type=lambda x: (str(x) == 'True'),
         help='Perform automatic loop scheduling taking into account specific tensor sizes. May produce faster kernels but significantly increases compilation time. Note that the mapping will be performed for specific tensor sizes anyway.',
     )
     parser.add_argument(

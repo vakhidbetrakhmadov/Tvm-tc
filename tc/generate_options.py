@@ -35,30 +35,31 @@ def generate_options(args: argparse.Namespace):
             if args.debug: print("Building mapping options.")
 
             options = tc.MappingOptions("naive")
+
             if args.mapToBlocks is not None:
                 options.mapToBlocks(args.mapToBlocks)
             if args.mapToThreads is not None:
-                options.mapToBlocks(args.mapToThreads)
+                options.mapToThreads(args.mapToThreads)
             if args.tile is not None:
-                options.mapToBlocks(args.tile)
+                options.tile(args.tile)
             if args.useSharedMemory is not None:
-                options.mapToBlocks(args.useSharedMemory)
+                options.useSharedMemory(args.useSharedMemory)
             if args.maxSharedMemory is not None:
-                options.mapToBlocks(args.maxSharedMemory)
+                options.maxSharedMemory(args.maxSharedMemory)
             if args.unroll is not None:
-                options.mapToBlocks(args.unroll)
+                options.unroll(args.unroll)
             if args.unrollCopyShared is not None:
-                options.mapToBlocks(args.unrollCopyShared)
+                options.unrollCopyShared(args.unrollCopyShared)
             if args.useReaOnlyCache is not None:
-                options.mapToBlocks(args.useReaOnlyCache)
+                options.useReaOnlyCache(args.useReaOnlyCache)
             if args.matchLibraryCalls is not None:
-                options.mapToBlocks(args.matchLibraryCalls)
+                options.matchLibraryCalls(args.matchLibraryCalls)
             if args.fixParametersBeforeScheduling is not None:
-                options.mapToBlocks(args.fixParametersBeforeScheduling)
+                options.fixParametersBeforeScheduling(args.fixParametersBeforeScheduling)
             if args.outerScheduleFusionStrategy is not None:
-                options.mapToBlocks(args.outerScheduleFusionStrategy)
+                options.outerScheduleFusionStrategy(args.outerScheduleFusionStrategy)
             if args.intraTileFusionStrategy is not None:
-                options.mapToBlocks(args.intraTileFusionStrategy)
+                options.intraTileFusionStrategy(args.intraTileFusionStrategy)
             
             return options
             
