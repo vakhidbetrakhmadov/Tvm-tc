@@ -6,17 +6,16 @@ def get_argument_parser():
     )
 
     parser.add_argument(
-        '--debug', type=bool, default=False,
-        help='Run in debug mode.',
+        '--debug', action='store_true', help='Run in debug mode.',
     )
 
     parser.add_argument(
-        '--autotuner', type=bool, default=True,
+        '--autotuner', action='store_true', default=False,
         help='Use autotuner to find best mapping options',
     )
 
     parser.add_argument(
-        '--reinforce', type=bool, default=False,
+        '--reinforce', action='store_true', default=False,
         help='Reinforce the tuning process over time without paying a longer startup cost.',
     )
     parser.add_argument(
@@ -47,19 +46,19 @@ def get_argument_parser():
     )
 
     parser.add_argument(
-        '--mapToBlocks', type=list,
+        '--mapToBlocks', type=int, nargs='+',
         help='The configuration of CUDA grid, i.e. the number of CUDA blocks along three dimensions. Must be within the range allowed by CUDA (maximum 2^31-1 for the first value and 65535 for the second and third). Note that TC mapper eliminates empty blocks and the actual launch size may be smaller than requested.',
     )
     parser.add_argument(
-        '--mapToThreads', type=list,
+        '--mapToThreads', type=int, nargs='+',
         help='The configuration of CUDA block, i.e. the number of CUDA threads in each block along three dimensions. Must be within the range allowed by CUDA (maximum 1024 for the first and second value, 32 for the third, product below 1024). Note that TC mapper eliminates empty threads and the actual launch size may be smaller than requested.',
     )
     parser.add_argument(
-        '--tile', type=list,
+        '--tile', type=int, nargs='+',
         help='Perform loop tiling on the generated code with the given sizes. Independent of mapping to a grid of thread blocks.',
     )
     parser.add_argument(
-        '--useSharedMemory', type=bool,
+        '--useSharedMemory', action='store_true',
         help='Create block-local copies of data in shared memory when this can leverage data reuse or global memory access coalescing.',
     )
     parser.add_argument(
@@ -71,19 +70,19 @@ def get_argument_parser():
         help='Perform loop unrolling on the generated code and produce at most the given number of statements.',
     )
     parser.add_argument(
-        '--unrollCopyShared', type=bool,
+        '--unrollCopyShared', action='store_true',
         help='Also unroll the copies to and from shared memory introduced by the TC mapper. If unroll value is not provided, has no effect.',
     )
     parser.add_argument(
-        '--useReaOnlyCache', type=bool,
+        '--useReaOnlyCache', action='store_true',
         help='Emit loads to the readonly cache when appropriate.',
     )
     parser.add_argument(
-        '--matchLibraryCalls', type=bool,
+        '--matchLibraryCalls', action='store_true',
         help='Replace computation patterns with calls to highly optimized libraries (such as CUB, CUTLASS) when possible.',
     )
     parser.add_argument(
-        '--fixParametersBeforeScheduling', type=bool,
+        '--fixParametersBeforeScheduling', action='store_true',
         help='Perform automatic loop scheduling taking into account specific tensor sizes. May produce faster kernels but significantly increases compilation time. Note that the mapping will be performed for specific tensor sizes anyway.',
     )
     parser.add_argument(
