@@ -8,7 +8,7 @@ from generate_options import generate_options
 parser = get_argument_parser()
 args, extra_args = parser.parse_known_args()
 
-tc.GlobalDebugInit(["--dump_cuda=true"])
+tc.dump_cuda(True)
 
 torch.backends.cudnn.benchmark = True
 
