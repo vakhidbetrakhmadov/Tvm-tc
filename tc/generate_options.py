@@ -21,6 +21,8 @@ def generate_options(args: argparse.Namespace):
             return tc.make_naive_options_factory()(tc_str, entry_point, *inputs)
 
         if args.autotuner:
+            if args.debug:  print("Running autotuner.")
+
             loaded = tc.make_load_from_cache_options_factory(args.tuner_cache_file)(tc_str, entry_point, *inputs) if args.reinforce else None
             start = loaded if loaded is not None else 'naive'
 
@@ -30,6 +32,8 @@ def generate_options(args: argparse.Namespace):
                 cache_filename=args.tuner_cache_file,
                 store_to_cache=True,)(tc_str, entry_point, *inputs)
         else: 
+            if args.debug: print("Building mapping options.")
+
             options = tc.MappingOptions("naive")
             if args.mapToBlocks is not None:
                 options.mapToBlocks(args.mapToBlocks)

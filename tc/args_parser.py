@@ -6,6 +6,11 @@ def get_argument_parser():
     )
 
     parser.add_argument(
+        '--debug', type=bool, default=False,
+        help='Run in debug mode.',
+    )
+
+    parser.add_argument(
         '--autotuner', type=bool, default=True,
         help='Use autotuner to find best mapping options',
     )
