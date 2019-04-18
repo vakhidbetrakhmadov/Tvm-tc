@@ -11,6 +11,37 @@ def get_argument_parser():
     )
 
     parser.add_argument(
+        '--reinforce', type=bool, default=False,
+        help='Reinforce the tuning process over time without paying a longer startup cost.',
+    )
+    parser.add_argument(
+        '--tuner_threads', type=int, default=16,
+        help='Number of CPU tuning threads.',
+    )
+    parser.add_argument(
+        '--tuner_generations', type=int, default=25,
+        help='Number of tuning generations.',
+    )
+    parser.add_argument(
+        '--tuner_pop_size', type=int, default=100,
+        help='Number candidates per tuning generations.',
+    )
+    parser.add_argument(
+        '--tuner_number_elites', type=int, default=5,
+        help='Number of best tuning candidates that survive each generation.',
+    )
+    parser.add_argument(
+        '--tuner_devices', type=str, default='0',
+        help='Comma separated list of tuning devices.',
+    )
+    parser.add_argument(
+        '--tuner_cache_file',
+        type=str,
+        default='/tmp/cache_condensenet',
+        help='File to store tuned mapping options',
+    )
+
+    parser.add_argument(
         '--mapToBlocks', type=list,
         help='The configuration of CUDA grid, i.e. the number of CUDA blocks along three dimensions. Must be within the range allowed by CUDA (maximum 2^31-1 for the first value and 65535 for the second and third). Note that TC mapper eliminates empty blocks and the actual launch size may be smaller than requested.',
     )
@@ -59,34 +90,4 @@ def get_argument_parser():
         help='Require TC to try and execute different TC expressions interleaved (Max), separately (Min) or interleaved as long as sufficient parallelism is exploited (Preserve3Coincident) by performing loop fusion and fission. Applies to inner loops created by tiling.',
     )
 
-    parser.add_argument(
-        '--reinforce', type=bool, default=False,
-        help='Reinforce the tuning process over time without paying a longer startup cost.',
-    )
-    parser.add_argument(
-        '--tuner_threads', type=int, default=16,
-        help='Number of CPU tuning threads.',
-    )
-    parser.add_argument(
-        '--tuner_generations', type=int, default=25,
-        help='Number of tuning generations.',
-    )
-    parser.add_argument(
-        '--tuner_pop_size', type=int, default=100,
-        help='Number candidates per tuning generations.',
-    )
-    parser.add_argument(
-        '--tuner_number_elites', type=int, default=5,
-        help='Number of best tuning candidates that survive each generation.',
-    )
-    parser.add_argument(
-        '--tuner_devices', type=str, default='0',
-        help='Comma separated list of tuning devices.',
-    )
-    parser.add_argument(
-        '--tuner_cache_file',
-        type=str,
-        default='/tmp/cache_condensenet',
-        help='File to store tuned mapping options',
-    )
     return parser
