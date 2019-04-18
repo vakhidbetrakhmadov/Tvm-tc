@@ -2,7 +2,7 @@ import argparse
 
 def get_argument_parser():
     parser = argparse.ArgumentParser(
-        description='Mapping options config.'
+        description='TC arguments'
     )
 
     parser.add_argument(
