@@ -8,6 +8,8 @@ from generate_options import generate_options
 parser = get_argument_parser()
 args, extra_args = parser.parse_known_args()
 
+tc.GlobalDebugInit(["--dump_cuda=true"])
+
 torch.backends.cudnn.benchmark = True
 
 MATMUL = """
