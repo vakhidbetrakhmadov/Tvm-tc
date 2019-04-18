@@ -29,4 +29,4 @@ torch.cuda.synchronize()
 end = time.clock()
 
 print('Result: ', C)
-print('Execution time: ', start - end)
+print('Execution time: ', end - start)
