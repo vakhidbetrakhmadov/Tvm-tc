@@ -6,12 +6,12 @@ def get_argument_parser():
     )
 
     parser.add_argument(
-        '--debug', type=lambda x: (str(x) == 'True'), default=False,
+        '--debug', type=lambda x: (str(x) == 'False'), default=False,
          help='Run in debug mode.',
     )
 
     parser.add_argument(
-        '--autotuner', type=lambda x: (str(x) == 'True'), default=False,
+        '--autotuner', type=lambda x: (str(x) == 'False'), default=False,
         help='Use autotuner to find best parameters',
     )
 
