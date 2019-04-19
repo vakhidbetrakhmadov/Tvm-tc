@@ -3,10 +3,10 @@ import logging
 import sys
 import numpy as np
 import tvm
-from tvm import autotvm
-import matmul as m 
 
+from tvm import autotvm
 from args_parser import get_argument_parser
+from matmul import matmul_parametric, matmul_autotuner
 
 parser = get_argument_parser()
 args, extra_args = parser.parse_known_args()

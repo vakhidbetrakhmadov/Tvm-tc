@@ -1,6 +1,8 @@
 import tvm
 import argparse
 
+from tvm import autotvm
+
 def matmul_parametric(N, L, M, dtype, args):
     A = tvm.placeholder((N, L), name='A', dtype=dtype)
     B = tvm.placeholder((L, M), name='B', dtype=dtype)
