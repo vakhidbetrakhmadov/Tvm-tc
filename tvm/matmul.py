@@ -20,6 +20,11 @@ def matmul_parametric(N, L, M, dtype, args):
 
     s[C].reorder(yo, xo, k, yi, xi)
 
+    s[C].bind(xo, tvm.thread_axis("blockIdx.xo"))
+    s[C].bind(yo, tvm.thread_axis("blockIdx.yo"))
+    s[C].bind(xi, tvm.thread_axis("threadIdx.xi"))
+    s[C].bind(yi, tvm.thread_axis("threadIdx.yi"))
+
     return s, [A, B, C]
 
 @autotvm.template

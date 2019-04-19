@@ -18,7 +18,7 @@ N, L, M = 50, 50, 50
 if args.autotuner: 
     if args.debug: print("Autotuning schedule parameters")
 
-    task = autotvm.task.create(m.matmul_autotuner, args=(N, L, M, 'float32'), target=target)
+    task = autotvm.task.create(matmul_autotuner, args=(N, L, M, 'float32'), target=target)
 
     # logging config (for printing tuning log to the screen)
     logging.getLogger('autotvm').setLevel(logging.DEBUG)
@@ -51,7 +51,7 @@ if args.autotuner:
 else:
     if args.debug: print("Manual schedule parameters")
 
-    s, arg_bufs = m.matmul_parametric(tvm.var("N"), tvm.var("L"), tvm.var("M"), 'float32', args)
+    s, arg_bufs = matmul_parametric(tvm.var("N"), tvm.var("L"), tvm.var("M"), 'float32', args)
     matmul = tvm.build(s, arg_bufs, target, target_host=target, name="matmul")
     
     a_np = np.random.uniform(size=(N, L)).astype(np.float32)
