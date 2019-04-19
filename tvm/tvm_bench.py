@@ -46,8 +46,11 @@ if args.autotuner:
 
             print('Result: ', c_tvm)
 
-            dev_module = matmul.imported_modules[0]
-            print(dev_module.get_source())
+            if target == "cuda" or target.startswith('opencl'):
+                dev_module = matmul.imported_modules[0]
+                print(dev_module.get_source())
+            else:
+                print(matmul.get_source())
 else:
     if args.debug: print("Manual schedule parameters")
 
@@ -61,5 +64,8 @@ else:
 
     print('Result: ', c_tvm)
 
-    dev_module = matmul.imported_modules[0]
-    print(dev_module.get_source())
+    if target == "cuda" or target.startswith('opencl'):
+        dev_module = matmul.imported_modules[0]
+        print(dev_module.get_source())
+    else:
+        print(matmul.get_source())
