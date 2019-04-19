@@ -41,7 +41,7 @@ if args.autotuner:
 
             a_np = np.random.uniform(size=(N, L)).astype(np.float32)
             b_np = np.random.uniform(size=(L, M)).astype(np.float32)
-            c_tvm = tvm.nd.empty(N, M)
+            c_tvm = tvm.nd.empty((N, M))
             matmul(tvm.nd.array(a_np), tvm.nd.array(b_np), c_tvm)
 
             print('Result: ', c_tvm)
@@ -56,7 +56,7 @@ else:
     
     a_np = np.random.uniform(size=(N, L)).astype(np.float32)
     b_np = np.random.uniform(size=(L, M)).astype(np.float32)
-    c_tvm = tvm.nd.empty(N, M)
+    c_tvm = tvm.nd.empty((N, M))
     matmul(tvm.nd.array(a_np), tvm.nd.array(b_np), c_tvm)
 
     print('Result: ', c_tvm)
