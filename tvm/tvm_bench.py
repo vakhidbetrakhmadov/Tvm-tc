@@ -11,7 +11,7 @@ from matmul import matmul_parametric, matmul_autotuner
 parser = get_argument_parser()
 args, extra_args = parser.parse_known_args()
 
-target = 'llvm'
+target = 'cuda'
 
 N, L, M = 50, 50, 50
 
