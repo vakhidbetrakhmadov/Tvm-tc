@@ -11,6 +11,7 @@ from matmul import matmul_parametric, matmul_autotuner
 parser = get_argument_parser()
 args, extra_args = parser.parse_known_args()
 
+target_host="llvm"
 target = 'cuda'
 
 N, L, M = 50, 50, 50
@@ -55,7 +56,7 @@ else:
     if args.debug: print("Manual schedule parameters")
 
     s, arg_bufs = matmul_parametric(tvm.var("N"), tvm.var("L"), tvm.var("M"), 'float32', args)
-    matmul = tvm.build(s, arg_bufs, target, target_host=target, name="matmul")
+    matmul = tvm.build(s, arg_bufs, target, target_host=target_host, name="matmul")
     
     a_np = np.random.uniform(size=(N, L)).astype(np.float32)
     b_np = np.random.uniform(size=(L, M)).astype(np.float32)
