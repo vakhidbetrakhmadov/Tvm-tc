@@ -58,11 +58,14 @@ else:
     s, arg_bufs = matmul_parametric(tvm.var("N"), tvm.var("L"), tvm.var("M"), 'float32', args)
     matmul = tvm.build(s, arg_bufs, target, target_host=target_host, name="matmul")
     
-    # a_np = np.random.uniform(size=(N, L)).astype(np.float32)
-    # b_np = np.random.uniform(size=(L, M)).astype(np.float32)
-    # ctx = tvm.gpu(0)
-    # c_tvm = tvm.ndarray.empty((N, M), ctx=ctx)
-    # matmul(tvm.ndarray(a_np, ctx=ctx), tvm.ndarray(b_np, ctx=ctx), c_tvm)
+    ctx = tvm.context(target, 0)
+    a_np = np.random.uniform(size=(N, L)).astype(np.float32)
+    a_tvm = tvm.ndarray(a_np, ctx=ctx)
+    b_np = np.random.uniform(size=(L, M)).astype(np.float32)
+    b_tvm = tvm.ndarray(b_np, ctx=ctx)
+    c_tvm = tvm.ndarray.empty((N, M), ctx=ctx)
+
+    # matmul(a_tvm, b_tvm, c_tvm)
 
     # print('Result: ', c_tvm)
 
