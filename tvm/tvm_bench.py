@@ -11,7 +11,7 @@ from matmul import matmul_parametric, matmul_autotuner
 parser = get_argument_parser()
 args, extra_args = parser.parse_known_args()
 
-target_host="llvm"
+target_host = "llvm"
 target = "cuda"
 
 N, L, M = 50, 50, 50
@@ -60,8 +60,9 @@ else:
     
     a_np = np.random.uniform(size=(N, L)).astype(np.float32)
     b_np = np.random.uniform(size=(L, M)).astype(np.float32)
-    c_tvm = tvm.nd.empty((N, M))
-    matmul(tvm.nd.array(a_np), tvm.nd.array(b_np), c_tvm)
+    ctx = tvm.gpu(0)
+    c_tvm = tvm.nd.array.empty((N, M), ctx)
+    matmul(tvm.nd.array(a_np, ctx), tvm.nd.array(b_np, ctx), c_tvm)
 
     print('Result: ', c_tvm)
 
