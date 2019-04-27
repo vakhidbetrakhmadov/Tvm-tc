@@ -12,18 +12,18 @@ def matmul_parametric(N, L, M, dtype, args):
     s = tvm.create_schedule(C.op)
 
     # schedule
-    x, y = s[C].op.axis
+    y, x = s[C].op.axis
     k = s[C].op.reduce_axis[0]
 
-    xo, xi = s[C].split(x, args.x)
     yo, yi = s[C].split(y, args.y)
+    xo, xi = s[C].split(x, args.x)
     
     s[C].reorder(yo, xo, k, yi, xi)
 
-    # s[C].bind(xo, tvm.thread_axis("blockIdx.x"))
-    # s[C].bind(xi, tvm.thread_axis("threadIdx.x"))
-    # s[C].bind(yo, tvm.thread_axis("blockIdx.y"))
-    # s[C].bind(yi, tvm.thread_axis("threadIdx.y"))
+    s[C].bind(xo, tvm.thread_axis("blockIdx.x"))
+    s[C].bind(xi, tvm.thread_axis("threadIdx.x"))
+    s[C].bind(yo, tvm.thread_axis("blockIdx.y"))
+    s[C].bind(yi, tvm.thread_axis("threadIdx.y"))
 
     return s, [A, B, C]
 
