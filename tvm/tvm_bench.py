@@ -66,7 +66,7 @@ else:
     c_np = np.zeros((N,M), dtype=np.float32)
     c_tvm = tvm.nd.array(c_np, ctx)
 
-    # matmul(a_tvm, b_tvm, c_tvm)
+    matmul(a_tvm, b_tvm, c_tvm)
 
     # print('Result: ', c_tvm)
 
