@@ -11,7 +11,7 @@ B = tvm.compute((N), lambda i: A[i] * 3.14, name='B')
 s = tvm.create_schedule(B.op)
 
 x = s[B].op.axis
-s[B].bind(x, tvm.thread_axis("threadIdx.x")
+s[B].bind(x, tvm.thread_axis("threadIdx.x"))
 
 t = tvm.build(s, [A, B], target, target_host=target_host, name="t")
 
