@@ -70,8 +70,8 @@ else:
 
     print('Result: ', c_tvm)
 
-    # if target == "cuda" or target.startswith('opencl'):
-    #     dev_module = matmul.imported_modules[0]
-    #     print(dev_module.get_source())
-    # else:
-    #     print(matmul.get_source())
+    if target == "cuda" or target.startswith('opencl'):
+        dev_module = matmul.imported_modules[0]
+        print(dev_module.get_source())
+    else:
+        print(matmul.get_source())
