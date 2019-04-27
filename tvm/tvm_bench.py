@@ -61,8 +61,8 @@ else:
     a_np = np.random.uniform(size=(N, L)).astype(np.float32)
     b_np = np.random.uniform(size=(L, M)).astype(np.float32)
     ctx = tvm.gpu(0)
-    c_tvm = tvm.nd.array.empty((N, M), ctx)
-    matmul(tvm.nd.array(a_np, ctx), tvm.nd.array(b_np, ctx), c_tvm)
+    c_tvm = tvm.ndarray.empty((N, M), ctx)
+    matmul(tvm.ndarray(a_np, ctx), tvm.ndarray(b_np, ctx), c_tvm)
 
     print('Result: ', c_tvm)
 
