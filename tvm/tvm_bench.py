@@ -59,7 +59,7 @@ else:
     matmul = tvm.build(s, arg_bufs, target, target_host=target_host, name="matmul")
     
     ctx = tvm.context(target, 0)
-    a_np = np.random.uniform(size=(N, L)).astype(A,dtype)
+    a_np = np.random.uniform(size=(N, L)).astype(A.dtype)
     a_tvm = tvm.nd.array(a_np, ctx)
     b_np = np.random.uniform(size=(L, M)).astype(B.dtype)
     b_tvm = tvm.nd.array(b_np, ctx)
