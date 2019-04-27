@@ -68,7 +68,7 @@ else:
 
     matmul(a_tvm, b_tvm, c_tvm)
 
-    # print('Result: ', c_tvm)
+    print('Result: ', c_tvm)
 
     # if target == "cuda" or target.startswith('opencl'):
     #     dev_module = matmul.imported_modules[0]
