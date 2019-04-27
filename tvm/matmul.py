@@ -18,12 +18,12 @@ def matmul_parametric(N, L, M, dtype, args):
     xo, xi = s[C].split(x, args.x)
     yo, yi = s[C].split(y, args.y)
     
-    # s[C].reorder(yo, xo, k, yi, xi)
+    s[C].reorder(yo, xo, k, yi, xi)
 
-    s[C].bind(xo, tvm.thread_axis("blockIdx.x"))
-    s[C].bind(xi, tvm.thread_axis("threadIdx.x"))
-    s[C].bind(yo, tvm.thread_axis("blockIdx.y"))
-    s[C].bind(yi, tvm.thread_axis("threadIdx.y"))
+    # s[C].bind(xo, tvm.thread_axis("blockIdx.x"))
+    # s[C].bind(xi, tvm.thread_axis("threadIdx.x"))
+    # s[C].bind(yo, tvm.thread_axis("blockIdx.y"))
+    # s[C].bind(yi, tvm.thread_axis("threadIdx.y"))
 
     return s, [A, B, C]
 
