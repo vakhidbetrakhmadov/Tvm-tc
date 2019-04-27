@@ -17,7 +17,7 @@ target = "cuda"
 N, L, M = 50, 50, 50
 
 if args.autotuner: 
-    # if args.debug: print("Autotuning schedule parameters")
+    if args.debug: print("Autotuning schedule parameters")
 
     # task = autotvm.task.create(matmul_autotuner, args=(N, L, M, 'float32'), target=target)
 
