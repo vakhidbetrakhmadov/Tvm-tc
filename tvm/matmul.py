@@ -20,7 +20,7 @@ def matmul_parametric(N, L, M, dtype, args):
     
     s[C].reorder(yo, xo, k, yi, xi)
 
-    sd[C].bind(xo, tvm.thread_axis("blockIdx.x"))
+    s[C].bind(xo, tvm.thread_axis("blockIdx.x"))
     s[C].bind(xi, tvm.thread_axis("threadIdx.x"))
     s[C].bind(yo, tvm.thread_axis("blockIdx.y"))
     s[C].bind(yi, tvm.thread_axis("threadIdx.y"))
