@@ -12,7 +12,7 @@ parser = get_argument_parser()
 args, extra_args = parser.parse_known_args()
 
 target_host = "llvm"
-target = "cuda"
+target = "llvm"
 
 N, L, M = 50, 50, 50
 
