@@ -13,17 +13,17 @@ s = tvm.create_schedule(B.op)
 x = s[B].op.axis
 s[B].bind(x, tvm.thread_axis("threadIdx.x")
 
-test = tvm.build(s, [A, B]], target, target_host=target_host, name="test")
+t = tvm.build(s, [A, B], target, target_host=target_host, name="t")
 
 ctx = tvm.gpu(0)
 a_np = np.random.uniform(size=(N)).astype(np.float32)
 a_tvm = tvm.ndarray(a_np, ctx=ctx)
 b_tvm = tvm.ndarray.empty((N), ctx=ctx)
 
-test(a_tvm, b_tvm)
+t(a_tvm, b_tvm)
 
 if target == "cuda" or target.startswith('opencl'):
-    dev_module = test.imported_modules[0]
+    dev_module = t.imported_modules[0]
     print(dev_module.get_source())
 else:
-    print(test.get_source())
+    print(t.get_source())
