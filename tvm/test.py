@@ -1,12 +1,12 @@
 import numpy as np
 import tvm
 
-target_host = "llvm"
-target = "cuda"
+target_host = 'llvm'
+target = 'cuda'
 
 N = 50
 
-A = tvm.placeholder((N), name='A', dtype='float32')
+A = tvm.placeholder((N), name=tvm.var('N'), dtype='float32')
 B = tvm.compute((N), lambda i: A[i] * 3.14, name='B')
 s = tvm.create_schedule(B.op)
 
