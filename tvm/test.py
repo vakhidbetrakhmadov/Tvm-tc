@@ -6,7 +6,7 @@ target = 'cuda'
 
 N = 50
 
-A = tvm.placeholder((N), name=tvm.var('N'), dtype='float32')
+A = tvm.placeholder((tvm.var('N')), name='A', dtype='float32')
 B = tvm.compute((N), lambda i: A[i] * 3.14, name='B')
 s = tvm.create_schedule(B.op)
 
