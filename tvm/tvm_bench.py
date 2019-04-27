@@ -65,10 +65,13 @@ else:
     b_tvm = tvm.nd.array(b_np, ctx)
     c_np = np.zeros((N,M), dtype=np.float32)
     c_tvm = tvm.nd.array(c_np, ctx)
+    c_np = a_np.dot(b_np)
 
     matmul(a_tvm, b_tvm, c_tvm)
 
     print('Result: ', c_tvm)
+
+    tvm.testing.assert_allclose(c_np, c_tvm.asnumpy(), rtol=1e-2)
 
     if target == "cuda" or target.startswith('opencl'):
         dev_module = matmul.imported_modules[0]
