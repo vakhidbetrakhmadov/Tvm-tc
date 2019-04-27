@@ -1,29 +1,33 @@
 import numpy as np
 import tvm
 
-target_host = 'llvm'
-target = 'cuda'
+tgt_host="llvm"
+tgt="cuda"
 
-N = 50
+n = tvm.var("n")
+A = tvm.placeholder((n,), name='A')
+B = tvm.placeholder((n,), name='B')
+C = tvm.compute(A.shape, lambda i: A[i] + B[i], name="C")
 
-A = tvm.placeholder((tvm.var('N')), name='A', dtype='float32')
-B = tvm.compute((N), lambda i: A[i] * 3.14, name='B')
-s = tvm.create_schedule(B.op)
+s = tvm.create_schedule(C.op)
 
-x = s[B].op.axis
-s[B].bind(x, tvm.thread_axis("threadIdx.x"))
+bx, tx = s[C].split(C.op.axis[0], factor=64)
 
-t = tvm.build(s, [A, B], target, target_host=target_host, name="t")
 
-ctx = tvm.gpu(0)
-a_np = np.random.uniform(size=(N)).astype(np.float32)
-a_tvm = tvm.ndarray(a_np, ctx=ctx)
-b_tvm = tvm.ndarray.empty((N), ctx=ctx)
+s[C].bind(bx, tvm.thread_axis("blockIdx.x"))
+s[C].bind(tx, tvm.thread_axis("threadIdx.x"))
 
-t(a_tvm, b_tvm)
+fadd = tvm.build(s, [A, B, C], tgt, target_host=tgt_host, name="myadd")
 
-if target == "cuda" or target.startswith('opencl'):
-    dev_module = t.imported_modules[0]
-    print(dev_module.get_source())
-else:
-    print(t.get_source())
+ctx = tvm.context(tgt, 0)
+
+n = 1024
+a = tvm.nd.array(np.random.uniform(size=n).astype(A.dtype), ctx)
+b = tvm.nd.array(np.random.uniform(size=n).astype(B.dtype), ctx)
+c = tvm.nd.array(np.zeros(n, dtype=C.dtype), ctx)
+fadd(a, b, c)
+tvm.testing.assert_allclose(c.asnumpy(), a.asnumpy() + b.asnumpy())
+
+dev_module = fadd.imported_modules[0]
+print("-----GPU code-----")
+print(dev_module.get_source())
