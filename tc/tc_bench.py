@@ -62,7 +62,7 @@ elif args.prog == 'conv':
 
     torch.cuda.synchronize()
     start = time.clock()
-    OUT = TC.map(IN, WEIGHT)
+    OUT = TC.conv2d(IN, WEIGHT)
     torch.cuda.synchronize()
     end = time.clock()
 
