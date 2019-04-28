@@ -60,7 +60,7 @@ else:
     matmul = tvm.build(s, arg_bufs, target, target_host=target_host, name="matmul")
     end = time.clock()
 
-    print("Done compiling "{}" (compile time: {}ms)".format("matmul", (end - start) * 10 ** 3))
+    print("Done compiling \"{}\" (compile time: {}ms)".format("matmul", (end - start) * 10 ** 3))
     
     ctx = tvm.context(target, 0)
     a_np = np.random.uniform(size=(N, L)).astype(np.float32)
