@@ -12,7 +12,7 @@ def map(float(M) A) -> (B) {
 
 REDUCE = """
 def reduce(float(M) A) -> (B) { 
-    B(0) = 0
-    B(0) += A(m)
+    B(n) = 0 where n 0..0
+    B(n) += A(m) where n 0..0
 }
 """
