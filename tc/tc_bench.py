@@ -58,7 +58,7 @@ elif args.prog == 'conv':
     TC = tc.define(programs.CONV, generate_options(args))
 
     IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
-    WEIGHT = torch.randn().cuda(out_channel, in_channel, kernel, kernel)
+    WEIGHT = torch.randn(out_channel, in_channel, kernel, kernel).cuda()
 
     torch.cuda.synchronize()
     start = time.clock()
