@@ -68,3 +68,35 @@ elif args.prog == 'conv':
 
     print('Result: ', OUT)
     print('Execution time: {} ms'.format((end - start) * 10 ** 3))
+
+elif args.prog == 'trans_matmul':
+    M, K, N = 50, 50, 50
+
+    TC = tc.define(programs.TRANSPOSED_MATMUL, generate_options(args))
+
+    A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+
+    torch.cuda.synchronize()
+    start = time.clock()
+    C = TC.matmul(A, B)
+    torch.cuda.synchronize()
+    end = time.clock()
+
+    print('Result: ', C)
+    print('Execution time: {} ms'.format((end - start) * 10 ** 3))
+
+elif args.prog == 'trans_batch_matmul':
+    B, M, K, N = 50, 50, 50, 50
+
+    TC = tc.define(programs.TRANSPOSED_MATMUL, generate_options(args))
+
+    A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
+
+    torch.cuda.synchronize()
+    start = time.clock()
+    C = TC.matmul(A, B)
+    torch.cuda.synchronize()
+    end = time.clock()
+
+    print('Result: ', C)
+    print('Execution time: {} ms'.format((end - start) * 10 ** 3))
