@@ -88,7 +88,7 @@ elif args.prog == 'trans_matmul':
 elif args.prog == 'trans_batch_matmul':
     B, M, K, N = 50, 50, 50, 50
 
-    TC = tc.define(programs.TRANSPOSED_MATMUL, generate_options(args))
+    TC = tc.define(programs.TRANSPOSED_BATCH_MATMUL, generate_options(args))
 
     A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
 
