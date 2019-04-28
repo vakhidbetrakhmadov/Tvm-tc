@@ -10,10 +10,8 @@ def map(float(M) A) -> (B) {
 }
 """
 
-REDUCE = """
-def reduce(float(M) A) -> (B) {
-    float b = 0
-    b += A(m)
-    B = b
+CONV = """
+def conv2d(float(B,IP,H,W) in, float(OP,IP,KH,KW) weight) → (out) {
+   out(b,op,h,w) +=! in(b,ip, h + kh, w + kw) * weight(op,ip,kh,kw)
 }
 """

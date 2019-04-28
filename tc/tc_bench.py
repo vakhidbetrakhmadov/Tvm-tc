@@ -45,18 +45,26 @@ elif args.prog == 'map':
     print('Result: ', B)
     print('Execution time: {} ms'.format((end - start) * 10 ** 3))
 
-elif args.prog == 'reduce':
-    M = 50
+elif args.prog == 'conv':
+    batch = 256
+    in_channel = 256
+    out_channel = 512
+    in_size = 14
+    kernel = 3
+    stride = 1
+    padding = 0
+    out_size = (in_size - kernel + 2 * padding) // stride + 1
 
-    TC = tc.define(programs.REDUCE, generate_options(args))
+    TC = tc.define(programs.CONV, generate_options(args))
 
-    A = torch.randn(M).cuda()
+    IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
+    WEIGHT = torch.randn().cuda(out_channel, in_channel, kernel, kernel)
 
     torch.cuda.synchronize()
     start = time.clock()
-    B = TC.reduce(A)
+    OUT = TC.map(IN, WEIGHT)
     torch.cuda.synchronize()
     end = time.clock()
 
-    print('Result: ', B)
+    print('Result: ', OUT)
     print('Execution time: {} ms'.format((end - start) * 10 ** 3))
