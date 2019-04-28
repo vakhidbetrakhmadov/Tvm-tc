@@ -56,7 +56,11 @@ else:
     if args.debug: print("Manual schedule parameters")
 
     s, arg_bufs = matmul_parametric(tvm.var("N"), tvm.var("L"), tvm.var("M"), 'float32', args)
+    start = time.clock()
     matmul = tvm.build(s, arg_bufs, target, target_host=target_host, name="matmul")
+    end = time.clock()
+
+    print("Done compiling "{}" (compile time: {}ms)".format("matmul", (end - start) * 10 ** 3))
     
     ctx = tvm.context(target, 0)
     a_np = np.random.uniform(size=(N, L)).astype(np.float32)
@@ -67,9 +71,14 @@ else:
     c_tvm = tvm.nd.array(c_np, ctx)
     c_np = a_np.dot(b_np)
 
+    ctx.sync()
+    start = time.clock()
     matmul(a_tvm, b_tvm, c_tvm)
+    ctx.sync()
+    end = time.clock()
 
     print('Result: ', c_tvm)
+    print('Execution time: {} ms'.format((end - start) * 10 ** 3))
 
     tvm.testing.assert_allclose(c_np, c_tvm.asnumpy(), rtol=1e-2)
 
