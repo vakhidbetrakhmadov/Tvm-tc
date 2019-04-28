@@ -12,6 +12,6 @@ def map(float(M) A) -> (B) {
 
 REDUCE = """
 def reduce(float(M) A) -> (B) { 
-    B(n) +=! A(m) where n 0..0
+    B(n) +=! A(m) where n 0
 }
 """
