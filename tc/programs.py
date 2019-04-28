@@ -11,7 +11,7 @@ def map(float(M) A) -> (B) {
 """
 
 CONV = """
-def conv2d(float(B, IP, H, W) in, float(OP, IP, KH, KW) weight) -> (out) {
-   out(b, op, h, w) +=! in(b, ip, h + kh, w + kw) * weight(op, ip, kh, kw)
+def conv2d(float(B, IP, H, W) IN, float(OP, IP, KH, KW) WEIGHT) -> (OUT) {
+   OUT(b, op, h, w) +=! IN(b, ip, h + kh, w + kw) * WEIGHT(op, ip, kh, kw)
 }
 """
