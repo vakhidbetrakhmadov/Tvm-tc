@@ -21,6 +21,10 @@ def get_argument_parser():
     )
 
     parser.add_argument(
+        '--from_cache', type=lambda x: (str(x) == 'True'), default=False,
+        help='Load autotuned mapping options from cache.',
+    )
+    parser.add_argument(
         '--reinforce', type=lambda x: (str(x) == 'True'), default=False,
         help='Reinforce the tuning process over time without paying a longer startup cost.',
     )

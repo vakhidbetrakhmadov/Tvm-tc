@@ -20,7 +20,9 @@ def generate_options(args: argparse.Namespace):
         if entry_point == 'make_idx':
             return tc.make_naive_options_factory()(tc_str, entry_point, *inputs)
 
-        if args.autotuner:
+        if args.from_cache:
+            return tc.make_load_from_cache_options_factory(args.tuner_cache_file)(tc_str, entry_point, *inputs)
+        elif args.autotuner:
             if args.debug:  print("Running autotuner.")
 
             loaded = tc.make_load_from_cache_options_factory(args.tuner_cache_file)(tc_str, entry_point, *inputs) if args.reinforce else None
