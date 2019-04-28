@@ -11,6 +11,11 @@ def get_argument_parser():
     )
 
     parser.add_argument(
+        '--prog', type=str, default='matmul',
+         help='Program to run.',
+    )
+
+    parser.add_argument(
         '--autotuner', type=lambda x: (str(x) == 'True'), default=False,
         help='Use autotuner to find best mapping options',
     )
@@ -48,11 +53,15 @@ def get_argument_parser():
 
     parser.add_argument(
         '--mapToBlocks', type=int, nargs='+',
-        help='The configuration of CUDA grid, i.e. the number of CUDA blocks along three dimensions. Must be within the range allowed by CUDA (maximum 2^31-1 for the first value and 65535 for the second and third). Note that TC mapper eliminates empty blocks and the actual launch size may be smaller than requested.',
+        help='The configuration of CUDA grid, i.e. the number of CUDA blocks along three dimensions.\
+              Must be within the range allowed by CUDA (maximum 2^31-1 for the first value and 65535 for the second and third).\
+              Note that TC mapper eliminates empty blocks and the actual launch size may be smaller than requested.',
     )
     parser.add_argument(
         '--mapToThreads', type=int, nargs='+',
-        help='The configuration of CUDA block, i.e. the number of CUDA threads in each block along three dimensions. Must be within the range allowed by CUDA (maximum 1024 for the first and second value, 32 for the third, product below 1024). Note that TC mapper eliminates empty threads and the actual launch size may be smaller than requested.',
+        help='The configuration of CUDA block, i.e. the number of CUDA threads in each block along three dimensions.\
+              Must be within the range allowed by CUDA (maximum 1024 for the first and second value, 32 for the third, product below 1024).\
+              Note that TC mapper eliminates empty threads and the actual launch size may be smaller than requested.',
     )
     parser.add_argument(
         '--tile', type=int, nargs='+',
@@ -84,15 +93,20 @@ def get_argument_parser():
     )
     parser.add_argument(
         '--fixParametersBeforeScheduling', type=lambda x: (str(x) == 'True'),
-        help='Perform automatic loop scheduling taking into account specific tensor sizes. May produce faster kernels but significantly increases compilation time. Note that the mapping will be performed for specific tensor sizes anyway.',
+        help='Perform automatic loop scheduling taking into account specific tensor sizes.\
+              May produce faster kernels but significantly increases compilation time. Note that the mapping will be performed for specific tensor sizes anyway.',
     )
     parser.add_argument(
         '--outerScheduleFusionStrategy', type=str,
-        help='Require TC to try and execute different TC expressions interleaved (Max), separately (Min) or interleaved as long as sufficient parallelism is exploited (Preserve3Coincident) by performing loop fusion and fission. Applies before tiling.',
+        help='Require TC to try and execute different TC expressions interleaved (Max),\
+              separately (Min) or interleaved as long as sufficient parallelism is exploited (Preserve3Coincident)\
+              by performing loop fusion and fission. Applies before tiling.',
     )
     parser.add_argument(
         '--intraTileFusionStrategy', type=str,
-        help='Require TC to try and execute different TC expressions interleaved (Max), separately (Min) or interleaved as long as sufficient parallelism is exploited (Preserve3Coincident) by performing loop fusion and fission. Applies to inner loops created by tiling.',
+        help='Require TC to try and execute different TC expressions interleaved (Max),\
+              separately (Min) or interleaved as long as sufficient parallelism is\
+              exploited (Preserve3Coincident) by performing loop fusion and fission. Applies to inner loops created by tiling.',
     )
 
     return parser
