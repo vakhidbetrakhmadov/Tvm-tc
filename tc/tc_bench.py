@@ -78,7 +78,7 @@ elif args.prog == 'trans_matmul':
 
     torch.cuda.synchronize()
     start = time.clock()
-    C = TC.matmul(A, B)
+    C = TC.tmm(A, B)
     torch.cuda.synchronize()
     end = time.clock()
 
@@ -94,7 +94,7 @@ elif args.prog == 'trans_batch_matmul':
 
     torch.cuda.synchronize()
     start = time.clock()
-    C = TC.matmul(A, B)
+    C = TC.tbmm(A, B)
     torch.cuda.synchronize()
     end = time.clock()
 
