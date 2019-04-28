@@ -34,7 +34,7 @@ elif args.prog == 'map':
 
     TC = tc.define(programs.MAP, generate_options(args))
 
-    A, B = torch.randn(M).cuda(), torch.randn(M).cuda()
+    A = torch.randn(M).cuda()
 
     torch.cuda.synchronize()
     start = time.clock()
@@ -46,15 +46,15 @@ elif args.prog == 'map':
     print('Execution time: {} ms'.format((end - start) * 10 ** 3))
 
 elif args.prog == 'reduce':
-    M = 50
+    M, N = 50, 1
 
     TC = tc.define(programs.REDUCE, generate_options(args))
 
-    A, B = torch.randn(M).cuda(), torch.randn(1).cuda()
+    A, B = torch.randn(M).cuda(), torch.randn(N).cuda()
 
     torch.cuda.synchronize()
     start = time.clock()
-    B = TC.map(A)
+    B = TC.reduce(A, B)
     torch.cuda.synchronize()
     end = time.clock()
 
