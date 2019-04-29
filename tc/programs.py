@@ -10,19 +10,19 @@ def map(float(M) A) -> (B) {
 }
 """
 
-CONV = """
+CONV2D = """
 def conv2d(float(B, IP, H, W) IN, float(OP, IP, KH, KW) WEIGHT) -> (OUT) {
    OUT(b, op, h, w) +=! IN(b, ip, h + kh, w + kw) * WEIGHT(op, ip, kh, kw)
 }
 """
 
-TRANSPOSED_MATMUL = """
+TMM = """
 def tmm(float(M,K) A, float(N,K) B) -> (C) {
      C(m,n) +=! A(m,kk) * B(n,kk)
 }
 """
 
-TRANSPOSED_BATCH_MATMUL = """
+TBMM = """
 def tbmm(float(B,N,M) X, float(B,K,M) Y) -> (Z) {
      Z(b,n,k) +=! X(b,n,m) * Y(b,k,m)
 }

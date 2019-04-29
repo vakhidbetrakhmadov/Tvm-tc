@@ -4,7 +4,7 @@ import programs
 import tensor_comprehensions as tc 
 
 from args_parser import get_argument_parser
-from generate_options import generate_options
+from builder import build
 
 parser = get_argument_parser()
 args, extra_args = parser.parse_known_args()
@@ -16,13 +16,13 @@ torch.backends.cudnn.benchmark = True
 if args.prog == 'matmul':
     M, K, N = 50, 50, 50
 
-    TC = tc.define(programs.MATMUL, generate_options(args))
-
     A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
+
+    matmul = build(programs.MATMUL, args.prog, A, B, args)
 
     torch.cuda.synchronize()
     start = time.clock()
-    C = TC.matmul(A, B)
+    C = matmul(A, B)
     torch.cuda.synchronize()
     end = time.clock()
 
@@ -32,20 +32,20 @@ if args.prog == 'matmul':
 elif args.prog == 'map':
     M = 50
 
-    TC = tc.define(programs.MAP, generate_options(args))
-
     A = torch.randn(M).cuda()
+    
+    _map = build(programs.MAP, args.prog, A, args)
 
     torch.cuda.synchronize()
     start = time.clock()
-    B = TC.map(A)
+    B = _map(A)
     torch.cuda.synchronize()
     end = time.clock()
 
     print('Result: ', B)
     print('Execution time: {} ms'.format((end - start) * 10 ** 3))
 
-elif args.prog == 'conv':
+elif args.prog == 'conv2d':
     batch = 256
     in_channel = 256
     out_channel = 512
@@ -55,46 +55,46 @@ elif args.prog == 'conv':
     padding = 0
     out_size = (in_size - kernel + 2 * padding) // stride + 1
 
-    TC = tc.define(programs.CONV, generate_options(args))
-
     IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
     WEIGHT = torch.randn(out_channel, in_channel, kernel, kernel).cuda()
 
+    conv2d = build(programs.CONV2D, args.prog, IN, WEIGHT, args)
+
     torch.cuda.synchronize()
     start = time.clock()
-    OUT = TC.conv2d(IN, WEIGHT)
+    OUT = conv2d(IN, WEIGHT)
     torch.cuda.synchronize()
     end = time.clock()
 
     print('Result: ', OUT)
     print('Execution time: {} ms'.format((end - start) * 10 ** 3))
 
-elif args.prog == 'trans_matmul':
+elif args.prog == 'tmm':
     M, K, N = 50, 50, 50
-
-    TC = tc.define(programs.TRANSPOSED_MATMUL, generate_options(args))
-
+    
     A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+
+    conv = build(programs.TMM, args.prog, A, B, args)
 
     torch.cuda.synchronize()
     start = time.clock()
-    C = TC.tmm(A, B)
+    C = tmm(A, B)
     torch.cuda.synchronize()
     end = time.clock()
 
     print('Result: ', C)
     print('Execution time: {} ms'.format((end - start) * 10 ** 3))
 
-elif args.prog == 'trans_batch_matmul':
+elif args.prog == 'tbmm':
     B, M, K, N = 50, 50, 50, 50
-
-    TC = tc.define(programs.TRANSPOSED_BATCH_MATMUL, generate_options(args))
 
     A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
 
+    tbmm = build(programs.TBMM, args.prog, A, B, args)
+
     torch.cuda.synchronize()
     start = time.clock()
-    C = TC.tbmm(A, B)
+    C = tbmm(A, B)
     torch.cuda.synchronize()
     end = time.clock()
 

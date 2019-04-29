@@ -19,10 +19,13 @@ def get_argument_parser():
         '--autotuner', type=lambda x: (str(x) == 'True'), default=False,
         help='Use autotuner to find best mapping options',
     )
-
     parser.add_argument(
-        '--from_cache', type=lambda x: (str(x) == 'True'), default=False,
+        '--load_from_cache', type=lambda x: (str(x) == 'True'), default=False,
         help='Load autotuned mapping options from cache.',
+    )
+    parser.add_argument(
+        '--store_to_cache', type=lambda x: (str(x) == 'True'), default=False,
+        help='Store autotuned mapping options to cache.',
     )
     parser.add_argument(
         '--reinforce', type=lambda x: (str(x) == 'True'), default=False,
