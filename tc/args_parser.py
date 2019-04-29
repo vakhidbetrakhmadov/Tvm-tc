@@ -19,6 +19,7 @@ def get_argument_parser():
         '--autotuner', type=lambda x: (str(x) == 'True'), default=False,
         help='Use autotuner to find best mapping options',
     )
+    
     parser.add_argument(
         '--load_from_cache', type=lambda x: (str(x) == 'True'), default=False,
         help='Load autotuned mapping options from cache.',

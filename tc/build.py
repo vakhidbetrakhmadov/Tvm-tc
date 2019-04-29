@@ -1,7 +1,15 @@
+import time
 import argparse
 import torch
 import tensor_comprehensions as tc
 
+def build_and_time(args: argparse.Namespace, tc_str: str, entry_point: str, *inputs: torch.Tensor) -> tc.Executor:
+    start = time.clock()
+    exe = build(args, tc_str, entry_point, *inputs)
+    end = time.clock()
+    print("Done compiling \"{}\" (compile time: {}ms)".format("matmul", (end - start) * 10 ** 3))
+    return exe
+        
 def build(args: argparse.Namespace, tc_str: str, entry_point: str, *inputs: torch.Tensor) -> tc.Executor:
     tuner_config = (
         tc.TunerConfig()
