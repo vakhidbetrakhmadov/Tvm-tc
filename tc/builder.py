@@ -2,7 +2,7 @@ import argparse
 import torch
 import tensor_comprehensions as tc
 
-def build(tc_str: str, entry_point: str, *inputs: torch.Tensor, args: argparse.Namespace) -> tc.Executor:
+def build(args: argparse.Namespace, tc_str: str, entry_point: str, *inputs: torch.Tensor) -> tc.Executor:
     tuner_config = (
         tc.TunerConfig()
         .threads(args.tuner_threads)

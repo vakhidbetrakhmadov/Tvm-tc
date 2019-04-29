@@ -26,11 +26,7 @@ def get_argument_parser():
     parser.add_argument(
         '--store_to_cache', type=lambda x: (str(x) == 'True'), default=False,
         help='Store autotuned mapping options to cache.',
-    )
-    parser.add_argument(
-        '--reinforce', type=lambda x: (str(x) == 'True'), default=False,
-        help='Reinforce the tuning process over time without paying a longer startup cost.',
-    )
+    )    
     parser.add_argument(
         '--tuner_threads', type=int, default=16,
         help='Number of CPU tuning threads.',
