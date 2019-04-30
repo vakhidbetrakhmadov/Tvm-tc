@@ -100,8 +100,8 @@ else:
 
         ctx = tvm.context(target, 0)
 
-        a_tvm = tvm.nd.array(np.random.uniform(size=(N, L)).astype(np.float32), ctx)
-        b_tvm = tvm.nd.array(np.zeros((N,M), dtype=np.float32), ctx)
+        a_tvm = tvm.nd.array(np.random.uniform(size=(M)).astype(np.float32), ctx)
+        b_tvm = tvm.nd.array(np.zeros((M), dtype=np.float32), ctx)
 
         def callback(exe):
             exe(a_tvm, b_tvm)
