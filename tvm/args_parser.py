@@ -11,6 +11,11 @@ def get_argument_parser():
     )
 
     parser.add_argument(
+        '--prog', type=str, default='matmul',
+         help='Program to run.',
+    )
+
+    parser.add_argument(
         '--autotuner', type=lambda x: (str(x) == 'False'), default=False,
         help='Use autotuner to find best parameters',
     )

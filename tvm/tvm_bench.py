@@ -3,10 +3,10 @@ import logging
 import sys
 import numpy as np
 import tvm
+import programs
 
 from tvm import autotvm
 from args_parser import get_argument_parser
-from matmul import matmul_parametric, matmul_autotuner
 
 parser = get_argument_parser()
 args, extra_args = parser.parse_known_args()
@@ -14,7 +14,26 @@ args, extra_args = parser.parse_known_args()
 target_host = "llvm"
 target = "cuda"
 
-N, L, M = 50, 50, 50
+def run_and_time(s, arg_bufs, name, ctx, *input, output):
+    start = time.clock()
+    exe = tvm.build(s, arg_bufs, target, target_host=target_host, name=name)
+    end = time.clock()    
+
+    print("Done compiling \"{}\" (compile time: {}ms)".format(name, (end - start) * 10 ** 3))
+    
+    ctx.sync()
+    start = time.clock()
+    exe(*input, output)
+    ctx.sync()
+    end = time.clock()
+
+    print('Result: ', output)
+    print('Execution time: {} ms'.format((end - start) * 10 ** 3))
+
+    if target == "cuda" or target.startswith('opencl'):
+        print(exe.imported_modules[0].get_source())
+    else:
+        print(exe.get_source())
 
 if args.autotuner: 
     if args.debug: print("Autotuning schedule parameters")
@@ -54,36 +73,17 @@ if args.autotuner:
     #             print(matmul.get_source())
 else:
     if args.debug: print("Manual schedule parameters")
-
-    s, arg_bufs = matmul_parametric(tvm.var("N"), tvm.var("L"), tvm.var("M"), 'float32', args)
-    start = time.clock()
-    matmul = tvm.build(s, arg_bufs, target, target_host=target_host, name="matmul")
-    end = time.clock()
-
-    print("Done compiling \"{}\" (compile time: {}ms)".format("matmul", (end - start) * 10 ** 3))
     
-    ctx = tvm.context(target, 0)
-    a_np = np.random.uniform(size=(N, L)).astype(np.float32)
-    a_tvm = tvm.nd.array(a_np, ctx)
-    b_np = np.random.uniform(size=(L, M)).astype(np.float32)
-    b_tvm = tvm.nd.array(b_np, ctx)
-    c_np = np.zeros((N,M), dtype=np.float32)
-    c_tvm = tvm.nd.array(c_np, ctx)
-    c_np = a_np.dot(b_np)
+    if args.prog == "matmul":
 
-    ctx.sync()
-    start = time.clock()
-    matmul(a_tvm, b_tvm, c_tvm)
-    ctx.sync()
-    end = time.clock()
+        N, L, M = 50, 50, 50
 
-    print('Result: ', c_tvm)
-    print('Execution time: {} ms'.format((end - start) * 10 ** 3))
+        s, arg_bufs = programs.matmul_parametric(tvm.var("N"), tvm.var("L"), tvm.var("M"), 'float32', args)
 
-    tvm.testing.assert_allclose(c_np, c_tvm.asnumpy(), rtol=1e-2)
+        ctx = tvm.context(target, 0)
+        
+        a_tvm = tvm.nd.array(np.random.uniform(size=(N, L)).astype(np.float32), ctx)    
+        b_tvm = tvm.nd.array(np.random.uniform(size=(L, M)).astype(np.float32), ctx)
+        c_tvm = tvm.nd.array(np.zeros((N,M), dtype=np.float32), ctx)
 
-    if target == "cuda" or target.startswith('opencl'):
-        dev_module = matmul.imported_modules[0]
-        print(dev_module.get_source())
-    else:
-        print(matmul.get_source())
+        run_and_time(s, arg_bufs, args.prog, ctx, a_tvm, b_tvm, output=c_tvm)
