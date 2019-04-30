@@ -138,13 +138,7 @@ def conv2d(in_size, in_channel, batch, kernel, out_channel, stride, args):
     s[WW].bind(tx, thread_x)
     s[WW].vectorize(fi)  # vectorize memory load
 
-    return s, [A, W, B
-
-
-
-
-
-
+    return s, [A, W, B]
 
 
 
