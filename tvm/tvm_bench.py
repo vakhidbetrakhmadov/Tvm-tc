@@ -131,7 +131,7 @@ else:
 
         run_and_time(s, arg_bufs, args.prog, ctx, callback)
 
-    elif args.tmm == "tmm":
+    elif args.prog == "tmm":
 
         M, K, N = 50, 50, 50
 
