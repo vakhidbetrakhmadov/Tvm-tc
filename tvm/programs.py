@@ -36,7 +36,7 @@ def _map(args):
     s = tvm.create_schedule(B.op)
     
     # schedule
-    x = s[B].op.axis
+    x = s[B].op.axis[0]
 
     s[B].bind(x, tvm.thread_axis("threadIdx.x"))
 
