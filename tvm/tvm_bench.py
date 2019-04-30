@@ -14,7 +14,7 @@ args, extra_args = parser.parse_known_args()
 target_host = "llvm"
 target = "cuda"
 
-def run_and_time(s, arg_bufs, name, ctx, *input, output):
+def run_and_time(s, arg_bufs, name, ctx, *input, out):
     start = time.clock()
     exe = tvm.build(s, arg_bufs, target, target_host=target_host, name=name)
     end = time.clock()    
@@ -23,11 +23,11 @@ def run_and_time(s, arg_bufs, name, ctx, *input, output):
     
     ctx.sync()
     start = time.clock()
-    exe(*input, output)
+    exe(*input, out)
     ctx.sync()
     end = time.clock()
 
-    print('Result: ', output)
+    print('Result: ', out)
     print('Execution time: {} ms'.format((end - start) * 10 ** 3))
 
     if target == "cuda" or target.startswith('opencl'):
@@ -86,4 +86,4 @@ else:
         b_tvm = tvm.nd.array(np.random.uniform(size=(L, M)).astype(np.float32), ctx)
         c_tvm = tvm.nd.array(np.zeros((N,M), dtype=np.float32), ctx)
 
-        run_and_time(s, arg_bufs, args.prog, ctx, a_tvm, b_tvm, output=c_tvm)
+        run_and_time(s, arg_bufs, args.prog, ctx, a_tvm, b_tvm, out=c_tvm)
