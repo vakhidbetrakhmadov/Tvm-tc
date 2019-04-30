@@ -28,5 +28,9 @@ def get_argument_parser():
         '-y', type=int, default=8,
         help='Tiling factor for y axis for split schedule primitive.',
     )
+    parser.add_argument(
+        '-z', type=int, default=8,
+        help='Tiling factor for z axis for split schedule primitive.',
+    )
 
     return parser

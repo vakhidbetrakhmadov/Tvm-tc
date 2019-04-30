@@ -155,7 +155,7 @@ def tmm(args):
     xo, xi = s[C].split(x, args.x)
     yo, yi = s[C].split(y, args.y)
     
-    # s[C].reorder(xo, yo, k, xi, yi)
+    # s[C].reorder(xo, yo, k, xi, yi) ... 
 
     s[C].bind(xo, tvm.thread_axis("blockIdx.x"))
     s[C].bind(xi, tvm.thread_axis("threadIdx.x"))
@@ -163,6 +163,36 @@ def tmm(args):
     s[C].bind(yi, tvm.thread_axis("threadIdx.y"))
 
     return s, [A, B, C]
+
+def tbmm(args):
+    B, N, M, K  = tvm.var("B"), tvm.var("N"), tvm.var("M"), tvm.var("K")
+
+    A = tvm.placeholder((B, N, M), name='A', dtype="float32")
+    B = tvm.placeholder((B, K, M), name='B', dtype="float32")
+
+    m = tvm.reduce_axis((0, M), name='m')
+    C = tvm.compute((B, N, K), lambda b, n, k: tvm.sum(A[b, n, m] * B[b, k, m], axis=m), name='C')
+    s = tvm.create_schedule(C.op)
+
+    x, y, z = s[C].op.axis
+    m = s[C].op.reduce_axis[0]
+
+    xo, xi = s[C].split(x, args.x)
+    yo, yi = s[C].split(y, args.y)
+    zo, zi = s[C].split(z, args.z)
+
+    # s[C].reorder(xo, yo, k, xi, yi) ... 
+
+    s[C].bind(xo, tvm.thread_axis("blockIdx.x"))
+    s[C].bind(xi, tvm.thread_axis("threadIdx.x"))
+    s[C].bind(yo, tvm.thread_axis("blockIdx.y"))
+    s[C].bind(yi, tvm.thread_axis("threadIdx.y"))
+    s[C].bind(zo, tvm.thread_axis("blockIdx.z"))
+    s[C].bind(zi, tvm.thread_axis("threadIdx.z"))
+
+    return s, [A, B, C]
+
+
 
 
 
