@@ -78,7 +78,7 @@ else:
 
         N, L, M = 50, 50, 50
 
-        s, arg_bufs = programs.matmul_parametric(tvm.var("N"), tvm.var("L"), tvm.var("M"), 'float32', args)
+        s, arg_bufs = programs.matmul_parametric(args)
 
         ctx = tvm.context(target, 0)
         
@@ -90,4 +90,21 @@ else:
             exe(a_tvm, b_tvm, c_tvm)
             return c_tvm
 
+        run_and_time(s, arg_bufs, args.prog, ctx, callback)
+    
+    elif args.prog == "map":
+
+        M = 50
+
+        s, arg_bufs = programs._map(args)
+
+        ctx = tvm.context(target, 0)
+
+        a_tvm = tvm.nd.array(np.random.uniform(size=(N, L)).astype(np.float32), ctx)
+        b_tvm = tvm.nd.array(np.zeros((N,M), dtype=np.float32), ctx)
+
+        def callback(exe):
+            exe(a_tvm, b_tvm)
+            return b_tvm
+        
         run_and_time(s, arg_bufs, args.prog, ctx, callback)

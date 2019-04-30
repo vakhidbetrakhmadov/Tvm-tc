@@ -3,9 +3,10 @@ import argparse
 
 from tvm import autotvm
 
-def matmul_parametric(N, L, M, dtype, args):
-    A = tvm.placeholder((N, L), name='A', dtype=dtype)
-    B = tvm.placeholder((L, M), name='B', dtype=dtype)
+def matmul_parametric(args):
+    N, L, M = tvm.var("N"), tvm.var("L"), tvm.var("M")
+    A = tvm.placeholder((N, L), name='A', dtype="float32")
+    B = tvm.placeholder((L, M), name='B', dtype="float32")
 
     k = tvm.reduce_axis((0, L), name='k')
     C = tvm.compute((N, M), lambda i, j: tvm.sum(A[i, k] * B[k, j], axis=k), name='C')
@@ -27,8 +28,9 @@ def matmul_parametric(N, L, M, dtype, args):
 
     return s, [A, B, C]
 
-def _map(M, dtype, args):
-    A = tvm.placeholder((M), name='A', dtype=dtype)
+def _map(args):
+    M = tvm.var("M")
+    A = tvm.placeholder((M), name='A', dtype="float32")
 
     B = tvm.compute((M), lambda i: A[i] * 3.14, name='B')
     s = tvm.create_schedule(B.op)
