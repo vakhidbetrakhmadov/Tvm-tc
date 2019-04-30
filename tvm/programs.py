@@ -60,7 +60,7 @@ def conv2d(in_size, in_channel, batch, kernel, out_channel, stride, args):
 
     # Designate the memory hierarchy
     s = tvm.create_schedule(B.op)
-    s[A].compute_inline() # compute Apad inline
+    
     AA = s.cache_read(A, 'shared', [B])
     WW = s.cache_read(W, "shared", [B])
     AL = s.cache_read(AA, "local", [B])
