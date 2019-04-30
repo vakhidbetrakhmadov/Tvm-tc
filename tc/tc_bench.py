@@ -48,7 +48,6 @@ def main():
         kernel = 3
         stride = 1
         padding = 0
-        out_size = (in_size - kernel + 2 * padding) // stride + 1
 
         IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
         WEIGHT = torch.randn(out_channel, in_channel, kernel, kernel).cuda()

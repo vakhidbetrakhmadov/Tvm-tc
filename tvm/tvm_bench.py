@@ -81,7 +81,6 @@ else:
         s, arg_bufs = programs.matmul_parametric(args)
 
         ctx = tvm.context(target, 0)
-        
         a_tvm = tvm.nd.array(np.random.uniform(size=(N, L)).astype(np.float32), ctx)    
         b_tvm = tvm.nd.array(np.random.uniform(size=(L, M)).astype(np.float32), ctx)
         c_tvm = tvm.nd.array(np.zeros((N,M), dtype=np.float32), ctx)
@@ -99,7 +98,6 @@ else:
         s, arg_bufs = programs._map(args)
 
         ctx = tvm.context(target, 0)
-
         a_tvm = tvm.nd.array(np.random.uniform(size=(M)).astype(np.float32), ctx)
         b_tvm = tvm.nd.array(np.zeros((M), dtype=np.float32), ctx)
 
@@ -107,4 +105,28 @@ else:
             exe(a_tvm, b_tvm)
             return b_tvm
         
+        run_and_time(s, arg_bufs, args.prog, ctx, callback)
+
+    elif args.prog == "conv2d":
+
+        batch = 256
+        in_channel = 256
+        out_channel = 512
+        in_size = 14
+        kernel = 3
+        stride = 1
+        pad = 0
+        out_size = (in_size - kernel + 2*pad) // stride + 1
+
+        s, arg_bufs = programs.conv2d(in_size, in_channel, batch, kernel, out_channel, stride, args)
+
+        ctx = tvm.context(target, 0)
+        a_tvm = tvm.nd.array(np.random.uniform(size=(in_size, in_size, in_channel, batch)).astype("float32"), ctx)
+        w_tvm = tvm.nd.array(np.random.uniform(size=(kernel, kernel, in_channel, out_channel)).astype("float32"), ctx)
+        b_tvm = tvm.nd.array(np.zeros((out_size, out_size, out_channel, batch), dtype="float32"), ctx)
+
+        def callback(exe):
+            exe(a_tvm, w_tvm, b_tvm)
+            return b_tvm
+
         run_and_time(s, arg_bufs, args.prog, ctx, callback)
