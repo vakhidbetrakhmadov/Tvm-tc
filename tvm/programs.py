@@ -3,7 +3,7 @@ import argparse
 
 from tvm import autotvm
 
-def matmul_parametric(args):
+def matmul(args):
     N, L, M = tvm.var("N"), tvm.var("L"), tvm.var("M")
     A = tvm.placeholder((N, L), name='A', dtype="float32")
     B = tvm.placeholder((L, M), name='B', dtype="float32")
@@ -140,20 +140,29 @@ def conv2d(in_size, in_channel, batch, kernel, out_channel, stride, args):
 
     return s, [A, W, B]
 
+def tmm(args):
+    M, K, N  = tvm.var("M"), tvm.var("K"), tvm.var("N")
+    A = tvm.placeholder((M, K), name='A', dtype="float32")
+    B = tvm.placeholder((N, K), name='B', dtype="float32")
 
+    k = tvm.reduce_axis((0, K), name='k')
+    C = tvm.compute((M, N), lambda i, j: tvm.sum(A[i, k] * B[j, k], axis=k), name='C')
+    s = tvm.create_schedule(C.op)
 
+    x, y = s[C].op.axis
+    k = s[C].op.reduce_axis[0]
 
+    xo, xi = s[C].split(x, args.x)
+    yo, yi = s[C].split(y, args.y)
+    
+    # s[C].reorder(xo, yo, k, xi, yi)
 
+    s[C].bind(xo, tvm.thread_axis("blockIdx.x"))
+    s[C].bind(xi, tvm.thread_axis("threadIdx.x"))
+    s[C].bind(yo, tvm.thread_axis("blockIdx.y"))
+    s[C].bind(yi, tvm.thread_axis("threadIdx.y"))
 
-
-
-
-
-
-
-
-
-
+    return s, [A, B, C]
 
 
 

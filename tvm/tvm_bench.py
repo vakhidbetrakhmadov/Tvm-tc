@@ -78,7 +78,7 @@ else:
 
         N, L, M = 50, 50, 50
 
-        s, arg_bufs = programs.matmul_parametric(args)
+        s, arg_bufs = programs.matmul(args)
 
         ctx = tvm.context(target, 0)
         a_tvm = tvm.nd.array(np.random.uniform(size=(N, L)).astype(np.float32), ctx)    
@@ -128,5 +128,22 @@ else:
         def callback(exe):
             exe(a_tvm, w_tvm, b_tvm)
             return b_tvm
+
+        run_and_time(s, arg_bufs, args.prog, ctx, callback)
+
+    elif args.tmm == "tmm":
+
+        M, K, N = 50, 50, 50
+
+        s, arg_bufs = programs.tmm(args)
+
+        ctx = tvm.context(target, 0)
+        a_tvm = tvm.nd.array(np.random.uniform(size=(M, K)).astype(np.float32), ctx)
+        b_tvm = tvm.nd.array(np.random.uniform(size=(N, K)).astype(np.float32), ctx)
+        c_tvm = tvm.nd.array(np.zeros((M,N), dtype=np.float32), ctx)
+
+        def callback(exe):
+            exe(a_tvm, b_tvm, c_tvm)
+            return c_tvm
 
         run_and_time(s, arg_bufs, args.prog, ctx, callback)
