@@ -155,12 +155,12 @@ else:
         s, arg_bufs = programs.tmm(args)
 
         ctx = tvm.context(target, 0)
-        a_tvm = tvm.nd.array(np.random.uniform(size=(B, N, M)).astype(np.float32), ctx)
-        b_tvm = tvm.nd.array(np.random.uniform(size=(B, K, M)).astype(np.float32), ctx)
-        c_tvm = tvm.nd.array(np.zeros((B, N, K), dtype=np.float32), ctx)
+        x_tvm = tvm.nd.array(np.random.uniform(size=(B, N, M)).astype(np.float32), ctx)
+        y_tvm = tvm.nd.array(np.random.uniform(size=(B, K, M)).astype(np.float32), ctx)
+        z_tvm = tvm.nd.array(np.zeros((B, N, K), dtype=np.float32), ctx)
 
         def callback(exe):
-            exe(a_tvm, b_tvm, c_tvm)
-            return c_tvm
+            exe(x_tvm, y_tvm, z_tvm)
+            return z_tvm
 
         run_and_time(s, arg_bufs, args.prog, ctx, callback)
