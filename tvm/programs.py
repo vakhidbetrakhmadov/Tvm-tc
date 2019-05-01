@@ -175,7 +175,7 @@ def tbmm(args):
     s = tvm.create_schedule(Z.op)
 
     x, y, z = s[Z].op.axis
-    m = s[Z].op.reduce_axis[2]
+    # m = s[Z].op.reduce_axis[0]
 
     xo, xi = s[Z].split(x, args.x)
     yo, yi = s[Z].split(y, args.y)
