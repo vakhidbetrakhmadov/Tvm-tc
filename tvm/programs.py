@@ -167,30 +167,30 @@ def tmm(args):
 def tbmm(args):
     B, N, M, K  = tvm.var("B"), tvm.var("N"), tvm.var("M"), tvm.var("K")
 
-    A = tvm.placeholder((B, N, M), name='A', dtype="float32")
-    B = tvm.placeholder((B, K, M), name='B', dtype="float32")
+    X = tvm.placeholder((B, N, M), name='X', dtype="float32")
+    Y = tvm.placeholder((B, K, M), name='Y', dtype="float32")
 
     m = tvm.reduce_axis((0, M), name='m')
-    C = tvm.compute((B, N, K), lambda b, n, k: tvm.sum(A[b, n, m] * B[b, k, m], axis=m), name='C')
-    s = tvm.create_schedule(C.op)
+    Z = tvm.compute((B, N, K), lambda b, n, k: tvm.sum(X[b, n, m] * Y[b, k, m], axis=m), name='Z')
+    s = tvm.create_schedule(Z.op)
 
-    x, y, z = s[C].op.axis
-    m = s[C].op.reduce_axis[0]
+    x, y, z = s[Z].op.axis
+    m = s[Z].op.reduce_axis[0]
 
-    xo, xi = s[C].split(x, args.x)
-    yo, yi = s[C].split(y, args.y)
-    zo, zi = s[C].split(z, args.z)
+    xo, xi = s[Z].split(x, args.x)
+    yo, yi = s[Z].split(y, args.y)
+    zo, zi = s[Z].split(z, args.z)
 
-    # s[C].reorder(xo, yo, k, xi, yi) ... 
+    # s[Z].reorder(xo, yo, k, xi, yi) ... 
 
-    s[C].bind(xo, tvm.thread_axis("blockIdx.x"))
-    s[C].bind(xi, tvm.thread_axis("threadIdx.x"))
-    s[C].bind(yo, tvm.thread_axis("blockIdx.y"))
-    s[C].bind(yi, tvm.thread_axis("threadIdx.y"))
-    s[C].bind(zo, tvm.thread_axis("blockIdx.z"))
-    s[C].bind(zi, tvm.thread_axis("threadIdx.z"))
+    s[Z].bind(xo, tvm.thread_axis("blockIdx.x"))
+    s[Z].bind(xi, tvm.thread_axis("threadIdx.x"))
+    s[Z].bind(yo, tvm.thread_axis("blockIdx.y"))
+    s[Z].bind(yi, tvm.thread_axis("threadIdx.y"))
+    s[Z].bind(zo, tvm.thread_axis("blockIdx.z"))
+    s[Z].bind(zi, tvm.thread_axis("threadIdx.z"))
 
-    return s, [A, B, C]
+    return s, [X, Y, Z]
 
 
 
