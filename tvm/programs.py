@@ -170,7 +170,7 @@ def tbmm(args):
     X = tvm.placeholder((B, N, M), name='X', dtype="float32")
     Y = tvm.placeholder((B, K, M), name='Y', dtype="float32")
 
-    m = tvm.reduce_axis((0, 0, M), name='m')
+    m = tvm.reduce_axis((0, M), name='m')
     Z = tvm.compute((B, N, K), lambda b, n, k: tvm.sum(X[b, n, m] * Y[b, k, m], axis=m), name='Z')
     s = tvm.create_schedule(Z.op)
 

@@ -152,7 +152,7 @@ else:
 
         B, N, M, K  = 50, 50, 50, 50
 
-        s, arg_bufs = programs.tmm(args)
+        s, arg_bufs = programs.tbmm(args)
 
         ctx = tvm.context(target, 0)
         x_tvm = tvm.nd.array(np.random.uniform(size=(B, N, M)).astype(np.float32), ctx)
