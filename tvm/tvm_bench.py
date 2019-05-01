@@ -57,7 +57,7 @@ if args.autotuner:
         tuner.tune(n_trial=10, measure_option=measure_option, callbacks=[autotvm.callback.log_to_file('{}.log'.format(args.prog))])
 
         # apply history best from log file
-        with autotvm.apply_history_best('.log'.format(args.prog)):
+        with autotvm.apply_history_best('{}.log'.format(args.prog)):
             with tvm.target.create(target):
                 s, arg_bufs = programs.matmul_auto(N, L, M, 'float32')
 
