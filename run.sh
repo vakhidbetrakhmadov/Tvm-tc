@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # TC config 
-logfile = log.txt
-tc_python = /opt/conda/anaconda/envs/tc_build/bin/python3
+alias tc_python = /opt/conda/anaconda/envs/tc_build/bin/python3
+logfile = "log.txt"
 pop_size = 1
 generations = 1
 
