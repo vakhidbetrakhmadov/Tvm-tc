@@ -59,20 +59,17 @@ if args.autotuner:
     with autotvm.apply_history_best('matmul.log'):
         with tvm.target.create(target):
             s, arg_bufs = programs.matmul_auto(N, L, M, 'float32')
-            matmul = tvm.build(s, arg_bufs)
 
-            a_np = np.random.uniform(size=(N, L)).astype(np.float32)
-            b_np = np.random.uniform(size=(L, M)).astype(np.float32)
-            c_tvm = tvm.nd.empty((N, M))
-            matmul(tvm.nd.array(a_np), tvm.nd.array(b_np), c_tvm)
+            ctx = tvm.context(target, 0)
+            a_tvm = tvm.nd.array(np.random.uniform(size=(N, L)).astype(np.float32), ctx)
+            b_tvm = tvm.nd.array(np.random.uniform(size=(L, M)).astype(np.float32), ctx)
+            c_tvm = tvm.nd.array(np.zeros((N,M), dtype=np.float32), ctx)
 
-            print('Result: ', c_tvm)
+            def callback(exe):
+                exe(a_tvm, b_tvm, c_tvm)
+                return c_tvm
 
-            if target == "cuda" or target.startswith('opencl'):
-                dev_module = matmul.imported_modules[0]
-                print(dev_module.get_source())
-            else:
-                print(matmul.get_source())
+            run_and_time(s, arg_bufs, args.prog, ctx, callback)
 else:
     if args.debug: print("Manual schedule parameters")
     
