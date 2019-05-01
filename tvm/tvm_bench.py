@@ -74,95 +74,95 @@ if args.autotuner:
             else:
                 print(matmul.get_source())
 else:
-    # if args.debug: print("Manual schedule parameters")
+    if args.debug: print("Manual schedule parameters")
     
-    # if args.prog == "matmul":
+    if args.prog == "matmul":
 
-    #     N, L, M = 50, 50, 50
+        N, L, M = 50, 50, 50
 
-    #     s, arg_bufs = programs.matmul(args)
+        s, arg_bufs = programs.matmul(args)
 
-    #     ctx = tvm.context(target, 0)
-    #     a_tvm = tvm.nd.array(np.random.uniform(size=(N, L)).astype(np.float32), ctx)    
-    #     b_tvm = tvm.nd.array(np.random.uniform(size=(L, M)).astype(np.float32), ctx)
-    #     c_tvm = tvm.nd.array(np.zeros((N,M), dtype=np.float32), ctx)
+        ctx = tvm.context(target, 0)
+        a_tvm = tvm.nd.array(np.random.uniform(size=(N, L)).astype(np.float32), ctx)    
+        b_tvm = tvm.nd.array(np.random.uniform(size=(L, M)).astype(np.float32), ctx)
+        c_tvm = tvm.nd.array(np.zeros((N,M), dtype=np.float32), ctx)
 
-    #     def callback(exe):
-    #         exe(a_tvm, b_tvm, c_tvm)
-    #         return c_tvm
+        def callback(exe):
+            exe(a_tvm, b_tvm, c_tvm)
+            return c_tvm
 
-    #     run_and_time(s, arg_bufs, args.prog, ctx, callback)
+        run_and_time(s, arg_bufs, args.prog, ctx, callback)
     
-    # elif args.prog == "map":
+    elif args.prog == "map":
 
-    #     M = 50
+        M = 50
 
-    #     s, arg_bufs = programs._map(args)
+        s, arg_bufs = programs._map(args)
 
-    #     ctx = tvm.context(target, 0)
-    #     a_tvm = tvm.nd.array(np.random.uniform(size=(M)).astype(np.float32), ctx)
-    #     b_tvm = tvm.nd.array(np.zeros((M), dtype=np.float32), ctx)
+        ctx = tvm.context(target, 0)
+        a_tvm = tvm.nd.array(np.random.uniform(size=(M)).astype(np.float32), ctx)
+        b_tvm = tvm.nd.array(np.zeros((M), dtype=np.float32), ctx)
 
-    #     def callback(exe):
-    #         exe(a_tvm, b_tvm)
-    #         return b_tvm
+        def callback(exe):
+            exe(a_tvm, b_tvm)
+            return b_tvm
         
-    #     run_and_time(s, arg_bufs, args.prog, ctx, callback)
+        run_and_time(s, arg_bufs, args.prog, ctx, callback)
 
-    # elif args.prog == "conv2d":
+    elif args.prog == "conv2d":
 
-    #     batch = 256
-    #     in_channel = 256
-    #     out_channel = 512
-    #     in_size = 14
-    #     kernel = 3
-    #     stride = 1
-    #     pad = 0
-    #     out_size = (in_size - kernel + 2*pad) // stride + 1
+        batch = 256
+        in_channel = 256
+        out_channel = 512
+        in_size = 14
+        kernel = 3
+        stride = 1
+        pad = 0
+        out_size = (in_size - kernel + 2*pad) // stride + 1
 
-    #     s, arg_bufs = programs.conv2d(in_size, in_channel, batch, kernel, out_channel, stride, args)
+        s, arg_bufs = programs.conv2d(in_size, in_channel, batch, kernel, out_channel, stride, args)
 
-    #     ctx = tvm.context(target, 0)
-    #     a_tvm = tvm.nd.array(np.random.uniform(size=(in_size, in_size, in_channel, batch)).astype("float32"), ctx)
-    #     w_tvm = tvm.nd.array(np.random.uniform(size=(kernel, kernel, in_channel, out_channel)).astype("float32"), ctx)
-    #     b_tvm = tvm.nd.array(np.zeros((out_size, out_size, out_channel, batch), dtype="float32"), ctx)
+        ctx = tvm.context(target, 0)
+        a_tvm = tvm.nd.array(np.random.uniform(size=(in_size, in_size, in_channel, batch)).astype("float32"), ctx)
+        w_tvm = tvm.nd.array(np.random.uniform(size=(kernel, kernel, in_channel, out_channel)).astype("float32"), ctx)
+        b_tvm = tvm.nd.array(np.zeros((out_size, out_size, out_channel, batch), dtype="float32"), ctx)
 
-    #     def callback(exe):
-    #         exe(a_tvm, w_tvm, b_tvm)
-    #         return b_tvm
+        def callback(exe):
+            exe(a_tvm, w_tvm, b_tvm)
+            return b_tvm
 
-    #     run_and_time(s, arg_bufs, args.prog, ctx, callback)
+        run_and_time(s, arg_bufs, args.prog, ctx, callback)
 
-    # elif args.prog == "tmm":
+    elif args.prog == "tmm":
 
-    #     M, K, N = 50, 50, 50
+        M, K, N = 50, 50, 50
 
-    #     s, arg_bufs = programs.tmm(args)
+        s, arg_bufs = programs.tmm(args)
 
-    #     ctx = tvm.context(target, 0)
-    #     a_tvm = tvm.nd.array(np.random.uniform(size=(M, K)).astype(np.float32), ctx)
-    #     b_tvm = tvm.nd.array(np.random.uniform(size=(N, K)).astype(np.float32), ctx)
-    #     c_tvm = tvm.nd.array(np.zeros((M,N), dtype=np.float32), ctx)
+        ctx = tvm.context(target, 0)
+        a_tvm = tvm.nd.array(np.random.uniform(size=(M, K)).astype(np.float32), ctx)
+        b_tvm = tvm.nd.array(np.random.uniform(size=(N, K)).astype(np.float32), ctx)
+        c_tvm = tvm.nd.array(np.zeros((M,N), dtype=np.float32), ctx)
 
-    #     def callback(exe):
-    #         exe(a_tvm, b_tvm, c_tvm)
-    #         return c_tvm
+        def callback(exe):
+            exe(a_tvm, b_tvm, c_tvm)
+            return c_tvm
 
-    #     run_and_time(s, arg_bufs, args.prog, ctx, callback)
+        run_and_time(s, arg_bufs, args.prog, ctx, callback)
 
-    # elif args.prog == "tbmm":
+    elif args.prog == "tbmm":
 
-    #     B, N, M, K  = 50, 50, 50, 50
+        B, N, M, K  = 50, 50, 50, 50
 
-    #     s, arg_bufs = programs.tbmm(args)
+        s, arg_bufs = programs.tbmm(args)
 
-    #     ctx = tvm.context(target, 0)
-    #     x_tvm = tvm.nd.array(np.random.uniform(size=(B, N, M)).astype(np.float32), ctx)
-    #     y_tvm = tvm.nd.array(np.random.uniform(size=(B, K, M)).astype(np.float32), ctx)
-    #     z_tvm = tvm.nd.array(np.zeros((B, N, K), dtype=np.float32), ctx)
+        ctx = tvm.context(target, 0)
+        x_tvm = tvm.nd.array(np.random.uniform(size=(B, N, M)).astype(np.float32), ctx)
+        y_tvm = tvm.nd.array(np.random.uniform(size=(B, K, M)).astype(np.float32), ctx)
+        z_tvm = tvm.nd.array(np.zeros((B, N, K), dtype=np.float32), ctx)
 
-    #     def callback(exe):
-    #         exe(x_tvm, y_tvm, z_tvm)
-    #         return z_tvm
+        def callback(exe):
+            exe(x_tvm, y_tvm, z_tvm)
+            return z_tvm
 
-    #     run_and_time(s, arg_bufs, args.prog, ctx, callback)
+        run_and_time(s, arg_bufs, args.prog, ctx, callback)
