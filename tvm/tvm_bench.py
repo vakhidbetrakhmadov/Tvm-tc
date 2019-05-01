@@ -157,7 +157,7 @@ else:
         ctx = tvm.context(target, 0)
         a_tvm = tvm.nd.array(np.random.uniform(size=(B, N, M)).astype(np.float32), ctx)
         b_tvm = tvm.nd.array(np.random.uniform(size=(B, K, M)).astype(np.float32), ctx)
-        c_tvm = tvm.nd.array(np.zeros((B, N, K), dtype=np.float32), ctx)
+        c_tvm = tvm.nd.array(np.zeros(size=(B, N, K), dtype=np.float32), ctx)
 
         def callback(exe):
             exe(a_tvm, b_tvm, c_tvm)
