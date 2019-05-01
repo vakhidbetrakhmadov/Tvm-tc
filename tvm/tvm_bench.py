@@ -38,39 +38,41 @@ def run_and_time(s, arg_bufs, name, ctx, callback):
 if args.autotuner: 
     if args.debug: print("Autotuning schedule parameters")
 
-    # task = autotvm.task.create(matmul_autotuner, args=(N, L, M, 'float32'), target=target)
+    N, L, M = 50, 50, 50
 
-    # # logging config (for printing tuning log to the screen)
-    # logging.getLogger('autotvm').setLevel(logging.DEBUG)
-    # logging.getLogger('autotvm').addHandler(logging.StreamHandler(sys.stdout))
+    task = autotvm.task.create(programs.matmul_auto, args=(N, L, M, 'float32'), target=target)
 
-    # # There are two steps for measuring a config: build and run.
-    # # By default, we use all cpu cores to compile program. Then measure them sequentially.
-    # # We measure 5 times and take average to reduce variance.
-    # measure_option = autotvm.measure_option(builder='local', runner=autotvm.LocalRunner(number=5))
+    # logging config (for printing tuning log to the screen)
+    logging.getLogger('autotvm').setLevel(logging.DEBUG)
+    logging.getLogger('autotvm').addHandler(logging.StreamHandler(sys.stdout))
 
-    # # begin tuning, log records to file `matmul.log`
-    # tuner = autotvm.tuner.RandomTuner(task)
-    # tuner.tune(n_trial=10, measure_option=measure_option, callbacks=[autotvm.callback.log_to_file('matmul.log')])
+    # There are two steps for measuring a config: build and run.
+    # By default, we use all cpu cores to compile program. Then measure them sequentially.
+    # We measure 5 times and take average to reduce variance.
+    measure_option = autotvm.measure_option(builder='local', runner=autotvm.LocalRunner(number=5))
 
-    # # apply history best from log file
-    # with autotvm.apply_history_best('matmul.log'):
-    #     with tvm.target.create(target):
-    #         s, arg_bufs = matmul(N, L, M, 'float32')
-    #         matmul = tvm.build(s, arg_bufs)
+    # begin tuning, log records to file `matmul.log`
+    tuner = autotvm.tuner.RandomTuner(task)
+    tuner.tune(n_trial=10, measure_option=measure_option, callbacks=[autotvm.callback.log_to_file('matmul.log')])
 
-    #         a_np = np.random.uniform(size=(N, L)).astype(np.float32)
-    #         b_np = np.random.uniform(size=(L, M)).astype(np.float32)
-    #         c_tvm = tvm.nd.empty((N, M))
-    #         matmul(tvm.nd.array(a_np), tvm.nd.array(b_np), c_tvm)
+    # apply history best from log file
+    with autotvm.apply_history_best('matmul.log'):
+        with tvm.target.create(target):
+            s, arg_bufs = programs.matmul_auto(N, L, M, 'float32')
+            matmul = tvm.build(s, arg_bufs)
 
-    #         print('Result: ', c_tvm)
+            a_np = np.random.uniform(size=(N, L)).astype(np.float32)
+            b_np = np.random.uniform(size=(L, M)).astype(np.float32)
+            c_tvm = tvm.nd.empty((N, M))
+            matmul(tvm.nd.array(a_np), tvm.nd.array(b_np), c_tvm)
 
-    #         if target == "cuda" or target.startswith('opencl'):
-    #             dev_module = matmul.imported_modules[0]
-    #             print(dev_module.get_source())
-    #         else:
-    #             print(matmul.get_source())
+            print('Result: ', c_tvm)
+
+            if target == "cuda" or target.startswith('opencl'):
+                dev_module = matmul.imported_modules[0]
+                print(dev_module.get_source())
+            else:
+                print(matmul.get_source())
 else:
     if args.debug: print("Manual schedule parameters")
     
