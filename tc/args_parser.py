@@ -51,7 +51,7 @@ def get_argument_parser():
     parser.add_argument(
         '--tuner_cache_file',
         type=str,
-        default='/tmp/cache_condensenet',
+        default='/Tvm-tc/tc/cache',
         help='File to store tuned mapping options',
     )
 
