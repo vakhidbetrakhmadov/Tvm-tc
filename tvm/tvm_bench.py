@@ -54,7 +54,7 @@ if args.autotuner:
 
         # begin tuning, log records to file `matmul.log`
         tuner = autotvm.tuner.RandomTuner(task)
-        tuner.tune(n_trial=10, measure_option=measure_option, callbacks=[autotvm.callback.log_to_file('{}.log'.format(args.prog))])
+        tuner.tune(n_trial=100, measure_option=measure_option, callbacks=[autotvm.callback.log_to_file('{}.log'.format(args.prog))])
 
         # apply history best from log file
         with autotvm.apply_history_best('{}.log'.format(args.prog)):
