@@ -21,6 +21,11 @@ def get_argument_parser():
     )
 
     parser.add_argument(
+        '--count', type=int, default=5,
+        help='How many time to run.',
+    )
+
+    parser.add_argument(
         '--autotuner', type=lambda x: (str(x) == 'True'), default=False,
         help='Use autotuner to find best mapping options',
     )

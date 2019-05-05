@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # TC config 
-pop_size=1
-generations=1
+pop_size=100
+generations=12
 logfile="log.txt"
 
 run_tc() {
@@ -28,3 +28,4 @@ for program in matmul map conv2d tmm tbmm; do
 done
 
 #TVM config 
+
