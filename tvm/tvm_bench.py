@@ -81,6 +81,8 @@ else:
 
         N, L, M, _ = args.size
 
+        print(N, L, M)
+
         s, arg_bufs = programs.matmul(args)
 
         ctx = tvm.context(target, 0)
