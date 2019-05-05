@@ -6,7 +6,7 @@ def matmul(float(M, K) A, float(K, N) B) -> (C) {
 
 MAP = """
 def map(float(M) A) -> (B) {
-    B(m) +=! A(m) * 3.14
+    B(m) =! A(m) * 3.14
 }
 """
 
