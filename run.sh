@@ -15,5 +15,5 @@ run_tc() {
 
 for program in matmul, map, conv2d, tmm, tbmm
 do 
-    run_tc 1 1 program "log.txt"
+    run_tc 1 1 program log.txt
 done
