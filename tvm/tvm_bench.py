@@ -45,7 +45,7 @@ if args.autotuner:
     if args.prog == "matmul":
         N, L, M = 50, 50, 50
 
-        task = autotvm.task.create(programs.matmul_auto, target=target)
+        task = autotvm.task.create(programs.matmul_auto, args=(), target=target)
 
         # There are two steps for measuring a config: build and run.
         # By default, we use all cpu cores to compile program. Then measure them sequentially.
