@@ -38,7 +38,7 @@ def main():
         A = torch.randn(M).cuda()
         
         _map = build_and_time(args, programs.MAP, args.prog, A)
-        run_and_time(matmul, _map)
+        run_and_time(_map, A)
 
     elif args.prog == 'conv2d':
         batch = 256

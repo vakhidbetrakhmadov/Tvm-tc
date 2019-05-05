@@ -11,7 +11,7 @@ def get_argument_parser():
     )
 
     parser.add_argument(
-        '--prog', type=str, default='matmul',
+        '--prog', type=str, default='',
          help='Program to run.',
     )
 
