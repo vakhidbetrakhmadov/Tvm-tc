@@ -8,7 +8,7 @@ logfile="log.txt"
 run_tc() {
     echo $1 $2 $3 $4
 
-    arg1='50 50 50'
+    arg1='50 50 50 50'
     arg2='256 256 512 14 3'
 
     if [ "$3" = "conv2d" ]; then

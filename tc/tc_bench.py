@@ -27,7 +27,7 @@ def main():
     if args.debug: print(args.size)
 
     if args.prog == 'matmul':
-        M, K, N = args.size
+        M, K, N, _ = args.size
 
         A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
 
@@ -35,7 +35,7 @@ def main():
         run_and_time(matmul, A, B)
         
     elif args.prog == 'map':
-        M, _, _ = args.size
+        M, _, _, _ = args.size
 
         A = torch.randn(M).cuda()
         
@@ -61,7 +61,7 @@ def main():
         run_and_time(conv2d, IN, WEIGHT)
 
     elif args.prog == 'tmm':
-        M, K, N = args.size
+        M, K, N, _ = args.size
         
         A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
 
