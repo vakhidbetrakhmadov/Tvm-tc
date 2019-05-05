@@ -20,7 +20,7 @@ def run_and_time(exe: tc.Executor, *inputs: torch.Tensor):
     torch.cuda.synchronize()
     end = time.clock()
 
-    print('Result: ', out)
+    # print('Result: ', out)
     print('Execution time: {} ms'.format((end - start) * 10 ** 3))
 
 def main():
