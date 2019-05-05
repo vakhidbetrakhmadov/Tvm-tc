@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # TC config 
-pop_size=100
-generations=12
+pop_size=1
+generations=1
 logfile="log.txt"
 
 run_tc() {
