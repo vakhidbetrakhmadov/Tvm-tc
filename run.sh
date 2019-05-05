@@ -15,12 +15,12 @@ run_tc() {
 rm $logfile
 
 for program in matmul map tmm tbmm; do
-    for size in '50'; do
+    for size in "'50 50 50'"; do
         run_tc $pop_size $generations $program $size $logfile
     done
 done
 
-for size in '256 256 512 14 3'; do
+for size in "'256 256 512 14 3'"; do
     run_tc $pop_size $generations conv2d $size $logfile
 done
 

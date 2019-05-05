@@ -33,7 +33,7 @@ def main():
         run_and_time(matmul, A, B)
         
     elif args.prog == 'map':
-        M = args.size
+        M, _, _ = args.size
 
         A = torch.randn(M).cuda()
         
