@@ -2,8 +2,9 @@
 
 # TC config 
 run_tc() {
-    echo $1, $2 $3
+    echo $1 $2 $3 $4
     /opt/conda/anaconda/envs/tc_build/bin/python3 tc/tc_bench.py --debug=True --autotuner=True --store_to_cache=True --tuner_pop_size=$1 --tuner_generations=$2 --prog=$3 &>> $4
+    cat "\n\n\n\n" >> $4
     return
 }
 
