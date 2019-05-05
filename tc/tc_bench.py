@@ -24,6 +24,8 @@ def run_and_time(exe: tc.Executor, *inputs: torch.Tensor):
     print('Execution time: {} ms'.format((end - start) * 10 ** 3))
 
 def main():
+    if args.debug: print(args.size)
+
     if args.prog == 'matmul':
         M, K, N = args.size
 
