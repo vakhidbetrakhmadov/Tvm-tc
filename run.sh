@@ -40,13 +40,13 @@ run_tvm() {
     arg1_1='256 256 512 14 3'
     arg2_1='50 50 50 50'
 
-    if [ "$3" = "conv2d" ]; then
+    if [ "$1" = "conv2d" ]; then
         python tvm/tvm_bench.py --debug=True --prog=$1 --size $arg1_1 >> $2
     else 
         python tvm/tvm_bench.py --debug=True --prog=$1 --size $arg2_1 >> $2
     fi 
 
-    echo -e "\n - - - - \n" >> $4
+    echo -e "\n - - - - \n" >> $2
     return
 }
 
