@@ -111,3 +111,5 @@ rm $tvm_logfile
 for program in matmul map conv2d tmm tbmm; do
     run_tvm $program $tvm_logfile    
 done
+
+git add . && git commit -m 'Refactoring' && git push origin
