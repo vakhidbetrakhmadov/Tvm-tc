@@ -227,20 +227,3 @@ def matmul_auto():
     s[C].bind(yi, tvm.thread_axis("threadIdx.y"))
 
     return s, [A, B, C]
-
-def _map(args):
-    M = tvm.var("M")
-    A = tvm.placeholder((M), name='A', dtype="float32")
-
-    B = tvm.compute((M), lambda i: A[i] * 3.14, name='B')
-    s = tvm.create_schedule(B.op)
-
-    # schedule
-    x = s[B].op.axis[0]
-
-    xo, xi = s[B].split(x, args.x)
-
-    s[B].bind(xo, tvm.thread_axis("blockIdx.x"))
-    s[B].bind(xi, tvm.thread_axis("threadIdx.x"))
-
-    return s, [A, B]

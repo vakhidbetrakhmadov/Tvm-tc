@@ -25,7 +25,7 @@ def run_and_time(exe: tc.Executor, *inputs: torch.Tensor):
 
 def main():
     if args.prog == 'matmul':
-        M, K, N = 50, 50, 50
+        M, K, N = args.size
 
         A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
 
@@ -33,7 +33,7 @@ def main():
         run_and_time(matmul, A, B)
         
     elif args.prog == 'map':
-        M = 50
+        M = args.size
 
         A = torch.randn(M).cuda()
         
@@ -41,11 +41,14 @@ def main():
         run_and_time(_map, A)
 
     elif args.prog == 'conv2d':
-        batch = 256
-        in_channel = 256
-        out_channel = 512
-        in_size = 14
-        kernel = 3
+        batch, in_channel, out_channel, in_size, kernel = args.size
+
+        # batch = 256
+        # in_channel = 256
+        # out_channel = 512
+        # in_size = 14
+        # kernel = 3
+
         stride = 1
         padding = 0
 
@@ -56,7 +59,7 @@ def main():
         run_and_time(conv2d, IN, WEIGHT)
 
     elif args.prog == 'tmm':
-        M, K, N = 50, 50, 50
+        M, K, N = args.size
         
         A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
 
@@ -64,7 +67,7 @@ def main():
         run_and_time(tmm, A, B)
 
     elif args.prog == 'tbmm':
-        B, M, K, N = 50, 50, 50, 50
+        B, M, K, N = args.size
 
         A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
 

@@ -16,6 +16,11 @@ def get_argument_parser():
     )
 
     parser.add_argument(
+        '--size', type=int, nargs='+',
+        help='Input size.',
+    )
+
+    parser.add_argument(
         '--autotuner', type=lambda x: (str(x) == 'True'), default=False,
         help='Use autotuner to find best mapping options',
     )
