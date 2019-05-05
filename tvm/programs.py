@@ -196,10 +196,9 @@ def tbmm(args):
     return s, [X, Y, Z]
 
 @autotvm.template
-def matmul_auto():
-    N, L, M = tvm.var("N"), tvm.var("L"), tvm.var("M")
-    A = tvm.placeholder((N, L), name='A', dtype="float32")
-    B = tvm.placeholder((L, M), name='B', dtype="float32")
+def matmul_auto(N, L, M, dtype):
+    A = tvm.placeholder((N, L), name='A', dtype=dtype)
+    B = tvm.placeholder((L, M), name='B', dtype=dtype)
 
     k = tvm.reduce_axis((0, L), name='k')
     C = tvm.compute((N, M), lambda i, j: tvm.sum(A[i, k] * B[k, j], axis=k), name='C')
