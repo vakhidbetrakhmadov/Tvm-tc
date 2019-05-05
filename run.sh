@@ -14,7 +14,7 @@ run_tc() {
 
 rm $logfile
 
-sizes1 = ('50 50 50')
+sizes1=('50 50 50')
 for program in matmul map tmm tbmm; do
     for size in ${sizes1[*]}; do
         run_tc $pop_size $generations $program $size $logfile
