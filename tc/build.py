@@ -7,7 +7,7 @@ def build_and_time(args: argparse.Namespace, tc_str: str, entry_point: str, *inp
     start = time.clock()
     exe = build(args, tc_str, entry_point, *inputs)
     end = time.clock()
-    print("Done compiling \"{}\" (compile time: {}ms)".format("matmul", (end - start) * 10 ** 3))
+    print("Done compiling \"{}\" (compile time: {}ms)".format(entry_point, (end - start) * 10 ** 3))
     return exe
         
 def build(args: argparse.Namespace, tc_str: str, entry_point: str, *inputs: torch.Tensor) -> tc.Executor:
