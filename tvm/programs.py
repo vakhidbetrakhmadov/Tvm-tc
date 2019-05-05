@@ -38,7 +38,10 @@ def _map(args):
     # schedule
     x = s[B].op.axis[0]
 
-    s[B].bind(x, tvm.thread_axis("threadIdx.x"))
+    xo, xi = s[B].split(x, args.x)
+
+    s[B].bind(xo, tvm.thread_axis("blockIdx.x"))
+    s[B].bind(xi, tvm.thread_axis("threadIdx.x"))
 
     return s, [A, B]
 
@@ -193,9 +196,10 @@ def tbmm(args):
     return s, [X, Y, Z]
 
 @autotvm.template
-def matmul_auto(N, L, M, dtype):
-    A = tvm.placeholder((N, L), name='A', dtype=dtype)
-    B = tvm.placeholder((L, M), name='B', dtype=dtype)
+def matmul_auto():
+    N, L, M = tvm.var("N"), tvm.var("L"), tvm.var("M")
+    A = tvm.placeholder((N, L), name='A', dtype="float32")
+    B = tvm.placeholder((L, M), name='B', dtype="float32")
 
     k = tvm.reduce_axis((0, L), name='k')
     C = tvm.compute((N, M), lambda i, j: tvm.sum(A[i, k] * B[k, j], axis=k), name='C')
@@ -223,3 +227,20 @@ def matmul_auto(N, L, M, dtype):
     s[C].bind(yi, tvm.thread_axis("threadIdx.y"))
 
     return s, [A, B, C]
+
+def _map(args):
+    M = tvm.var("M")
+    A = tvm.placeholder((M), name='A', dtype="float32")
+
+    B = tvm.compute((M), lambda i: A[i] * 3.14, name='B')
+    s = tvm.create_schedule(B.op)
+
+    # schedule
+    x = s[B].op.axis[0]
+
+    xo, xi = s[B].split(x, args.x)
+
+    s[B].bind(xo, tvm.thread_axis("blockIdx.x"))
+    s[B].bind(xi, tvm.thread_axis("threadIdx.x"))
+
+    return s, [A, B]
