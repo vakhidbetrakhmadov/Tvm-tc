@@ -150,7 +150,7 @@ else:
 
     elif args.prog == "tbmm":
 
-        B, N, M, K  = args.size
+        N, M, K, B  = args.size
 
         s, arg_bufs = programs.tbmm(args)
 

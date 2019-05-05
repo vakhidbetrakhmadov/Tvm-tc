@@ -72,7 +72,7 @@ def main():
         run_and_time(args.count, tmm, A, B)
 
     elif args.prog == 'tbmm':
-        B, M, K, N = args.size
+        M, K, N, B = args.size
 
         A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
 
