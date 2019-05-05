@@ -21,7 +21,7 @@ def get_argument_parser():
     )
 
     parser.add_argument(
-        '--count', type=int, default=5,
+        '--count', type=int, default=10,
         help='How many time to run.',
     )
 
