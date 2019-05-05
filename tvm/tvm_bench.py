@@ -21,14 +21,17 @@ def run_and_time(s, arg_bufs, name, ctx, callback):
 
     print("Done compiling \"{}\" (compile time: {}ms)".format(name, (end - start) * 10 ** 3))
     
-    ctx.sync()
-    start = time.clock()
-    output = callback(exe)
-    ctx.sync()
-    end = time.clock()
+    total_time = 0
+    for _ in range(0, args.count):
+        ctx.sync()
+        start = time.clock()
+        output = callback(exe)
+        ctx.sync()
+        end = time.clock()
+        total_time += (end - start)
 
-    print('Result: ', output)
-    print('Execution time: {} ms'.format((end - start) * 10 ** 3))
+    # print('Result: ', output)
+    print('Execution time: {} ms'.format((total_time / args.count) * 10 ** 3))
 
     if target == "cuda" or target.startswith('opencl'):
         print(exe.imported_modules[0].get_source())
@@ -76,7 +79,7 @@ else:
     
     if args.prog == "matmul":
 
-        N, L, M = 50, 50, 50
+        N, L, M, _ = args.size
 
         s, arg_bufs = programs.matmul(args)
 
@@ -93,7 +96,7 @@ else:
     
     elif args.prog == "map":
 
-        M = 50
+        M, _, _, _ = args.size
 
         s, arg_bufs = programs._map(args)
 
@@ -109,11 +112,8 @@ else:
 
     elif args.prog == "conv2d":
 
-        batch = 256
-        in_channel = 256
-        out_channel = 512
-        in_size = 14
-        kernel = 3
+        batch, in_channel, out_channel, in_size, kernel = args.size
+
         stride = 1
         pad = 0
         out_size = (in_size - kernel + 2*pad) // stride + 1
@@ -133,7 +133,7 @@ else:
 
     elif args.prog == "tmm":
 
-        M, K, N = 50, 50, 50
+        M, K, N, _ = args.size
 
         s, arg_bufs = programs.tmm(args)
 
@@ -150,7 +150,7 @@ else:
 
     elif args.prog == "tbmm":
 
-        B, N, M, K  = 50, 50, 50, 50
+        B, N, M, K  = args.size
 
         s, arg_bufs = programs.tbmm(args)
 
