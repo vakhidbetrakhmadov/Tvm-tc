@@ -60,11 +60,11 @@ run_tc() {
     return
 }
 
-# rm $tc_logfile
+rm $tc_logfile
 
-# for program in matmul map conv2d tmm tbmm; do
-#     run_tc $pop_size $generations $program $tc_logfile    
-# done
+for program in matmul map conv2d tmm tbmm; do
+    run_tc $pop_size $generations $program $tc_logfile    
+done
 
 # - - - TVM config - - - 
 
