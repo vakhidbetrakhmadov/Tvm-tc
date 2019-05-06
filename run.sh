@@ -2,8 +2,8 @@
 
 # - - - TC config - - - 
 
-pop_size=100
-generations=12
+pop_size=50
+generations=8
 tc_logfile="tc_log.txt"
 
 run_tc() {
