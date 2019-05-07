@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # - - - TC config - - - 
-
 pop_size=1
 generations=1
 tc_logfile="tc_log.txt"
@@ -67,7 +66,6 @@ for program in matmul map conv2d tmm tbmm; do
 done
 
 # - - - TVM config - - - 
-
 tvm_logfile="tvm_log.txt"
 
 run_tvm() { 
