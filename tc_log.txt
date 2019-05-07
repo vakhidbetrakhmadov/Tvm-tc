@@ -1,0 +1,3315 @@
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:23:00.965673    94 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_50_50_50(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[50] = reinterpret_cast<float (*)[50]>(pC);
+  const float (*A)[50] = reinterpret_cast<const float (*)[50]>(pA);
+  const float (*B)[50] = reinterpret_cast<const float (*)[50]>(pB);
+  if (t0 + 32 * b1 <= 49) {
+    for (int c2 = 0; c2 <= 49; c2 += 32) {
+      for (int c3 = t1; c3 <= min(31, -32 * b0 + 49); c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= min(31, -c2 + 49); c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(c2 + c5)][(t0 + 32 * b1)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(2, 2) @0x7fff4fe20430 block: CudaDim(32, 8) @0x7fff4fe20470
+[50, 50, 50, 50]
+Building mapping options.
+Done compiling "matmul" (compile time: 1769.091000000003ms)
+Execution time: 22.710500000000522 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:23:25.946146   113 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_50_50_50(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[50] = reinterpret_cast<float (*)[50]>(pC);
+  const float (*A)[50] = reinterpret_cast<const float (*)[50]>(pA);
+  const float (*B)[50] = reinterpret_cast<const float (*)[50]>(pB);
+  if (t0 + 32 * b1 <= 49) {
+    for (int c2 = 0; c2 <= 49; c2 += 32) {
+      for (int c3 = t1; c3 <= min(31, -32 * b0 + 49); c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= min(31, -c2 + 49); c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(c2 + c5)][(t0 + 32 * b1)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(2, 2) @0x7f08a5361730 block: CudaDim(32, 8) @0x7f08a5361770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 67/67/67[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 67/67/67
+I0507 20:23:28.906564   100 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_50_50_50(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[50] = reinterpret_cast<float (*)[50]>(pC);
+  const float (*A)[50] = reinterpret_cast<const float (*)[50]>(pA);
+  const float (*B)[50] = reinterpret_cast<const float (*)[50]>(pB);
+  if (t0 + 32 * b1 <= 49) {
+    for (int c2 = 0; c2 <= 49; c2 += 32) {
+      for (int c3 = t1; c3 <= min(31, -32 * b0 + 49); c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= min(31, -c2 + 49); c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(c2 + c5)][(t0 + 32 * b1)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(2, 2) @0x7ffcd1fe8af0 block: CudaDim(32, 8) @0x7ffcd1fe8b30
+[50, 50, 50, 50]
+Running autotuner.
+Done compiling "matmul" (compile time: 5792.584999999999ms)
+Execution time: 10.580500000000015 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:23:52.334283   125 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_32_128_256(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[256] = reinterpret_cast<float (*)[256]>(pC);
+  const float (*A)[32] = reinterpret_cast<const float (*)[32]>(pA);
+  const float (*B)[256] = reinterpret_cast<const float (*)[256]>(pB);
+  for (int c3 = t1; c3 <= 31; c3 += 8) {
+    C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+    for (int c5 = 0; c5 <= 31; c5 += 1) {
+      C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][c5]*B[c5][(t0 + 32 * b1)]));
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 8) @0x7ffca0787530 block: CudaDim(32, 8) @0x7ffca0787570
+[128, 32, 256, 1]
+Building mapping options.
+Done compiling "matmul" (compile time: 1664.6050000000016ms)
+Execution time: 20.477099999999382 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:24:17.993607   144 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_32_128_256(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[256] = reinterpret_cast<float (*)[256]>(pC);
+  const float (*A)[32] = reinterpret_cast<const float (*)[32]>(pA);
+  const float (*B)[256] = reinterpret_cast<const float (*)[256]>(pB);
+  for (int c3 = t1; c3 <= 31; c3 += 8) {
+    C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+    for (int c5 = 0; c5 <= 31; c5 += 1) {
+      C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][c5]*B[c5][(t0 + 32 * b1)]));
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 8) @0x7fdf7fffa730 block: CudaDim(32, 8) @0x7fdf7fffa770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 56/56/56[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 56/56/56
+I0507 20:24:21.102618   131 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_32_128_256(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[256] = reinterpret_cast<float (*)[256]>(pC);
+  const float (*A)[32] = reinterpret_cast<const float (*)[32]>(pA);
+  const float (*B)[256] = reinterpret_cast<const float (*)[256]>(pB);
+  for (int c3 = t1; c3 <= 31; c3 += 8) {
+    C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+    for (int c5 = 0; c5 <= 31; c5 += 1) {
+      C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][c5]*B[c5][(t0 + 32 * b1)]));
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 8) @0x7ffefbdbda20 block: CudaDim(32, 8) @0x7ffefbdbda60
+[128, 32, 256, 1]
+Running autotuner.
+Done compiling "matmul" (compile time: 5486.965000000001ms)
+Execution time: 10.412599999999372 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:24:44.635488   156 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_1024_128_1024(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[1024] = reinterpret_cast<float (*)[1024]>(pC);
+  const float (*A)[1024] = reinterpret_cast<const float (*)[1024]>(pA);
+  const float (*B)[1024] = reinterpret_cast<const float (*)[1024]>(pB);
+  for (int c2 = 0; c2 <= 1023; c2 += 32) {
+    for (int c3 = t1; c3 <= 31; c3 += 8) {
+      if (c2 == 0) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+      }
+      for (int c5 = 0; c5 <= 31; c5 += 1) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(c2 + c5)][(t0 + 32 * b1)]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 32) @0x7ffd4fedeab0 block: CudaDim(32, 8) @0x7ffd4fedeaf0
+[128, 1024, 1024, 1]
+Building mapping options.
+Done compiling "matmul" (compile time: 1707.1909999999982ms)
+Execution time: 21.477800000000258 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:25:09.187582   175 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_1024_128_1024(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[1024] = reinterpret_cast<float (*)[1024]>(pC);
+  const float (*A)[1024] = reinterpret_cast<const float (*)[1024]>(pA);
+  const float (*B)[1024] = reinterpret_cast<const float (*)[1024]>(pB);
+  for (int c2 = 0; c2 <= 1023; c2 += 32) {
+    for (int c3 = t1; c3 <= 31; c3 += 8) {
+      if (c2 == 0) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+      }
+      for (int c5 = 0; c5 <= 31; c5 += 1) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(c2 + c5)][(t0 + 32 * b1)]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 32) @0x7f3d1d111730 block: CudaDim(32, 8) @0x7f3d1d111770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 1040/1040/1040[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 1040/1040/1040
+I0507 20:25:12.234781   162 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_1024_128_1024(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[1024] = reinterpret_cast<float (*)[1024]>(pC);
+  const float (*A)[1024] = reinterpret_cast<const float (*)[1024]>(pA);
+  const float (*B)[1024] = reinterpret_cast<const float (*)[1024]>(pB);
+  for (int c2 = 0; c2 <= 1023; c2 += 32) {
+    for (int c3 = t1; c3 <= 31; c3 += 8) {
+      if (c2 == 0) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+      }
+      for (int c5 = 0; c5 <= 31; c5 += 1) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(c2 + c5)][(t0 + 32 * b1)]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 32) @0x7ffe87948800 block: CudaDim(32, 8) @0x7ffe87948840
+[128, 1024, 1024, 1]
+Running autotuner.
+Done compiling "matmul" (compile time: 5432.425000000002ms)
+Execution time: 10.958399999999457 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:25:38.571599   187 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_4096_128_16384(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[16384] = reinterpret_cast<float (*)[16384]>(pC);
+  const float (*A)[4096] = reinterpret_cast<const float (*)[4096]>(pA);
+  const float (*B)[16384] = reinterpret_cast<const float (*)[16384]>(pB);
+  for (int c1 = 32 * b1; c1 <= 16383; c1 += 8192) {
+    for (int c2 = 0; c2 <= 4095; c2 += 32) {
+      for (int c3 = t1; c3 <= 31; c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= 31; c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (C[(32 * b0 + c3)][(t0 + c1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(c2 + c5)][(t0 + c1)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 256) @0x7ffedcb70870 block: CudaDim(32, 8) @0x7ffedcb708b0
+[128, 4096, 16384, 1]
+Building mapping options.
+Done compiling "matmul" (compile time: 1924.7009999999989ms)
+Execution time: 75.60170000000035 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:26:06.782616   206 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_4096_128_16384(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[16384] = reinterpret_cast<float (*)[16384]>(pC);
+  const float (*A)[4096] = reinterpret_cast<const float (*)[4096]>(pA);
+  const float (*B)[16384] = reinterpret_cast<const float (*)[16384]>(pB);
+  for (int c1 = 32 * b1; c1 <= 16383; c1 += 8192) {
+    for (int c2 = 0; c2 <= 4095; c2 += 32) {
+      for (int c3 = t1; c3 <= 31; c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= 31; c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (C[(32 * b0 + c3)][(t0 + c1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(c2 + c5)][(t0 + c1)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 256) @0x7faf35ffa730 block: CudaDim(32, 8) @0x7faf35ffa770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 50031/50031/50031[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 50031/50031/50031
+I0507 20:26:10.637606   193 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_4096_128_16384(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[16384] = reinterpret_cast<float (*)[16384]>(pC);
+  const float (*A)[4096] = reinterpret_cast<const float (*)[4096]>(pA);
+  const float (*B)[16384] = reinterpret_cast<const float (*)[16384]>(pB);
+  for (int c1 = 32 * b1; c1 <= 16383; c1 += 8192) {
+    for (int c2 = 0; c2 <= 4095; c2 += 32) {
+      for (int c3 = t1; c3 <= 31; c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= 31; c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (C[(32 * b0 + c3)][(t0 + c1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(c2 + c5)][(t0 + c1)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 256) @0x7fff4f221540 block: CudaDim(32, 8) @0x7fff4f221580
+[128, 4096, 16384, 1]
+Running autotuner.
+Done compiling "matmul" (compile time: 6641.204999999999ms)
+Execution time: 58.543000000000234 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:26:34.487013   218 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_26_72_26(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[26] = reinterpret_cast<float (*)[26]>(pC);
+  const float (*A)[26] = reinterpret_cast<const float (*)[26]>(pA);
+  const float (*B)[26] = reinterpret_cast<const float (*)[26]>(pB);
+  for (int c3 = t1; c3 <= min(31, -32 * b0 + 71); c3 += 8) {
+    C[(32 * b0 + c3)][t0] = (float)0.000000;
+    for (int c5 = 0; c5 <= 25; c5 += 1) {
+      C[(32 * b0 + c3)][t0] = (C[(32 * b0 + c3)][t0] + (A[(32 * b0 + c3)][c5]*B[c5][t0]));
+    }
+  }
+}
+}
+
+grid: CudaDim(3, 1) @0x7ffcc40acb60 block: CudaDim(26, 8) @0x7ffcc40acba0
+[72, 26, 26, 500]
+Building mapping options.
+Done compiling "matmul" (compile time: 1615.324000000001ms)
+Execution time: 20.114700000000596 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:26:58.947806   237 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_26_72_26(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[26] = reinterpret_cast<float (*)[26]>(pC);
+  const float (*A)[26] = reinterpret_cast<const float (*)[26]>(pA);
+  const float (*B)[26] = reinterpret_cast<const float (*)[26]>(pB);
+  for (int c3 = t1; c3 <= min(31, -32 * b0 + 71); c3 += 8) {
+    C[(32 * b0 + c3)][t0] = (float)0.000000;
+    for (int c5 = 0; c5 <= 25; c5 += 1) {
+      C[(32 * b0 + c3)][t0] = (C[(32 * b0 + c3)][t0] + (A[(32 * b0 + c3)][c5]*B[c5][t0]));
+    }
+  }
+}
+}
+
+grid: CudaDim(3, 1) @0x7fe66f617730 block: CudaDim(26, 8) @0x7fe66f617770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 50/50/50[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 50/50/50
+I0507 20:27:02.105408   224 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void matmul_26_72_26(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[26] = reinterpret_cast<float (*)[26]>(pC);
+  const float (*A)[26] = reinterpret_cast<const float (*)[26]>(pA);
+  const float (*B)[26] = reinterpret_cast<const float (*)[26]>(pB);
+  for (int c3 = t1; c3 <= min(31, -32 * b0 + 71); c3 += 8) {
+    C[(32 * b0 + c3)][t0] = (float)0.000000;
+    for (int c5 = 0; c5 <= 25; c5 += 1) {
+      C[(32 * b0 + c3)][t0] = (C[(32 * b0 + c3)][t0] + (A[(32 * b0 + c3)][c5]*B[c5][t0]));
+    }
+  }
+}
+}
+
+grid: CudaDim(3, 1) @0x7ffcecd127f0 block: CudaDim(26, 8) @0x7ffcecd12830
+[72, 26, 26, 500]
+Running autotuner.
+Done compiling "matmul" (compile time: 5049.804000000002ms)
+Execution time: 10.205900000000412 ms
+
+ - - - - 
+
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:27:24.725983   249 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_50(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  if (t0 + 32 * b0 <= 49) {
+    B[(t0 + 32 * b0)] = (float)0.000000;
+    B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+  }
+}
+}
+
+grid: CudaDim(2, 1) @0x7fff6e5fffa0 block: CudaDim(32, 1) @0x7fff6e5fffe0
+[50, 50, 50, 50]
+Building mapping options.
+Done compiling "map" (compile time: 992.7320000000002ms)
+Execution time: 15.948900000000421 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:27:47.918391   268 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_50(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  if (t0 + 32 * b0 <= 49) {
+    B[(t0 + 32 * b0)] = (float)0.000000;
+    B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+  }
+}
+}
+
+grid: CudaDim(2, 1) @0x7f8cccb60730 block: CudaDim(32, 1) @0x7f8cccb60770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 55/55/55[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 55/55/55
+I0507 20:27:50.753890   255 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_50(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  if (t0 + 32 * b0 <= 49) {
+    B[(t0 + 32 * b0)] = (float)0.000000;
+    B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+  }
+}
+}
+
+grid: CudaDim(2, 1) @0x7ffd7a6758a0 block: CudaDim(32, 1) @0x7ffd7a6758e0
+[50, 50, 50, 50]
+Running autotuner.
+Done compiling "map" (compile time: 3025.9050000000016ms)
+Execution time: 7.038199999999506 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:28:13.368683   280 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_128(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  B[(t0 + 32 * b0)] = (float)0.000000;
+  B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+}
+}
+
+grid: CudaDim(4, 1) @0x7ffef626cfd0 block: CudaDim(32, 1) @0x7ffef626d010
+[128, 32, 256, 1]
+Building mapping options.
+Done compiling "map" (compile time: 908.7189999999978ms)
+Execution time: 16.43449999999973 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:28:36.451189   299 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_128(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  B[(t0 + 32 * b0)] = (float)0.000000;
+  B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+}
+}
+
+grid: CudaDim(4, 1) @0x7f240db62730 block: CudaDim(32, 1) @0x7f240db62770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 43/43/43[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 43/43/43
+I0507 20:28:39.313477   286 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_128(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  B[(t0 + 32 * b0)] = (float)0.000000;
+  B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+}
+}
+
+grid: CudaDim(4, 1) @0x7fff4ea722c0 block: CudaDim(32, 1) @0x7fff4ea72300
+[128, 32, 256, 1]
+Running autotuner.
+Done compiling "map" (compile time: 3010.1419999999985ms)
+Execution time: 7.058900000000534 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:29:01.919384   311 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_128(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  B[(t0 + 32 * b0)] = (float)0.000000;
+  B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+}
+}
+
+grid: CudaDim(4, 1) @0x7ffcc7102920 block: CudaDim(32, 1) @0x7ffcc7102960
+[128, 1024, 1024, 1]
+Building mapping options.
+Done compiling "map" (compile time: 966.7370000000019ms)
+Execution time: 7.229000000000596 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:29:24.756347   330 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_128(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  B[(t0 + 32 * b0)] = (float)0.000000;
+  B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+}
+}
+
+grid: CudaDim(4, 1) @0x7f8f4d361730 block: CudaDim(32, 1) @0x7f8f4d361770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 45/45/45[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 45/45/45
+I0507 20:29:27.610666   317 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_128(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  B[(t0 + 32 * b0)] = (float)0.000000;
+  B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+}
+}
+
+grid: CudaDim(4, 1) @0x7ffe819ad2f0 block: CudaDim(32, 1) @0x7ffe819ad330
+[128, 1024, 1024, 1]
+Running autotuner.
+Done compiling "map" (compile time: 3040.434000000001ms)
+Execution time: 7.099699999999487 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:29:50.322373   342 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_128(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  B[(t0 + 32 * b0)] = (float)0.000000;
+  B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+}
+}
+
+grid: CudaDim(4, 1) @0x7fffaa4e2a00 block: CudaDim(32, 1) @0x7fffaa4e2a40
+[128, 4096, 16384, 1]
+Building mapping options.
+Done compiling "map" (compile time: 982.7310000000011ms)
+Execution time: 7.1460000000001855 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:30:12.998283   361 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_128(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  B[(t0 + 32 * b0)] = (float)0.000000;
+  B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+}
+}
+
+grid: CudaDim(4, 1) @0x7fb10fffa730 block: CudaDim(32, 1) @0x7fb10fffa770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 46/46/46[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 46/46/46
+I0507 20:30:15.851114   348 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_128(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  B[(t0 + 32 * b0)] = (float)0.000000;
+  B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+}
+}
+
+grid: CudaDim(4, 1) @0x7ffcb7007ad0 block: CudaDim(32, 1) @0x7ffcb7007b10
+[128, 4096, 16384, 1]
+Running autotuner.
+Done compiling "map" (compile time: 3006.865000000001ms)
+Execution time: 6.977500000000347 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:30:38.431588   373 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_72(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  if (t0 + 32 * b0 <= 71) {
+    B[(t0 + 32 * b0)] = (float)0.000000;
+    B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+  }
+}
+}
+
+grid: CudaDim(3, 1) @0x7ffe9c92f430 block: CudaDim(32, 1) @0x7ffe9c92f470
+[72, 26, 26, 500]
+Building mapping options.
+Done compiling "map" (compile time: 964.4280000000016ms)
+Execution time: 15.762899999999647 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:31:01.349599   392 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_72(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  if (t0 + 32 * b0 <= 71) {
+    B[(t0 + 32 * b0)] = (float)0.000000;
+    B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+  }
+}
+}
+
+grid: CudaDim(3, 1) @0x7fcc62ec9730 block: CudaDim(32, 1) @0x7fcc62ec9770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 46/46/46[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 46/46/46
+I0507 20:31:04.197118   379 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void map_72(int M, float* pB, const float* pA) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*B) = reinterpret_cast<float (*)>(pB);
+  const float (*A) = reinterpret_cast<const float (*)>(pA);
+  if (t0 + 32 * b0 <= 71) {
+    B[(t0 + 32 * b0)] = (float)0.000000;
+    B[(t0 + 32 * b0)] = (B[(t0 + 32 * b0)] + (A[(t0 + 32 * b0)]*(float)3.140000));
+  }
+}
+}
+
+grid: CudaDim(3, 1) @0x7ffcdc52b4d0 block: CudaDim(32, 1) @0x7ffcdc52b510
+[72, 26, 26, 500]
+Running autotuner.
+Done compiling "map" (compile time: 3114.851999999999ms)
+Execution time: 7.0294999999998 ms
+
+ - - - - 
+
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:31:29.439412   404 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_256_14_256_3_3_512_14(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[512][((14 - 3) + 1)][((14 - 3) + 1)] = reinterpret_cast<float (*)[512][((14 - 3) + 1)][((14 - 3) + 1)]>(pOUT);
+  const float (*IN)[256][14][14] = reinterpret_cast<const float (*)[256][14][14]>(pIN);
+  const float (*WEIGHT)[256][3][3] = reinterpret_cast<const float (*)[256][3][3]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 31; c6 += 1) {
+      for (int c7 = t1; c7 <= 11; c7 += 8) {
+        OUT[(32 * b0 + c5)][(32 * b1 + c6)][c7][t0] = (float)0.000000;
+        for (int c9 = 0; c9 <= 255; c9 += 1) {
+          for (int c10 = 0; c10 <= 2; c10 += 1) {
+            for (int c11 = 0; c11 <= 2; c11 += 1) {
+              OUT[(32 * b0 + c5)][(32 * b1 + c6)][c7][t0] = (OUT[(32 * b0 + c5)][(32 * b1 + c6)][c7][t0] + (IN[(32 * b0 + c5)][c9][(c7 + c10)][(t0 + c11)]*WEIGHT[(32 * b1 + c6)][c9][c10][c11]));
+            }
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(8, 16) @0x7ffe85b25c80 block: CudaDim(12, 8) @0x7ffe85b25cc0
+[256, 256, 512, 14, 3]
+Building mapping options.
+Done compiling "conv2d" (compile time: 3164.811ms)
+Execution time: 867.6408000000006 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:32:06.330047   423 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_256_14_256_3_3_512_14(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[512][((14 - 3) + 1)][((14 - 3) + 1)] = reinterpret_cast<float (*)[512][((14 - 3) + 1)][((14 - 3) + 1)]>(pOUT);
+  const float (*IN)[256][14][14] = reinterpret_cast<const float (*)[256][14][14]>(pIN);
+  const float (*WEIGHT)[256][3][3] = reinterpret_cast<const float (*)[256][3][3]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 31; c6 += 1) {
+      for (int c7 = t1; c7 <= 11; c7 += 8) {
+        OUT[(32 * b0 + c5)][(32 * b1 + c6)][c7][t0] = (float)0.000000;
+        for (int c9 = 0; c9 <= 255; c9 += 1) {
+          for (int c10 = 0; c10 <= 2; c10 += 1) {
+            for (int c11 = 0; c11 <= 2; c11 += 1) {
+              OUT[(32 * b0 + c5)][(32 * b1 + c6)][c7][t0] = (OUT[(32 * b0 + c5)][(32 * b1 + c6)][c7][t0] + (IN[(32 * b0 + c5)][c9][(c7 + c10)][(t0 + c11)]*WEIGHT[(32 * b1 + c6)][c9][c10][c11]));
+            }
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(8, 16) @0x7fa5d97fd730 block: CudaDim(12, 8) @0x7fa5d97fd770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 879410/879410/879410[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 879410/879410/879410
+I0507 20:32:21.752007   410 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_256_14_256_3_3_512_14(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[512][((14 - 3) + 1)][((14 - 3) + 1)] = reinterpret_cast<float (*)[512][((14 - 3) + 1)][((14 - 3) + 1)]>(pOUT);
+  const float (*IN)[256][14][14] = reinterpret_cast<const float (*)[256][14][14]>(pIN);
+  const float (*WEIGHT)[256][3][3] = reinterpret_cast<const float (*)[256][3][3]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 31; c6 += 1) {
+      for (int c7 = t1; c7 <= 11; c7 += 8) {
+        OUT[(32 * b0 + c5)][(32 * b1 + c6)][c7][t0] = (float)0.000000;
+        for (int c9 = 0; c9 <= 255; c9 += 1) {
+          for (int c10 = 0; c10 <= 2; c10 += 1) {
+            for (int c11 = 0; c11 <= 2; c11 += 1) {
+              OUT[(32 * b0 + c5)][(32 * b1 + c6)][c7][t0] = (OUT[(32 * b0 + c5)][(32 * b1 + c6)][c7][t0] + (IN[(32 * b0 + c5)][c9][(c7 + c10)][(t0 + c11)]*WEIGHT[(32 * b1 + c6)][c9][c10][c11]));
+            }
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(8, 16) @0x7ffe306b37d0 block: CudaDim(12, 8) @0x7ffe306b3810
+[256, 256, 512, 14, 3]
+Running autotuner.
+Done compiling "conv2d" (compile time: 20523.424000000003ms)
+Execution time: 885.8288000000002 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:32:54.557171   435 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_14_16_14_14_16_14(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[16][((14 - 14) + 1)][((14 - 14) + 1)] = reinterpret_cast<float (*)[16][((14 - 14) + 1)][((14 - 14) + 1)]>(pOUT);
+  const float (*IN)[16][14][14] = reinterpret_cast<const float (*)[16][14][14]>(pIN);
+  const float (*WEIGHT)[16][14][14] = reinterpret_cast<const float (*)[16][14][14]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 15; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 15; c9 += 1) {
+        for (int c10 = 0; c10 <= 13; c10 += 1) {
+          for (int c11 = 0; c11 <= 13; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7fff1796f620 block: CudaDim(1, 1) @0x7fff1796f660
+[32, 16, 16, 14, 14]
+Building mapping options.
+Done compiling "conv2d" (compile time: 2213.954000000001ms)
+Execution time: 243.3049000000011 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:33:22.428647   454 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_14_16_14_14_16_14(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[16][((14 - 14) + 1)][((14 - 14) + 1)] = reinterpret_cast<float (*)[16][((14 - 14) + 1)][((14 - 14) + 1)]>(pOUT);
+  const float (*IN)[16][14][14] = reinterpret_cast<const float (*)[16][14][14]>(pIN);
+  const float (*WEIGHT)[16][14][14] = reinterpret_cast<const float (*)[16][14][14]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 15; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 15; c9 += 1) {
+        for (int c10 = 0; c10 <= 13; c10 += 1) {
+          for (int c11 = 0; c11 <= 13; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7fc8d7ffe730 block: CudaDim(1, 1) @0x7fc8d7ffe770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1
+Autotuner could not find options, returning base
+I0507 20:33:25.954885   441 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_14_16_14_14_16_14(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[16][((14 - 14) + 1)][((14 - 14) + 1)] = reinterpret_cast<float (*)[16][((14 - 14) + 1)][((14 - 14) + 1)]>(pOUT);
+  const float (*IN)[16][14][14] = reinterpret_cast<const float (*)[16][14][14]>(pIN);
+  const float (*WEIGHT)[16][14][14] = reinterpret_cast<const float (*)[16][14][14]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 15; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 15; c9 += 1) {
+        for (int c10 = 0; c10 <= 13; c10 += 1) {
+          for (int c11 = 0; c11 <= 13; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7fffcd13b200 block: CudaDim(1, 1) @0x7fffcd13b240
+[32, 16, 16, 14, 14]
+Running autotuner.
+Done compiling "conv2d" (compile time: 6924.144000000002ms)
+Execution time: 232.87800000000053 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:33:52.186678   466 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_7_32_7_7_32_7(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[32][((7 - 7) + 1)][((7 - 7) + 1)] = reinterpret_cast<float (*)[32][((7 - 7) + 1)][((7 - 7) + 1)]>(pOUT);
+  const float (*IN)[32][7][7] = reinterpret_cast<const float (*)[32][7][7]>(pIN);
+  const float (*WEIGHT)[32][7][7] = reinterpret_cast<const float (*)[32][7][7]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 31; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 31; c9 += 1) {
+        for (int c10 = 0; c10 <= 6; c10 += 1) {
+          for (int c11 = 0; c11 <= 6; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7ffea52072b0 block: CudaDim(1, 1) @0x7ffea52072f0
+[32, 32, 32, 7, 7]
+Building mapping options.
+Done compiling "conv2d" (compile time: 2212.738999999999ms)
+Execution time: 236.71490000000085 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:34:19.975834   485 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_7_32_7_7_32_7(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[32][((7 - 7) + 1)][((7 - 7) + 1)] = reinterpret_cast<float (*)[32][((7 - 7) + 1)][((7 - 7) + 1)]>(pOUT);
+  const float (*IN)[32][7][7] = reinterpret_cast<const float (*)[32][7][7]>(pIN);
+  const float (*WEIGHT)[32][7][7] = reinterpret_cast<const float (*)[32][7][7]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 31; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 31; c9 += 1) {
+        for (int c10 = 0; c10 <= 6; c10 += 1) {
+          for (int c11 = 0; c11 <= 6; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7f4445ffa730 block: CudaDim(1, 1) @0x7f4445ffa770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1
+Autotuner could not find options, returning base
+I0507 20:34:23.544453   472 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_7_32_7_7_32_7(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[32][((7 - 7) + 1)][((7 - 7) + 1)] = reinterpret_cast<float (*)[32][((7 - 7) + 1)][((7 - 7) + 1)]>(pOUT);
+  const float (*IN)[32][7][7] = reinterpret_cast<const float (*)[32][7][7]>(pIN);
+  const float (*WEIGHT)[32][7][7] = reinterpret_cast<const float (*)[32][7][7]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 31; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 31; c9 += 1) {
+        for (int c10 = 0; c10 <= 6; c10 += 1) {
+          for (int c11 = 0; c11 <= 6; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7ffe1663fb70 block: CudaDim(1, 1) @0x7ffe1663fbb0
+[32, 32, 32, 7, 7]
+Running autotuner.
+Done compiling "conv2d" (compile time: 7091.089999999997ms)
+Execution time: 231.6671999999997 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:34:49.695405   497 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_56_4_56_56_4_56(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[4][((56 - 56) + 1)][((56 - 56) + 1)] = reinterpret_cast<float (*)[4][((56 - 56) + 1)][((56 - 56) + 1)]>(pOUT);
+  const float (*IN)[4][56][56] = reinterpret_cast<const float (*)[4][56][56]>(pIN);
+  const float (*WEIGHT)[4][56][56] = reinterpret_cast<const float (*)[4][56][56]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 3; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 3; c9 += 1) {
+        for (int c10 = 0; c10 <= 55; c10 += 1) {
+          for (int c11 = 0; c11 <= 55; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7fff54749ba0 block: CudaDim(1, 1) @0x7fff54749be0
+[32, 4, 4, 56, 56]
+Building mapping options.
+Done compiling "conv2d" (compile time: 2248.189ms)
+Execution time: 239.39759999999984 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:35:17.637293   516 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_56_4_56_56_4_56(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[4][((56 - 56) + 1)][((56 - 56) + 1)] = reinterpret_cast<float (*)[4][((56 - 56) + 1)][((56 - 56) + 1)]>(pOUT);
+  const float (*IN)[4][56][56] = reinterpret_cast<const float (*)[4][56][56]>(pIN);
+  const float (*WEIGHT)[4][56][56] = reinterpret_cast<const float (*)[4][56][56]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 3; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 3; c9 += 1) {
+        for (int c10 = 0; c10 <= 55; c10 += 1) {
+          for (int c11 = 0; c11 <= 55; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7f00b8914730 block: CudaDim(1, 1) @0x7f00b8914770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1
+Autotuner could not find options, returning base
+I0507 20:35:22.068873   503 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_56_4_56_56_4_56(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[4][((56 - 56) + 1)][((56 - 56) + 1)] = reinterpret_cast<float (*)[4][((56 - 56) + 1)][((56 - 56) + 1)]>(pOUT);
+  const float (*IN)[4][56][56] = reinterpret_cast<const float (*)[4][56][56]>(pIN);
+  const float (*WEIGHT)[4][56][56] = reinterpret_cast<const float (*)[4][56][56]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 3; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 3; c9 += 1) {
+        for (int c10 = 0; c10 <= 55; c10 += 1) {
+          for (int c11 = 0; c11 <= 55; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7ffc02900bc0 block: CudaDim(1, 1) @0x7ffc02900c00
+[32, 4, 4, 56, 56]
+Running autotuner.
+Done compiling "conv2d" (compile time: 7411.7289999999975ms)
+Execution time: 232.48730000000037 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:35:48.421236   528 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_28_8_28_28_8_28(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[8][((28 - 28) + 1)][((28 - 28) + 1)] = reinterpret_cast<float (*)[8][((28 - 28) + 1)][((28 - 28) + 1)]>(pOUT);
+  const float (*IN)[8][28][28] = reinterpret_cast<const float (*)[8][28][28]>(pIN);
+  const float (*WEIGHT)[8][28][28] = reinterpret_cast<const float (*)[8][28][28]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 7; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 7; c9 += 1) {
+        for (int c10 = 0; c10 <= 27; c10 += 1) {
+          for (int c11 = 0; c11 <= 27; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7ffe4025ec50 block: CudaDim(1, 1) @0x7ffe4025ec90
+[32, 8, 8, 28, 28]
+Building mapping options.
+Done compiling "conv2d" (compile time: 2261.454999999998ms)
+Execution time: 244.1737 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:36:16.418917   547 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_28_8_28_28_8_28(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[8][((28 - 28) + 1)][((28 - 28) + 1)] = reinterpret_cast<float (*)[8][((28 - 28) + 1)][((28 - 28) + 1)]>(pOUT);
+  const float (*IN)[8][28][28] = reinterpret_cast<const float (*)[8][28][28]>(pIN);
+  const float (*WEIGHT)[8][28][28] = reinterpret_cast<const float (*)[8][28][28]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 7; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 7; c9 += 1) {
+        for (int c10 = 0; c10 <= 27; c10 += 1) {
+          for (int c11 = 0; c11 <= 27; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7f01adb62730 block: CudaDim(1, 1) @0x7f01adb62770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1
+Autotuner could not find options, returning base
+I0507 20:36:20.848456   534 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void conv2d_32_28_8_28_28_8_28(int B, int H, int IP, int KH, int KW, int OP, int W, float* pOUT, const float* pIN, const float* pWEIGHT) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*OUT)[8][((28 - 28) + 1)][((28 - 28) + 1)] = reinterpret_cast<float (*)[8][((28 - 28) + 1)][((28 - 28) + 1)]>(pOUT);
+  const float (*IN)[8][28][28] = reinterpret_cast<const float (*)[8][28][28]>(pIN);
+  const float (*WEIGHT)[8][28][28] = reinterpret_cast<const float (*)[8][28][28]>(pWEIGHT);
+  for (int c5 = 0; c5 <= 31; c5 += 1) {
+    for (int c6 = 0; c6 <= 7; c6 += 1) {
+      OUT[c5][c6][0][0] = (float)0.000000;
+      for (int c9 = 0; c9 <= 7; c9 += 1) {
+        for (int c10 = 0; c10 <= 27; c10 += 1) {
+          for (int c11 = 0; c11 <= 27; c11 += 1) {
+            OUT[c5][c6][0][0] = (OUT[c5][c6][0][0] + (IN[c5][c9][(0 + c10)][(0 + c11)]*WEIGHT[c6][c9][c10][c11]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 1) @0x7ffd006bbc90 block: CudaDim(1, 1) @0x7ffd006bbcd0
+[32, 8, 8, 28, 28]
+Running autotuner.
+Done compiling "conv2d" (compile time: 7391.947000000002ms)
+Execution time: 226.61620000000013 ms
+
+ - - - - 
+
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:36:46.508843   559 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_50_50_50(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[50] = reinterpret_cast<float (*)[50]>(pC);
+  const float (*A)[50] = reinterpret_cast<const float (*)[50]>(pA);
+  const float (*B)[50] = reinterpret_cast<const float (*)[50]>(pB);
+  if (t0 + 32 * b1 <= 49) {
+    for (int c2 = 0; c2 <= 49; c2 += 32) {
+      for (int c3 = t1; c3 <= min(31, -32 * b0 + 49); c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= min(31, -c2 + 49); c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(t0 + 32 * b1)][(c2 + c5)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(2, 2) @0x7ffd5114e6e0 block: CudaDim(32, 8) @0x7ffd5114e720
+[50, 50, 50, 50]
+Building mapping options.
+Done compiling "tmm" (compile time: 1842.1169999999981ms)
+Execution time: 24.254099999999568 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:37:11.337872   578 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_50_50_50(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[50] = reinterpret_cast<float (*)[50]>(pC);
+  const float (*A)[50] = reinterpret_cast<const float (*)[50]>(pA);
+  const float (*B)[50] = reinterpret_cast<const float (*)[50]>(pB);
+  if (t0 + 32 * b1 <= 49) {
+    for (int c2 = 0; c2 <= 49; c2 += 32) {
+      for (int c3 = t1; c3 <= min(31, -32 * b0 + 49); c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= min(31, -c2 + 49); c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(t0 + 32 * b1)][(c2 + c5)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(2, 2) @0x7f8b0b7fd730 block: CudaDim(32, 8) @0x7f8b0b7fd770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 72/72/72[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 72/72/72
+I0507 20:37:14.344890   565 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_50_50_50(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[50] = reinterpret_cast<float (*)[50]>(pC);
+  const float (*A)[50] = reinterpret_cast<const float (*)[50]>(pA);
+  const float (*B)[50] = reinterpret_cast<const float (*)[50]>(pB);
+  if (t0 + 32 * b1 <= 49) {
+    for (int c2 = 0; c2 <= 49; c2 += 32) {
+      for (int c3 = t1; c3 <= min(31, -32 * b0 + 49); c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= min(31, -c2 + 49); c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(t0 + 32 * b1)][(c2 + c5)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(2, 2) @0x7ffffff10ec0 block: CudaDim(32, 8) @0x7ffffff10f00
+[50, 50, 50, 50]
+Running autotuner.
+Done compiling "tmm" (compile time: 5686.305999999999ms)
+Execution time: 10.258599999999518 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:37:37.849858   590 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_32_128_256(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[256] = reinterpret_cast<float (*)[256]>(pC);
+  const float (*A)[32] = reinterpret_cast<const float (*)[32]>(pA);
+  const float (*B)[32] = reinterpret_cast<const float (*)[32]>(pB);
+  for (int c3 = t1; c3 <= 31; c3 += 8) {
+    C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+    for (int c5 = 0; c5 <= 31; c5 += 1) {
+      C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][c5]*B[(t0 + 32 * b1)][c5]));
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 8) @0x7ffca095ec20 block: CudaDim(32, 8) @0x7ffca095ec60
+[128, 32, 256, 1]
+Building mapping options.
+Done compiling "tmm" (compile time: 1658.5229999999988ms)
+Execution time: 23.19659999999999 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:38:02.403695   609 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_32_128_256(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[256] = reinterpret_cast<float (*)[256]>(pC);
+  const float (*A)[32] = reinterpret_cast<const float (*)[32]>(pA);
+  const float (*B)[32] = reinterpret_cast<const float (*)[32]>(pB);
+  for (int c3 = t1; c3 <= 31; c3 += 8) {
+    C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+    for (int c5 = 0; c5 <= 31; c5 += 1) {
+      C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][c5]*B[(t0 + 32 * b1)][c5]));
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 8) @0x7f54c6ffc730 block: CudaDim(32, 8) @0x7f54c6ffc770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 76/76/76[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 76/76/76
+I0507 20:38:05.477792   596 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_32_128_256(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[256] = reinterpret_cast<float (*)[256]>(pC);
+  const float (*A)[32] = reinterpret_cast<const float (*)[32]>(pA);
+  const float (*B)[32] = reinterpret_cast<const float (*)[32]>(pB);
+  for (int c3 = t1; c3 <= 31; c3 += 8) {
+    C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+    for (int c5 = 0; c5 <= 31; c5 += 1) {
+      C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][c5]*B[(t0 + 32 * b1)][c5]));
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 8) @0x7fffa4b59210 block: CudaDim(32, 8) @0x7fffa4b59250
+[128, 32, 256, 1]
+Running autotuner.
+Done compiling "tmm" (compile time: 5380.151999999999ms)
+Execution time: 10.894700000000057 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:38:28.890580   621 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_1024_128_1024(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[1024] = reinterpret_cast<float (*)[1024]>(pC);
+  const float (*A)[1024] = reinterpret_cast<const float (*)[1024]>(pA);
+  const float (*B)[1024] = reinterpret_cast<const float (*)[1024]>(pB);
+  for (int c2 = 0; c2 <= 1023; c2 += 32) {
+    for (int c3 = t1; c3 <= 31; c3 += 8) {
+      if (c2 == 0) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+      }
+      for (int c5 = 0; c5 <= 31; c5 += 1) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(t0 + 32 * b1)][(c2 + c5)]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 32) @0x7ffdea32f950 block: CudaDim(32, 8) @0x7ffdea32f990
+[128, 1024, 1024, 1]
+Building mapping options.
+Done compiling "tmm" (compile time: 1711.5059999999999ms)
+Execution time: 25.432299999999586 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:38:53.492687   640 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_1024_128_1024(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[1024] = reinterpret_cast<float (*)[1024]>(pC);
+  const float (*A)[1024] = reinterpret_cast<const float (*)[1024]>(pA);
+  const float (*B)[1024] = reinterpret_cast<const float (*)[1024]>(pB);
+  for (int c2 = 0; c2 <= 1023; c2 += 32) {
+    for (int c3 = t1; c3 <= 31; c3 += 8) {
+      if (c2 == 0) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+      }
+      for (int c5 = 0; c5 <= 31; c5 += 1) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(t0 + 32 * b1)][(c2 + c5)]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 32) @0x7f36f77fd730 block: CudaDim(32, 8) @0x7f36f77fd770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 5061/5061/5061[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 5061/5061/5061
+I0507 20:38:56.521478   627 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_1024_128_1024(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[1024] = reinterpret_cast<float (*)[1024]>(pC);
+  const float (*A)[1024] = reinterpret_cast<const float (*)[1024]>(pA);
+  const float (*B)[1024] = reinterpret_cast<const float (*)[1024]>(pB);
+  for (int c2 = 0; c2 <= 1023; c2 += 32) {
+    for (int c3 = t1; c3 <= 31; c3 += 8) {
+      if (c2 == 0) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (float)0.000000;
+      }
+      for (int c5 = 0; c5 <= 31; c5 += 1) {
+        C[(32 * b0 + c3)][(t0 + 32 * b1)] = (C[(32 * b0 + c3)][(t0 + 32 * b1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(t0 + 32 * b1)][(c2 + c5)]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 32) @0x7ffc3275e4e0 block: CudaDim(32, 8) @0x7ffc3275e520
+[128, 1024, 1024, 1]
+Running autotuner.
+Done compiling "tmm" (compile time: 5589.835000000001ms)
+Execution time: 15.16439999999939 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:39:22.973273   652 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_4096_128_16384(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[16384] = reinterpret_cast<float (*)[16384]>(pC);
+  const float (*A)[4096] = reinterpret_cast<const float (*)[4096]>(pA);
+  const float (*B)[4096] = reinterpret_cast<const float (*)[4096]>(pB);
+  for (int c1 = 32 * b1; c1 <= 16383; c1 += 8192) {
+    for (int c2 = 0; c2 <= 4095; c2 += 32) {
+      for (int c3 = t1; c3 <= 31; c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= 31; c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (C[(32 * b0 + c3)][(t0 + c1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(t0 + c1)][(c2 + c5)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 256) @0x7ffdb1f3b910 block: CudaDim(32, 8) @0x7ffdb1f3b950
+[128, 4096, 16384, 1]
+Building mapping options.
+Done compiling "tmm" (compile time: 1894.9630000000006ms)
+Execution time: 286.04430000000036 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:39:53.483180   671 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_4096_128_16384(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[16384] = reinterpret_cast<float (*)[16384]>(pC);
+  const float (*A)[4096] = reinterpret_cast<const float (*)[4096]>(pA);
+  const float (*B)[4096] = reinterpret_cast<const float (*)[4096]>(pB);
+  for (int c1 = 32 * b1; c1 <= 16383; c1 += 8192) {
+    for (int c2 = 0; c2 <= 4095; c2 += 32) {
+      for (int c3 = t1; c3 <= 31; c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= 31; c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (C[(32 * b0 + c3)][(t0 + c1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(t0 + c1)][(c2 + c5)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 256) @0x7f57a2ec9730 block: CudaDim(32, 8) @0x7f57a2ec9770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 259953/259953/259953[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 259953/259953/259953
+I0507 20:40:00.311431   658 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_4096_128_16384(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[16384] = reinterpret_cast<float (*)[16384]>(pC);
+  const float (*A)[4096] = reinterpret_cast<const float (*)[4096]>(pA);
+  const float (*B)[4096] = reinterpret_cast<const float (*)[4096]>(pB);
+  for (int c1 = 32 * b1; c1 <= 16383; c1 += 8192) {
+    for (int c2 = 0; c2 <= 4095; c2 += 32) {
+      for (int c3 = t1; c3 <= 31; c3 += 8) {
+        if (c2 == 0) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (float)0.000000;
+        }
+        for (int c5 = 0; c5 <= 31; c5 += 1) {
+          C[(32 * b0 + c3)][(t0 + c1)] = (C[(32 * b0 + c3)][(t0 + c1)] + (A[(32 * b0 + c3)][(c2 + c5)]*B[(t0 + c1)][(c2 + c5)]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(4, 256) @0x7ffe3f829a30 block: CudaDim(32, 8) @0x7ffe3f829a70
+[128, 4096, 16384, 1]
+Running autotuner.
+Done compiling "tmm" (compile time: 9286.829000000002ms)
+Execution time: 269.6805000000012 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:40:26.442090   683 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_26_72_26(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[26] = reinterpret_cast<float (*)[26]>(pC);
+  const float (*A)[26] = reinterpret_cast<const float (*)[26]>(pA);
+  const float (*B)[26] = reinterpret_cast<const float (*)[26]>(pB);
+  for (int c3 = t1; c3 <= min(31, -32 * b0 + 71); c3 += 8) {
+    C[(32 * b0 + c3)][t0] = (float)0.000000;
+    for (int c5 = 0; c5 <= 25; c5 += 1) {
+      C[(32 * b0 + c3)][t0] = (C[(32 * b0 + c3)][t0] + (A[(32 * b0 + c3)][c5]*B[t0][c5]));
+    }
+  }
+}
+}
+
+grid: CudaDim(3, 1) @0x7ffd8a487ea0 block: CudaDim(26, 8) @0x7ffd8a487ee0
+[72, 26, 26, 500]
+Building mapping options.
+Done compiling "tmm" (compile time: 1641.490000000001ms)
+Execution time: 22.56470000000057 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:40:51.028039   702 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_26_72_26(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[26] = reinterpret_cast<float (*)[26]>(pC);
+  const float (*A)[26] = reinterpret_cast<const float (*)[26]>(pA);
+  const float (*B)[26] = reinterpret_cast<const float (*)[26]>(pB);
+  for (int c3 = t1; c3 <= min(31, -32 * b0 + 71); c3 += 8) {
+    C[(32 * b0 + c3)][t0] = (float)0.000000;
+    for (int c5 = 0; c5 <= 25; c5 += 1) {
+      C[(32 * b0 + c3)][t0] = (C[(32 * b0 + c3)][t0] + (A[(32 * b0 + c3)][c5]*B[t0][c5]));
+    }
+  }
+}
+}
+
+grid: CudaDim(3, 1) @0x7fbaac865730 block: CudaDim(26, 8) @0x7fbaac865770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 57/57/57[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 57/57/57
+I0507 20:40:54.168745   689 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tmm_26_72_26(int K, int M, int N, float* pC, const float* pA, const float* pB) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*C)[26] = reinterpret_cast<float (*)[26]>(pC);
+  const float (*A)[26] = reinterpret_cast<const float (*)[26]>(pA);
+  const float (*B)[26] = reinterpret_cast<const float (*)[26]>(pB);
+  for (int c3 = t1; c3 <= min(31, -32 * b0 + 71); c3 += 8) {
+    C[(32 * b0 + c3)][t0] = (float)0.000000;
+    for (int c5 = 0; c5 <= 25; c5 += 1) {
+      C[(32 * b0 + c3)][t0] = (C[(32 * b0 + c3)][t0] + (A[(32 * b0 + c3)][c5]*B[t0][c5]));
+    }
+  }
+}
+}
+
+grid: CudaDim(3, 1) @0x7fffed919da0 block: CudaDim(26, 8) @0x7fffed919de0
+[72, 26, 26, 500]
+Running autotuner.
+Done compiling "tmm" (compile time: 5191.286999999999ms)
+Execution time: 10.750299999999768 ms
+
+ - - - - 
+
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:41:17.855657   714 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_50_50_50_50(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[50][50] = reinterpret_cast<float (*)[50][50]>(pZ);
+  const float (*X)[50][50] = reinterpret_cast<const float (*)[50][50]>(pX);
+  const float (*Y)[50][50] = reinterpret_cast<const float (*)[50][50]>(pY);
+  for (int c2 = 0; c2 <= 49; c2 += 32) {
+    if (t0 + c2 <= 49) {
+      for (int c4 = 0; c4 <= min(31, -32 * b0 + 49); c4 += 1) {
+        for (int c5 = t1; c5 <= min(31, -32 * b1 + 49); c5 += 8) {
+          Z[(32 * b0 + c4)][(32 * b1 + c5)][(t0 + c2)] = (float)0.000000;
+          for (int c7 = 0; c7 <= 49; c7 += 1) {
+            Z[(32 * b0 + c4)][(32 * b1 + c5)][(t0 + c2)] = (Z[(32 * b0 + c4)][(32 * b1 + c5)][(t0 + c2)] + (X[(32 * b0 + c4)][(32 * b1 + c5)][c7]*Y[(32 * b0 + c4)][(t0 + c2)][c7]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(2, 2) @0x7fff850ce310 block: CudaDim(32, 8) @0x7fff850ce350
+[50, 50, 50, 50]
+Building mapping options.
+Done compiling "tbmm" (compile time: 2168.0030000000024ms)
+Execution time: 28.585600000000255 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:41:43.519989   733 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_50_50_50_50(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[50][50] = reinterpret_cast<float (*)[50][50]>(pZ);
+  const float (*X)[50][50] = reinterpret_cast<const float (*)[50][50]>(pX);
+  const float (*Y)[50][50] = reinterpret_cast<const float (*)[50][50]>(pY);
+  for (int c2 = 0; c2 <= 49; c2 += 32) {
+    if (t0 + c2 <= 49) {
+      for (int c4 = 0; c4 <= min(31, -32 * b0 + 49); c4 += 1) {
+        for (int c5 = t1; c5 <= min(31, -32 * b1 + 49); c5 += 8) {
+          Z[(32 * b0 + c4)][(32 * b1 + c5)][(t0 + c2)] = (float)0.000000;
+          for (int c7 = 0; c7 <= 49; c7 += 1) {
+            Z[(32 * b0 + c4)][(32 * b1 + c5)][(t0 + c2)] = (Z[(32 * b0 + c4)][(32 * b1 + c5)][(t0 + c2)] + (X[(32 * b0 + c4)][(32 * b1 + c5)][c7]*Y[(32 * b0 + c4)][(t0 + c2)][c7]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(2, 2) @0x7f8aecb60730 block: CudaDim(32, 8) @0x7f8aecb60770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 2493/2493/2493[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 2493/2493/2493
+I0507 20:41:47.156777   720 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_50_50_50_50(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[50][50] = reinterpret_cast<float (*)[50][50]>(pZ);
+  const float (*X)[50][50] = reinterpret_cast<const float (*)[50][50]>(pX);
+  const float (*Y)[50][50] = reinterpret_cast<const float (*)[50][50]>(pY);
+  for (int c2 = 0; c2 <= 49; c2 += 32) {
+    if (t0 + c2 <= 49) {
+      for (int c4 = 0; c4 <= min(31, -32 * b0 + 49); c4 += 1) {
+        for (int c5 = t1; c5 <= min(31, -32 * b1 + 49); c5 += 8) {
+          Z[(32 * b0 + c4)][(32 * b1 + c5)][(t0 + c2)] = (float)0.000000;
+          for (int c7 = 0; c7 <= 49; c7 += 1) {
+            Z[(32 * b0 + c4)][(32 * b1 + c5)][(t0 + c2)] = (Z[(32 * b0 + c4)][(32 * b1 + c5)][(t0 + c2)] + (X[(32 * b0 + c4)][(32 * b1 + c5)][c7]*Y[(32 * b0 + c4)][(t0 + c2)][c7]));
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(2, 2) @0x7fff43f53d00 block: CudaDim(32, 8) @0x7fff43f53d40
+[50, 50, 50, 50]
+Running autotuner.
+Done compiling "tbmm" (compile time: 6919.754999999998ms)
+Execution time: 14.288399999999157 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:42:10.837339   745 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_1_32_128_256(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[256][32] = reinterpret_cast<float (*)[256][32]>(pZ);
+  const float (*X)[256][128] = reinterpret_cast<const float (*)[256][128]>(pX);
+  const float (*Y)[32][128] = reinterpret_cast<const float (*)[32][128]>(pY);
+  for (int c5 = t1; c5 <= 31; c5 += 8) {
+    Z[0][(32 * b1 + c5)][t0] = (float)0.000000;
+    for (int c7 = 0; c7 <= 127; c7 += 1) {
+      Z[0][(32 * b1 + c5)][t0] = (Z[0][(32 * b1 + c5)][t0] + (X[0][(32 * b1 + c5)][c7]*Y[0][t0][c7]));
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 8) @0x7fff2996fa30 block: CudaDim(32, 8) @0x7fff2996fa70
+[128, 32, 256, 1]
+Building mapping options.
+Done compiling "tbmm" (compile time: 1880.824999999998ms)
+Execution time: 20.883899999999755 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:42:35.790527   764 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_1_32_128_256(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[256][32] = reinterpret_cast<float (*)[256][32]>(pZ);
+  const float (*X)[256][128] = reinterpret_cast<const float (*)[256][128]>(pX);
+  const float (*Y)[32][128] = reinterpret_cast<const float (*)[32][128]>(pY);
+  for (int c5 = t1; c5 <= 31; c5 += 8) {
+    Z[0][(32 * b1 + c5)][t0] = (float)0.000000;
+    for (int c7 = 0; c7 <= 127; c7 += 1) {
+      Z[0][(32 * b1 + c5)][t0] = (Z[0][(32 * b1 + c5)][t0] + (X[0][(32 * b1 + c5)][c7]*Y[0][t0][c7]));
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 8) @0x7fa3e0914730 block: CudaDim(32, 8) @0x7fa3e0914770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 149/149/149[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 149/149/149
+I0507 20:42:39.674662   751 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_1_32_128_256(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[256][32] = reinterpret_cast<float (*)[256][32]>(pZ);
+  const float (*X)[256][128] = reinterpret_cast<const float (*)[256][128]>(pX);
+  const float (*Y)[32][128] = reinterpret_cast<const float (*)[32][128]>(pY);
+  for (int c5 = t1; c5 <= 31; c5 += 8) {
+    Z[0][(32 * b1 + c5)][t0] = (float)0.000000;
+    for (int c7 = 0; c7 <= 127; c7 += 1) {
+      Z[0][(32 * b1 + c5)][t0] = (Z[0][(32 * b1 + c5)][t0] + (X[0][(32 * b1 + c5)][c7]*Y[0][t0][c7]));
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 8) @0x7fff858512d0 block: CudaDim(32, 8) @0x7fff85851310
+[128, 32, 256, 1]
+Running autotuner.
+Done compiling "tbmm" (compile time: 5940.124999999998ms)
+Execution time: 11.576000000000164 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:43:03.234743   776 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_1_1024_128_1024(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[1024][1024] = reinterpret_cast<float (*)[1024][1024]>(pZ);
+  const float (*X)[1024][128] = reinterpret_cast<const float (*)[1024][128]>(pX);
+  const float (*Y)[1024][128] = reinterpret_cast<const float (*)[1024][128]>(pY);
+  for (int c2 = 0; c2 <= 1023; c2 += 32) {
+    for (int c5 = t1; c5 <= 31; c5 += 8) {
+      Z[0][(32 * b1 + c5)][(t0 + c2)] = (float)0.000000;
+      for (int c7 = 0; c7 <= 127; c7 += 1) {
+        Z[0][(32 * b1 + c5)][(t0 + c2)] = (Z[0][(32 * b1 + c5)][(t0 + c2)] + (X[0][(32 * b1 + c5)][c7]*Y[0][(t0 + c2)][c7]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 32) @0x7fff57126ff0 block: CudaDim(32, 8) @0x7fff57127030
+[128, 1024, 1024, 1]
+Building mapping options.
+Done compiling "tbmm" (compile time: 1899.054999999997ms)
+Execution time: 29.876700000000156 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:43:28.160315   795 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_1_1024_128_1024(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[1024][1024] = reinterpret_cast<float (*)[1024][1024]>(pZ);
+  const float (*X)[1024][128] = reinterpret_cast<const float (*)[1024][128]>(pX);
+  const float (*Y)[1024][128] = reinterpret_cast<const float (*)[1024][128]>(pY);
+  for (int c2 = 0; c2 <= 1023; c2 += 32) {
+    for (int c5 = t1; c5 <= 31; c5 += 8) {
+      Z[0][(32 * b1 + c5)][(t0 + c2)] = (float)0.000000;
+      for (int c7 = 0; c7 <= 127; c7 += 1) {
+        Z[0][(32 * b1 + c5)][(t0 + c2)] = (Z[0][(32 * b1 + c5)][(t0 + c2)] + (X[0][(32 * b1 + c5)][c7]*Y[0][(t0 + c2)][c7]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 32) @0x7f8a257fd730 block: CudaDim(32, 8) @0x7f8a257fd770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 6681/6681/6681[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 6681/6681/6681
+I0507 20:43:31.979326   782 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_1_1024_128_1024(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[1024][1024] = reinterpret_cast<float (*)[1024][1024]>(pZ);
+  const float (*X)[1024][128] = reinterpret_cast<const float (*)[1024][128]>(pX);
+  const float (*Y)[1024][128] = reinterpret_cast<const float (*)[1024][128]>(pY);
+  for (int c2 = 0; c2 <= 1023; c2 += 32) {
+    for (int c5 = t1; c5 <= 31; c5 += 8) {
+      Z[0][(32 * b1 + c5)][(t0 + c2)] = (float)0.000000;
+      for (int c7 = 0; c7 <= 127; c7 += 1) {
+        Z[0][(32 * b1 + c5)][(t0 + c2)] = (Z[0][(32 * b1 + c5)][(t0 + c2)] + (X[0][(32 * b1 + c5)][c7]*Y[0][(t0 + c2)][c7]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 32) @0x7ffe1e9719f0 block: CudaDim(32, 8) @0x7ffe1e971a30
+[128, 1024, 1024, 1]
+Running autotuner.
+Done compiling "tbmm" (compile time: 6093.975999999998ms)
+Execution time: 18.14019999999985 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:43:56.280536   807 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_1_4096_128_16384(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[16384][4096] = reinterpret_cast<float (*)[16384][4096]>(pZ);
+  const float (*X)[16384][128] = reinterpret_cast<const float (*)[16384][128]>(pX);
+  const float (*Y)[4096][128] = reinterpret_cast<const float (*)[4096][128]>(pY);
+  for (int c1 = 32 * b1; c1 <= 16383; c1 += 8192) {
+    for (int c2 = 0; c2 <= 4095; c2 += 32) {
+      for (int c5 = t1; c5 <= 31; c5 += 8) {
+        Z[0][(c1 + c5)][(t0 + c2)] = (float)0.000000;
+        for (int c7 = 0; c7 <= 127; c7 += 1) {
+          Z[0][(c1 + c5)][(t0 + c2)] = (Z[0][(c1 + c5)][(t0 + c2)] + (X[0][(c1 + c5)][c7]*Y[0][(t0 + c2)][c7]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 256) @0x7ffe498c9b20 block: CudaDim(32, 8) @0x7ffe498c9b60
+[128, 4096, 16384, 1]
+Building mapping options.
+Done compiling "tbmm" (compile time: 2486.8780000000006ms)
+Execution time: 359.0866000000002 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:44:27.005967   826 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_1_4096_128_16384(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[16384][4096] = reinterpret_cast<float (*)[16384][4096]>(pZ);
+  const float (*X)[16384][128] = reinterpret_cast<const float (*)[16384][128]>(pX);
+  const float (*Y)[4096][128] = reinterpret_cast<const float (*)[4096][128]>(pY);
+  for (int c1 = 32 * b1; c1 <= 16383; c1 += 8192) {
+    for (int c2 = 0; c2 <= 4095; c2 += 32) {
+      for (int c5 = t1; c5 <= 31; c5 += 8) {
+        Z[0][(c1 + c5)][(t0 + c2)] = (float)0.000000;
+        for (int c7 = 0; c7 <= 127; c7 += 1) {
+          Z[0][(c1 + c5)][(t0 + c2)] = (Z[0][(c1 + c5)][(t0 + c2)] + (X[0][(c1 + c5)][c7]*Y[0][(t0 + c2)][c7]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 256) @0x7efc95ffe730 block: CudaDim(32, 8) @0x7efc95ffe770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 333422/333422/333422[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 333422/333422/333422
+I0507 20:44:35.415578   813 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_1_4096_128_16384(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[16384][4096] = reinterpret_cast<float (*)[16384][4096]>(pZ);
+  const float (*X)[16384][128] = reinterpret_cast<const float (*)[16384][128]>(pX);
+  const float (*Y)[4096][128] = reinterpret_cast<const float (*)[4096][128]>(pY);
+  for (int c1 = 32 * b1; c1 <= 16383; c1 += 8192) {
+    for (int c2 = 0; c2 <= 4095; c2 += 32) {
+      for (int c5 = t1; c5 <= 31; c5 += 8) {
+        Z[0][(c1 + c5)][(t0 + c2)] = (float)0.000000;
+        for (int c7 = 0; c7 <= 127; c7 += 1) {
+          Z[0][(c1 + c5)][(t0 + c2)] = (Z[0][(c1 + c5)][(t0 + c2)] + (X[0][(c1 + c5)][c7]*Y[0][(t0 + c2)][c7]));
+        }
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(1, 256) @0x7fff0bb8bca0 block: CudaDim(32, 8) @0x7fff0bb8bce0
+[128, 4096, 16384, 1]
+Running autotuner.
+Done compiling "tbmm" (compile time: 11350.645000000004ms)
+Execution time: 346.33980000000054 ms
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:45:02.330034   838 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_500_26_72_26(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[26][26] = reinterpret_cast<float (*)[26][26]>(pZ);
+  const float (*X)[26][72] = reinterpret_cast<const float (*)[26][72]>(pX);
+  const float (*Y)[26][72] = reinterpret_cast<const float (*)[26][72]>(pY);
+  for (int c4 = 0; c4 <= min(31, -32 * b0 + 499); c4 += 1) {
+    for (int c5 = t1; c5 <= 25; c5 += 8) {
+      Z[(32 * b0 + c4)][c5][t0] = (float)0.000000;
+      for (int c7 = 0; c7 <= 71; c7 += 1) {
+        Z[(32 * b0 + c4)][c5][t0] = (Z[(32 * b0 + c4)][c5][t0] + (X[(32 * b0 + c4)][c5][c7]*Y[(32 * b0 + c4)][t0][c7]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(16, 1) @0x7ffc10bfc330 block: CudaDim(26, 8) @0x7ffc10bfc370
+[72, 26, 26, 500]
+Building mapping options.
+Done compiling "tbmm" (compile time: 1789.287999999999ms)
+Execution time: 23.586900000000455 ms
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0507 20:45:27.340384   857 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_500_26_72_26(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[26][26] = reinterpret_cast<float (*)[26][26]>(pZ);
+  const float (*X)[26][72] = reinterpret_cast<const float (*)[26][72]>(pX);
+  const float (*Y)[26][72] = reinterpret_cast<const float (*)[26][72]>(pY);
+  for (int c4 = 0; c4 <= min(31, -32 * b0 + 499); c4 += 1) {
+    for (int c5 = t1; c5 <= 25; c5 += 8) {
+      Z[(32 * b0 + c4)][c5][t0] = (float)0.000000;
+      for (int c7 = 0; c7 <= 71; c7 += 1) {
+        Z[(32 * b0 + c4)][c5][t0] = (Z[(32 * b0 + c4)][c5][t0] + (X[(32 * b0 + c4)][c5][c7]*Y[(32 * b0 + c4)][t0][c7]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(16, 1) @0x7f839bb62730 block: CudaDim(26, 8) @0x7f839bb62770
+[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 0)/1[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 1937/1937/1937[2KIteration 0	Jobs(Compiled, Evaluated)/total  (1, 1)/1   (best/median/worst)us: 1937/1937/1937
+I0507 20:45:30.261757   844 cuda_tc_executor.cc:104] generatedCuda: 
+template<typename T> inline __device__ T floord(T n, T d) {
+  return n < 0 ? - (-n + d - 1)/d : n / d;
+}
+#define if_then_else(cond,a,b) ((cond) ? (a) : (b))
+
+#ifndef __CUDACC_RTC__
+// Can't include system dependencies with NVRTC
+// Can't include cuda_fp16.h with NVRTC due to transitive system dependencies
+#include <cuda_fp16.h>
+#endif
+
+#define inff __int_as_float(0x7f800000)
+#define inf __longlong_as_double(0x7ff0000000000000LL)
+
+// Before CUDA 9, syncwarp is a noop since warps are always synchronized.
+#if (!defined(__clang__) && __CUDACC_VER_MAJOR__ < 9) || \
+    ( defined(__clang__) && CUDA_VERSION < 9000)
+inline __device__ void __syncwarp(unsigned mask = 0xFFFFFFFF) {}
+#endif
+
+extern "C" {
+__global__ void tbmm_500_26_72_26(int B, int K, int M, int N, float* pZ, const float* pX, const float* pY) {
+  int b0 = blockIdx.x; int b1 = blockIdx.y; int b2 = blockIdx.z;
+  int t0 = threadIdx.x; int t1 = threadIdx.y; int t2 = threadIdx.z;
+  float (*Z)[26][26] = reinterpret_cast<float (*)[26][26]>(pZ);
+  const float (*X)[26][72] = reinterpret_cast<const float (*)[26][72]>(pX);
+  const float (*Y)[26][72] = reinterpret_cast<const float (*)[26][72]>(pY);
+  for (int c4 = 0; c4 <= min(31, -32 * b0 + 499); c4 += 1) {
+    for (int c5 = t1; c5 <= 25; c5 += 8) {
+      Z[(32 * b0 + c4)][c5][t0] = (float)0.000000;
+      for (int c7 = 0; c7 <= 71; c7 += 1) {
+        Z[(32 * b0 + c4)][c5][t0] = (Z[(32 * b0 + c4)][c5][t0] + (X[(32 * b0 + c4)][c5][c7]*Y[(32 * b0 + c4)][t0][c7]));
+      }
+    }
+  }
+}
+}
+
+grid: CudaDim(16, 1) @0x7ffcb64caa30 block: CudaDim(26, 8) @0x7ffcb64caa70
+[72, 26, 26, 500]
+Running autotuner.
+Done compiling "tbmm" (compile time: 5857.109000000001ms)
+Execution time: 13.648199999999733 ms
+
+ - - - - 
+

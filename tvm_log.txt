@@ -1,6 +1,6 @@
 Manual schedule parameters
-Done compiling "matmul" (compile time: 155.814ms)
-Execution time: 19.6134 ms
+Done compiling "matmul" (compile time: 154.633ms)
+Execution time: 20.7737 ms
 extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int N, int M, int L) {
   if (((int)blockIdx.x) < (N / 8)) {
     if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
@@ -29,8 +29,8 @@ extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "matmul" (compile time: 155.223ms)
-Execution time: 7.4134 ms
+Done compiling "matmul" (compile time: 147.884ms)
+Execution time: 7.3582 ms
 extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int N, int M, int L) {
   if (((int)blockIdx.x) < (N / 8)) {
     if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
@@ -59,8 +59,8 @@ extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "matmul" (compile time: 146.009ms)
-Execution time: 13.6109 ms
+Done compiling "matmul" (compile time: 148.554ms)
+Execution time: 13.2403 ms
 extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int N, int M, int L) {
   if (((int)blockIdx.x) < (N / 8)) {
     if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
@@ -89,8 +89,8 @@ extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "matmul" (compile time: 159.629ms)
-Execution time: 342.1066 ms
+Done compiling "matmul" (compile time: 178.279ms)
+Execution time: 342.5599 ms
 extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int N, int M, int L) {
   if (((int)blockIdx.x) < (N / 8)) {
     if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
@@ -119,8 +119,8 @@ extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "matmul" (compile time: 143.951ms)
-Execution time: 8.244 ms
+Done compiling "matmul" (compile time: 163.702ms)
+Execution time: 7.3479 ms
 extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int N, int M, int L) {
   if (((int)blockIdx.x) < (N / 8)) {
     if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
@@ -152,8 +152,8 @@ extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __rest
  - - - - 
 
 Manual schedule parameters
-Done compiling "map" (compile time: 129.734ms)
-Execution time: 14.1885 ms
+Done compiling "map" (compile time: 124.099ms)
+Execution time: 13.9315 ms
 extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restrict__ A, int M) {
   if (((int)blockIdx.x) < (M / 8)) {
     B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
@@ -166,8 +166,8 @@ extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restric
 
 
 Manual schedule parameters
-Done compiling "map" (compile time: 123.513ms)
-Execution time: 5.5834 ms
+Done compiling "map" (compile time: 134.854ms)
+Execution time: 5.3008 ms
 extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restrict__ A, int M) {
   if (((int)blockIdx.x) < (M / 8)) {
     B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
@@ -180,8 +180,8 @@ extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restric
 
 
 Manual schedule parameters
-Done compiling "map" (compile time: 123.187ms)
-Execution time: 5.4891 ms
+Done compiling "map" (compile time: 129.255ms)
+Execution time: 5.3628 ms
 extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restrict__ A, int M) {
   if (((int)blockIdx.x) < (M / 8)) {
     B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
@@ -194,8 +194,8 @@ extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restric
 
 
 Manual schedule parameters
-Done compiling "map" (compile time: 119.157ms)
-Execution time: 5.7107 ms
+Done compiling "map" (compile time: 120.15ms)
+Execution time: 5.3549 ms
 extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restrict__ A, int M) {
   if (((int)blockIdx.x) < (M / 8)) {
     B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
@@ -208,8 +208,8 @@ extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restric
 
 
 Manual schedule parameters
-Done compiling "map" (compile time: 128.198ms)
-Execution time: 5.419 ms
+Done compiling "map" (compile time: 126.424ms)
+Execution time: 5.475 ms
 extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restrict__ A, int M) {
   if (((int)blockIdx.x) < (M / 8)) {
     B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
@@ -225,8 +225,8 @@ extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restric
  - - - - 
 
 Manual schedule parameters
-Done compiling "conv2d" (compile time: 212.354ms)
-Execution time: 70.7254 ms
+Done compiling "conv2d" (compile time: 197.253ms)
+Execution time: 70.4523 ms
 extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __restrict__ W,  float* __restrict__ B) {
    float B_local[64];
   __shared__ float A_shared[512];
@@ -285,8 +285,8 @@ extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "conv2d" (compile time: 195.606ms)
-Execution time: 30.8274 ms
+Done compiling "conv2d" (compile time: 197.047ms)
+Execution time: 29.2318 ms
 extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __restrict__ W,  float* __restrict__ B) {
    float B_local[64];
   __shared__ float A_shared[512];
@@ -375,8 +375,8 @@ extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "conv2d" (compile time: 196.701ms)
-Execution time: 25.0934 ms
+Done compiling "conv2d" (compile time: 192.728ms)
+Execution time: 23.9644 ms
 extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __restrict__ W,  float* __restrict__ B) {
    float B_local[64];
   __shared__ float A_shared[512];
@@ -459,8 +459,8 @@ extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "conv2d" (compile time: 195.415ms)
-Execution time: 45.2178 ms
+Done compiling "conv2d" (compile time: 192.092ms)
+Execution time: 44.1452 ms
 extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __restrict__ W,  float* __restrict__ B) {
    float B_local[64];
   __shared__ float A_shared[512];
@@ -557,8 +557,8 @@ extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "conv2d" (compile time: 195.51ms)
-Execution time: 32.7095 ms
+Done compiling "conv2d" (compile time: 196.766ms)
+Execution time: 32.4998 ms
 extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __restrict__ W,  float* __restrict__ B) {
    float B_local[64];
   __shared__ float A_shared[512];
@@ -648,8 +648,8 @@ extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __rest
  - - - - 
 
 Manual schedule parameters
-Done compiling "tmm" (compile time: 155.61ms)
-Execution time: 19.5252 ms
+Done compiling "tmm" (compile time: 142.845ms)
+Execution time: 18.9891 ms
 extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int M, int N, int K) {
   if (((int)blockIdx.x) < (M / 8)) {
     if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
@@ -678,8 +678,8 @@ extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restric
 
 
 Manual schedule parameters
-Done compiling "tmm" (compile time: 153.373ms)
-Execution time: 7.6691 ms
+Done compiling "tmm" (compile time: 157.223ms)
+Execution time: 7.126 ms
 extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int M, int N, int K) {
   if (((int)blockIdx.x) < (M / 8)) {
     if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
@@ -708,8 +708,8 @@ extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restric
 
 
 Manual schedule parameters
-Done compiling "tmm" (compile time: 171.793ms)
-Execution time: 12.8445 ms
+Done compiling "tmm" (compile time: 154.451ms)
+Execution time: 12.5417 ms
 extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int M, int N, int K) {
   if (((int)blockIdx.x) < (M / 8)) {
     if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
@@ -738,8 +738,8 @@ extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restric
 
 
 Manual schedule parameters
-Done compiling "tmm" (compile time: 170.073ms)
-Execution time: 364.3569 ms
+Done compiling "tmm" (compile time: 170.452ms)
+Execution time: 364.4392 ms
 extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int M, int N, int K) {
   if (((int)blockIdx.x) < (M / 8)) {
     if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
@@ -768,8 +768,8 @@ extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restric
 
 
 Manual schedule parameters
-Done compiling "tmm" (compile time: 155.414ms)
-Execution time: 7.4927 ms
+Done compiling "tmm" (compile time: 150.65ms)
+Execution time: 7.1608 ms
 extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int M, int N, int K) {
   if (((int)blockIdx.x) < (M / 8)) {
     if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
@@ -801,8 +801,8 @@ extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restric
  - - - - 
 
 Manual schedule parameters
-Done compiling "tbmm" (compile time: 171.555ms)
-Execution time: 20.7589 ms
+Done compiling "tbmm" (compile time: 159.779ms)
+Execution time: 21.5123 ms
 extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
   if (((int)blockIdx.x) < (B / 8)) {
     if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
@@ -839,8 +839,8 @@ extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restri
 
 
 Manual schedule parameters
-Done compiling "tbmm" (compile time: 171.939ms)
-Execution time: 8.2264 ms
+Done compiling "tbmm" (compile time: 169.707ms)
+Execution time: 8.2726 ms
 extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
   if (((int)blockIdx.x) < (B / 8)) {
     if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
@@ -877,8 +877,8 @@ extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restri
 
 
 Manual schedule parameters
-Done compiling "tbmm" (compile time: 173.998ms)
-Execution time: 35.9102 ms
+Done compiling "tbmm" (compile time: 159.582ms)
+Execution time: 35.3688 ms
 extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
   if (((int)blockIdx.x) < (B / 8)) {
     if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
@@ -915,8 +915,8 @@ extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restri
 
 
 Manual schedule parameters
-Done compiling "tbmm" (compile time: 183.967ms)
-Execution time: 1954.9854 ms
+Done compiling "tbmm" (compile time: 176.185ms)
+Execution time: 1946.9409 ms
 extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
   if (((int)blockIdx.x) < (B / 8)) {
     if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
@@ -953,8 +953,8 @@ extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restri
 
 
 Manual schedule parameters
-Done compiling "tbmm" (compile time: 183.075ms)
-Execution time: 10.795 ms
+Done compiling "tbmm" (compile time: 175.182ms)
+Execution time: 11.799 ms
 extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
   if (((int)blockIdx.x) < (B / 8)) {
     if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
