@@ -33,29 +33,29 @@ run_tc() {
     echo $1 $2 $3 $4
 
     if [ "$3" = "matmul" ] || [ "$3" = "tmm" ]; then
-        arg1=mm_arg1
-        arg2=mm_arg2 
-        arg3=mm_arg3 
-        arg4=mm_arg4 
-        arg5=mm_arg5 
+        arg1=$mm_arg1
+        arg2=$mm_arg2 
+        arg3=$mm_arg3 
+        arg4=$mm_arg4 
+        arg5=$mm_arg5 
     elif [ "$3" = "tbmm" ]; then
-        arg1=tbmm_arg1
-        arg2=tbmm_arg2 
-        arg3=tbmm_arg3 
-        arg4=tbmm_arg4 
-        arg5=tbmm_arg5 
+        arg1=$tbmm_arg1
+        arg2=$tbmm_arg2 
+        arg3=$tbmm_arg3 
+        arg4=$tbmm_arg4 
+        arg5=$tbmm_arg5 
     elif [ "$3" = "conv2d" ]; then
-        arg1=conv_arg1
-        arg2=conv_arg2
-        arg3=conv_arg3
-        arg4=conv_arg4
-        arg5=conv_arg5
+        arg1=$conv_arg1
+        arg2=$conv_arg2
+        arg3=$conv_arg3
+        arg4=$conv_arg4
+        arg5=$conv_arg5
     else # [ "$3" = "map" ] 
-        arg1=map_arg1
-        arg2=map_arg2
-        arg3=map_arg3
-        arg4=map_arg4
-        arg5=map_arg5
+        arg1=$map_arg1
+        arg2=$map_arg2
+        arg3=$map_arg3
+        arg4=$map_arg4
+        arg5=$map_arg5
     fi 
 
     /opt/conda/anaconda/envs/tc_build/bin/python3 tc/tc_bench.py --debug=True --prog=$3 --size $arg1 &>> $4
@@ -90,29 +90,29 @@ run_tvm() {
     echo $1 $2
 
     if [ "$1" = "matmul" ] || [ "$1" = "tmm" ]; then
-        arg1=mm_arg1
-        arg2=mm_arg2 
-        arg3=mm_arg3 
-        arg4=mm_arg4 
-        arg5=mm_arg5 
+        arg1=$mm_arg1
+        arg2=$mm_arg2 
+        arg3=$mm_arg3 
+        arg4=$mm_arg4 
+        arg5=$mm_arg5 
     elif [ "$1" = "tbmm" ]; then
-        arg1=tbmm_arg1
-        arg2=tbmm_arg2 
-        arg3=tbmm_arg3 
-        arg4=tbmm_arg4 
-        arg5=tbmm_arg5 
+        arg1=$tbmm_arg1
+        arg2=$tbmm_arg2 
+        arg3=$tbmm_arg3 
+        arg4=$tbmm_arg4 
+        arg5=$tbmm_arg5 
     elif [ "$1" = "conv2d" ]; then
-        arg1=conv_arg1
-        arg2=conv_arg2
-        arg3=conv_arg3
-        arg4=conv_arg4
-        arg5=conv_arg5
+        arg1=$conv_arg1
+        arg2=$conv_arg2
+        arg3=$conv_arg3
+        arg4=$conv_arg4
+        arg5=$conv_arg5
     else # [ "$1" = "map" ] 
-        arg1=map_arg1
-        arg2=map_arg2
-        arg3=map_arg3
-        arg4=map_arg4
-        arg5=map_arg5
+        arg1=$map_arg1
+        arg2=$map_arg2
+        arg3=$map_arg3
+        arg4=$map_arg4
+        arg5=$map_arg5
     fi 
 
     python tvm/tvm_bench.py --debug=True --prog=$1 --size $arg1 >> $2
