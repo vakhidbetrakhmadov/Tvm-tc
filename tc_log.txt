@@ -1,1115 +1,385 @@
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg1'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg1'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg2'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg2'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg3'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg3'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg4'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg4'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg5'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg5'
+[72, 26, 26]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 33, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[72, 26, 26]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 33, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[50, 50, 50]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 33, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[50, 50, 50]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 33, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 32, 256]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 33, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 32, 256]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 33, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 1024, 1024]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 33, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 1024, 1024]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 33, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 4096, 16384]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 33, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 4096, 16384]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 33, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
 
  - - - - 
 
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg1'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg1'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg2'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg2'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg3'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg3'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg4'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg4'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg5'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'mm_arg5'
+[72, 26, 26]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 67, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[72, 26, 26]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 67, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[50, 50, 50]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 67, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[50, 50, 50]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 67, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 32, 256]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 67, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 32, 256]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 67, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 1024, 1024]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 67, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 1024, 1024]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 67, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 4096, 16384]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 67, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
+[128, 4096, 16384]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 67, in main
+    M, K, N, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 3)
 
  - - - - 
 
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'tbmm_arg1'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'tbmm_arg1'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'tbmm_arg2'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'tbmm_arg2'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'tbmm_arg3'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'tbmm_arg3'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'tbmm_arg4'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'tbmm_arg4'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'tbmm_arg5'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'tbmm_arg5'
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[72, 26, 26, 250]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 77, in main
+    A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[72, 26, 26, 250]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 77, in main
+    A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[72, 26, 26, 500]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 77, in main
+    A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[72, 26, 26, 500]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 77, in main
+    A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[72, 26, 26, 1024]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 77, in main
+    A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[72, 26, 26, 1024]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 77, in main
+    A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[50, 50, 50, 500]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 77, in main
+    A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[50, 50, 50, 500]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 77, in main
+    A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[50, 50, 50, 1024]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 77, in main
+    A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[50, 50, 50, 1024]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 77, in main
+    A, B = torch.randn(B, N, M).cuda(), torch.randn(B, K, M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
 
  - - - - 
 
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'conv_arg1'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'conv_arg1'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'conv_arg2'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'conv_arg2'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'conv_arg3'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'conv_arg3'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'conv_arg4'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'conv_arg4'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'conv_arg5'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'conv_arg5'
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[32, 16, 16, 14, 14]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 60, in main
+    IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[32, 16, 16, 14, 14]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 60, in main
+    IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[32, 32, 32, 7, 7]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 60, in main
+    IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[32, 32, 32, 7, 7]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 60, in main
+    IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[32, 4, 4, 56, 56]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 60, in main
+    IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[32, 4, 4, 56, 56]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 60, in main
+    IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[32, 8, 8, 28, 28]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 60, in main
+    IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[32, 8, 8, 28, 28]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 60, in main
+    IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[256, 256, 512, 14, 3]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 60, in main
+    IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
+[256, 256, 512, 14, 3]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 60, in main
+    IN = torch.randn(batch, in_channel, in_size, in_size).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
 
  - - - - 
 
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'map_arg1'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'map_arg1'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'map_arg2'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'map_arg2'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'map_arg3'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'map_arg3'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'map_arg4'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'map_arg4'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'map_arg5'
-usage: tc_bench.py [-h] [--debug DEBUG] [--prog PROG] [--size SIZE [SIZE ...]]
-                   [--count COUNT] [--autotuner AUTOTUNER]
-                   [--load_from_cache LOAD_FROM_CACHE]
-                   [--store_to_cache STORE_TO_CACHE]
-                   [--tuner_threads TUNER_THREADS]
-                   [--tuner_generations TUNER_GENERATIONS]
-                   [--tuner_pop_size TUNER_POP_SIZE]
-                   [--tuner_number_elites TUNER_NUMBER_ELITES]
-                   [--tuner_devices TUNER_DEVICES]
-                   [--tuner_cache_file TUNER_CACHE_FILE]
-                   [--mapToBlocks MAPTOBLOCKS [MAPTOBLOCKS ...]]
-                   [--mapToThreads MAPTOTHREADS [MAPTOTHREADS ...]]
-                   [--tile TILE [TILE ...]]
-                   [--useSharedMemory USESHAREDMEMORY]
-                   [--maxSharedMemory MAXSHAREDMEMORY] [--unroll UNROLL]
-                   [--unrollCopyShared UNROLLCOPYSHARED]
-                   [--useReaOnlyCache USEREAONLYCACHE]
-                   [--matchLibraryCalls MATCHLIBRARYCALLS]
-                   [--fixParametersBeforeScheduling FIXPARAMETERSBEFORESCHEDULING]
-                   [--outerScheduleFusionStrategy OUTERSCHEDULEFUSIONSTRATEGY]
-                   [--intraTileFusionStrategy INTRATILEFUSIONSTRATEGY]
-tc_bench.py: error: argument --size: invalid int value: 'map_arg5'
+[1000]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 41, in main
+    M, _, _, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 1)
+[1000]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 41, in main
+    M, _, _, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 1)
+[10000]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 41, in main
+    M, _, _, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 1)
+[10000]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 41, in main
+    M, _, _, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 1)
+[100000]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 41, in main
+    M, _, _, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 1)
+[100000]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 41, in main
+    M, _, _, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 1)
+[1000000]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 41, in main
+    M, _, _, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 1)
+[1000000]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 41, in main
+    M, _, _, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 1)
+[10000000]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 41, in main
+    M, _, _, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 1)
+[10000000]
+Traceback (most recent call last):
+  File "tc/tc_bench.py", line 82, in <module>
+    main()
+  File "tc/tc_bench.py", line 41, in main
+    M, _, _, _ = args.size
+ValueError: not enough values to unpack (expected 4, got 1)
 
  - - - - 
 
