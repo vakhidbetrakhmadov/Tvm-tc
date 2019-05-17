@@ -79,7 +79,7 @@ else:
     
     if args.prog == "matmul":
 
-        N, L, M, _ = args.size
+        N, L, M = args.size
 
         s, arg_bufs = programs.matmul(args)
 
@@ -96,7 +96,7 @@ else:
     
     elif args.prog == "map":
 
-        M, _, _, _ = args.size
+        M = args.size
 
         s, arg_bufs = programs._map(args)
 
@@ -133,7 +133,7 @@ else:
 
     elif args.prog == "tmm":
 
-        M, K, N, _ = args.size
+        M, K, N = args.size
 
         s, arg_bufs = programs.tmm(args)
 
