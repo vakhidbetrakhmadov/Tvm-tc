@@ -1,50 +1,26 @@
 Manual schedule parameters
-Manual schedule parameters
-Manual schedule parameters
-Manual schedule parameters
-Manual schedule parameters
-
- - - - - 
-
-Manual schedule parameters
-Manual schedule parameters
-Manual schedule parameters
-Manual schedule parameters
-Manual schedule parameters
-
- - - - - 
-
-Manual schedule parameters
-Done compiling "tbmm" (compile time: 519.307ms)
-Execution time: 22.5981 ms
-extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
-  if (((int)blockIdx.x) < (B / 8)) {
-    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-      if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-        Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
-      }
+Done compiling "matmul" (compile time: 501.642ms)
+Execution time: 20.9993 ms
+extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int N, int M, int L) {
+  if (((int)blockIdx.x) < (N / 8)) {
+    if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+      C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
     }
-    for (int m = 0; m < M; ++m) {
-      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m)]));
-        }
+    for (int k = 0; k < L; ++k) {
+      if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * L) + k)] * B[(((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) + (k * M))]));
       }
     }
   } else {
-    if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
-      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
-        }
+    if ((((int)blockIdx.x) * 8) < (N - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
       }
     }
-    for (int m1 = 0; m1 < M; ++m1) {
-      if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
-        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-          if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-            Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m1)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m1)]));
-          }
+    for (int k1 = 0; k1 < L; ++k1) {
+      if ((((int)blockIdx.x) * 8) < (N - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+          C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * L) + k1)] * B[(((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) + (k1 * M))]));
         }
       }
     }
@@ -53,36 +29,28 @@ extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restri
 
 
 Manual schedule parameters
-Done compiling "tbmm" (compile time: 458.977ms)
-Execution time: 10.0267 ms
-extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
-  if (((int)blockIdx.x) < (B / 8)) {
-    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-      if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-        Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
-      }
+Done compiling "matmul" (compile time: 488.548ms)
+Execution time: 6.8734 ms
+extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int N, int M, int L) {
+  if (((int)blockIdx.x) < (N / 8)) {
+    if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+      C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
     }
-    for (int m = 0; m < M; ++m) {
-      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m)]));
-        }
+    for (int k = 0; k < L; ++k) {
+      if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * L) + k)] * B[(((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) + (k * M))]));
       }
     }
   } else {
-    if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
-      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
-        }
+    if ((((int)blockIdx.x) * 8) < (N - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
       }
     }
-    for (int m1 = 0; m1 < M; ++m1) {
-      if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
-        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-          if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-            Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m1)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m1)]));
-          }
+    for (int k1 = 0; k1 < L; ++k1) {
+      if ((((int)blockIdx.x) * 8) < (N - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+          C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * L) + k1)] * B[(((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) + (k1 * M))]));
         }
       }
     }
@@ -91,36 +59,28 @@ extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restri
 
 
 Manual schedule parameters
-Done compiling "tbmm" (compile time: 287.989ms)
-Execution time: 13.4604 ms
-extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
-  if (((int)blockIdx.x) < (B / 8)) {
-    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-      if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-        Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
-      }
+Done compiling "matmul" (compile time: 504.072ms)
+Execution time: 7.2695 ms
+extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int N, int M, int L) {
+  if (((int)blockIdx.x) < (N / 8)) {
+    if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+      C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
     }
-    for (int m = 0; m < M; ++m) {
-      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m)]));
-        }
+    for (int k = 0; k < L; ++k) {
+      if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * L) + k)] * B[(((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) + (k * M))]));
       }
     }
   } else {
-    if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
-      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
-        }
+    if ((((int)blockIdx.x) * 8) < (N - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
       }
     }
-    for (int m1 = 0; m1 < M; ++m1) {
-      if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
-        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-          if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-            Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m1)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m1)]));
-          }
+    for (int k1 = 0; k1 < L; ++k1) {
+      if ((((int)blockIdx.x) * 8) < (N - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+          C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * L) + k1)] * B[(((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) + (k1 * M))]));
         }
       }
     }
@@ -129,36 +89,28 @@ extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restri
 
 
 Manual schedule parameters
-Done compiling "tbmm" (compile time: 585.34ms)
-Execution time: 16.9323 ms
-extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
-  if (((int)blockIdx.x) < (B / 8)) {
-    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-      if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-        Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
-      }
+Done compiling "matmul" (compile time: 416.189ms)
+Execution time: 13.0424 ms
+extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int N, int M, int L) {
+  if (((int)blockIdx.x) < (N / 8)) {
+    if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+      C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
     }
-    for (int m = 0; m < M; ++m) {
-      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m)]));
-        }
+    for (int k = 0; k < L; ++k) {
+      if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * L) + k)] * B[(((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) + (k * M))]));
       }
     }
   } else {
-    if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
-      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
-        }
+    if ((((int)blockIdx.x) * 8) < (N - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
       }
     }
-    for (int m1 = 0; m1 < M; ++m1) {
-      if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
-        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-          if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-            Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m1)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m1)]));
-          }
+    for (int k1 = 0; k1 < L; ++k1) {
+      if ((((int)blockIdx.x) * 8) < (N - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+          C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * L) + k1)] * B[(((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) + (k1 * M))]));
         }
       }
     }
@@ -167,36 +119,28 @@ extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restri
 
 
 Manual schedule parameters
-Done compiling "tbmm" (compile time: 307.839ms)
-Execution time: 28.2957 ms
-extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
-  if (((int)blockIdx.x) < (B / 8)) {
-    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-      if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-        Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
-      }
+Done compiling "matmul" (compile time: 517.805ms)
+Execution time: 338.9156 ms
+extern "C" __global__ void matmul_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int N, int M, int L) {
+  if (((int)blockIdx.x) < (N / 8)) {
+    if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+      C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
     }
-    for (int m = 0; m < M; ++m) {
-      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m)]));
-        }
+    for (int k = 0; k < L; ++k) {
+      if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * L) + k)] * B[(((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) + (k * M))]));
       }
     }
   } else {
-    if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
-      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
-        }
+    if ((((int)blockIdx.x) * 8) < (N - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
       }
     }
-    for (int m1 = 0; m1 < M; ++m1) {
-      if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
-        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
-          if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
-            Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m1)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m1)]));
-          }
+    for (int k1 = 0; k1 < L; ++k1) {
+      if ((((int)blockIdx.x) * 8) < (N - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (M - ((int)threadIdx.y))) {
+          C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * M) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * L) + k1)] * B[(((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) + (k1 * M))]));
         }
       }
     }
@@ -208,8 +152,354 @@ extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restri
  - - - - 
 
 Manual schedule parameters
-Done compiling "conv2d" (compile time: 507.016ms)
-Execution time: 28.342 ms
+Done compiling "tmm" (compile time: 356.403ms)
+Execution time: 18.5651 ms
+extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int M, int N, int K) {
+  if (((int)blockIdx.x) < (M / 8)) {
+    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+      C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
+    }
+    for (int k = 0; k < K; ++k) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + k)] * B[((((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) * K) + k)]));
+      }
+    }
+  } else {
+    if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
+      }
+    }
+    for (int k1 = 0; k1 < K; ++k1) {
+      if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+          C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + k1)] * B[((((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) * K) + k1)]));
+        }
+      }
+    }
+  }
+}
+
+
+Manual schedule parameters
+Done compiling "tmm" (compile time: 298.261ms)
+Execution time: 7.1631 ms
+extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int M, int N, int K) {
+  if (((int)blockIdx.x) < (M / 8)) {
+    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+      C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
+    }
+    for (int k = 0; k < K; ++k) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + k)] * B[((((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) * K) + k)]));
+      }
+    }
+  } else {
+    if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
+      }
+    }
+    for (int k1 = 0; k1 < K; ++k1) {
+      if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+          C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + k1)] * B[((((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) * K) + k1)]));
+        }
+      }
+    }
+  }
+}
+
+
+Manual schedule parameters
+Done compiling "tmm" (compile time: 525.097ms)
+Execution time: 6.9389 ms
+extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int M, int N, int K) {
+  if (((int)blockIdx.x) < (M / 8)) {
+    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+      C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
+    }
+    for (int k = 0; k < K; ++k) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + k)] * B[((((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) * K) + k)]));
+      }
+    }
+  } else {
+    if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
+      }
+    }
+    for (int k1 = 0; k1 < K; ++k1) {
+      if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+          C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + k1)] * B[((((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) * K) + k1)]));
+        }
+      }
+    }
+  }
+}
+
+
+Manual schedule parameters
+Done compiling "tmm" (compile time: 472.129ms)
+Execution time: 14.3987 ms
+extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int M, int N, int K) {
+  if (((int)blockIdx.x) < (M / 8)) {
+    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+      C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
+    }
+    for (int k = 0; k < K; ++k) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + k)] * B[((((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) * K) + k)]));
+      }
+    }
+  } else {
+    if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
+      }
+    }
+    for (int k1 = 0; k1 < K; ++k1) {
+      if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+          C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + k1)] * B[((((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) * K) + k1)]));
+        }
+      }
+    }
+  }
+}
+
+
+Manual schedule parameters
+Done compiling "tmm" (compile time: 587.542ms)
+Execution time: 361.7259 ms
+extern "C" __global__ void tmm_kernel0( float* __restrict__ C,  float* __restrict__ A,  float* __restrict__ B, int M, int N, int K) {
+  if (((int)blockIdx.x) < (M / 8)) {
+    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+      C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
+    }
+    for (int k = 0; k < K; ++k) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + k)] * B[((((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) * K) + k)]));
+      }
+    }
+  } else {
+    if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = 0.000000e+00f;
+      }
+    }
+    for (int k1 = 0; k1 < K; ++k1) {
+      if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+          C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] = (C[(((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y))] + (A[((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + k1)] * B[((((((int)blockIdx.y) * 8) + ((int)threadIdx.y)) * K) + k1)]));
+        }
+      }
+    }
+  }
+}
+
+
+
+ - - - - 
+
+Manual schedule parameters
+Done compiling "tbmm" (compile time: 575.756ms)
+Execution time: 8.6236 ms
+extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
+  if (((int)blockIdx.x) < (B / 8)) {
+    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+      if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+        Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
+      }
+    }
+    for (int m = 0; m < M; ++m) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m)]));
+        }
+      }
+    }
+  } else {
+    if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
+        }
+      }
+    }
+    for (int m1 = 0; m1 < M; ++m1) {
+      if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+          if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+            Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m1)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m1)]));
+          }
+        }
+      }
+    }
+  }
+}
+
+
+Manual schedule parameters
+Done compiling "tbmm" (compile time: 589.395ms)
+Execution time: 10.7147 ms
+extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
+  if (((int)blockIdx.x) < (B / 8)) {
+    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+      if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+        Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
+      }
+    }
+    for (int m = 0; m < M; ++m) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m)]));
+        }
+      }
+    }
+  } else {
+    if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
+        }
+      }
+    }
+    for (int m1 = 0; m1 < M; ++m1) {
+      if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+          if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+            Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m1)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m1)]));
+          }
+        }
+      }
+    }
+  }
+}
+
+
+Manual schedule parameters
+Done compiling "tbmm" (compile time: 275.605ms)
+Execution time: 12.7969 ms
+extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
+  if (((int)blockIdx.x) < (B / 8)) {
+    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+      if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+        Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
+      }
+    }
+    for (int m = 0; m < M; ++m) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m)]));
+        }
+      }
+    }
+  } else {
+    if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
+        }
+      }
+    }
+    for (int m1 = 0; m1 < M; ++m1) {
+      if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+          if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+            Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m1)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m1)]));
+          }
+        }
+      }
+    }
+  }
+}
+
+
+Manual schedule parameters
+Done compiling "tbmm" (compile time: 493.445ms)
+Execution time: 15.5818 ms
+extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
+  if (((int)blockIdx.x) < (B / 8)) {
+    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+      if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+        Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
+      }
+    }
+    for (int m = 0; m < M; ++m) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m)]));
+        }
+      }
+    }
+  } else {
+    if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
+        }
+      }
+    }
+    for (int m1 = 0; m1 < M; ++m1) {
+      if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+          if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+            Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m1)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m1)]));
+          }
+        }
+      }
+    }
+  }
+}
+
+
+Manual schedule parameters
+Done compiling "tbmm" (compile time: 366.123ms)
+Execution time: 27.1836 ms
+extern "C" __global__ void tbmm_kernel0( float* __restrict__ Z,  float* __restrict__ X,  float* __restrict__ Y, int B, int N, int K, int M) {
+  if (((int)blockIdx.x) < (B / 8)) {
+    if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+      if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+        Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
+      }
+    }
+    for (int m = 0; m < M; ++m) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m)]));
+        }
+      }
+    }
+  } else {
+    if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
+      if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+        if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+          Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = 0.000000e+00f;
+        }
+      }
+    }
+    for (int m1 = 0; m1 < M; ++m1) {
+      if ((((int)blockIdx.x) * 8) < (B - ((int)threadIdx.x))) {
+        if ((((int)blockIdx.y) * 8) < (N - ((int)threadIdx.y))) {
+          if ((((int)blockIdx.z) * 8) < (K - ((int)threadIdx.z))) {
+            Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] = (Z[((((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z))] + (X[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * N) + (((int)blockIdx.y) * 8)) + ((int)threadIdx.y)) * M) + m1)] * Y[(((((((((int)blockIdx.x) * 8) + ((int)threadIdx.x)) * K) + (((int)blockIdx.z) * 8)) + ((int)threadIdx.z)) * M) + m1)]));
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+ - - - - 
+
+Manual schedule parameters
+Done compiling "conv2d" (compile time: 352.864ms)
+Execution time: 10.7568 ms
 extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __restrict__ W,  float* __restrict__ B) {
    float B_local[64];
   __shared__ float A_shared[512];
@@ -298,8 +588,8 @@ extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "conv2d" (compile time: 574.165ms)
-Execution time: 25.4279 ms
+Done compiling "conv2d" (compile time: 533.312ms)
+Execution time: 8.5381 ms
 extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __restrict__ W,  float* __restrict__ B) {
    float B_local[64];
   __shared__ float A_shared[512];
@@ -382,8 +672,8 @@ extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "conv2d" (compile time: 330.506ms)
-Execution time: 42.8704 ms
+Done compiling "conv2d" (compile time: 456.435ms)
+Execution time: 22.8677 ms
 extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __restrict__ W,  float* __restrict__ B) {
    float B_local[64];
   __shared__ float A_shared[512];
@@ -480,8 +770,8 @@ extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "conv2d" (compile time: 325.187ms)
-Execution time: 31.0999 ms
+Done compiling "conv2d" (compile time: 576.863ms)
+Execution time: 12.9938 ms
 extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __restrict__ W,  float* __restrict__ B) {
    float B_local[64];
   __shared__ float A_shared[512];
@@ -568,8 +858,8 @@ extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __rest
 
 
 Manual schedule parameters
-Done compiling "conv2d" (compile time: 360.522ms)
-Execution time: 68.9183 ms
+Done compiling "conv2d" (compile time: 481.696ms)
+Execution time: 17.2248 ms
 extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __restrict__ W,  float* __restrict__ B) {
    float B_local[64];
   __shared__ float A_shared[512];
@@ -631,10 +921,75 @@ extern "C" __global__ void conv2d_kernel0( float* __restrict__ A,  float* __rest
  - - - - 
 
 Manual schedule parameters
+Done compiling "map" (compile time: 529.707ms)
+Execution time: 13.5796 ms
+extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restrict__ A, int M) {
+  if (((int)blockIdx.x) < (M / 8)) {
+    B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
+  } else {
+    if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+      B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
+    }
+  }
+}
+
+
 Manual schedule parameters
+Done compiling "map" (compile time: 401.833ms)
+Execution time: 5.5364 ms
+extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restrict__ A, int M) {
+  if (((int)blockIdx.x) < (M / 8)) {
+    B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
+  } else {
+    if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+      B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
+    }
+  }
+}
+
+
 Manual schedule parameters
+Done compiling "map" (compile time: 523.026ms)
+Execution time: 5.2123 ms
+extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restrict__ A, int M) {
+  if (((int)blockIdx.x) < (M / 8)) {
+    B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
+  } else {
+    if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+      B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
+    }
+  }
+}
+
+
 Manual schedule parameters
+Done compiling "map" (compile time: 446.157ms)
+Execution time: 5.3119 ms
+extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restrict__ A, int M) {
+  if (((int)blockIdx.x) < (M / 8)) {
+    B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
+  } else {
+    if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+      B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
+    }
+  }
+}
+
+
 Manual schedule parameters
+Done compiling "map" (compile time: 469.575ms)
+Execution time: 7.234 ms
+extern "C" __global__ void map_kernel0( float* __restrict__ B,  float* __restrict__ A, int M) {
+  if (((int)blockIdx.x) < (M / 8)) {
+    B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
+  } else {
+    if ((((int)blockIdx.x) * 8) < (M - ((int)threadIdx.x))) {
+      B[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] = (A[((((int)blockIdx.x) * 8) + ((int)threadIdx.x))] * 3.140000e+00f);
+    }
+  }
+}
+
+
 
  - - - - 
 

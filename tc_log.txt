@@ -1,146 +1,166 @@
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [72, 26, 26]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 33, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 35, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [72, 26, 26]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 33, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 35, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [50, 50, 50]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 33, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 35, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [50, 50, 50]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 33, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 35, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 32, 256]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 33, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 35, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 32, 256]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 33, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 35, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 1024, 1024]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 33, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 35, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 1024, 1024]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 33, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 35, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 4096, 16384]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 33, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 35, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 4096, 16384]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 33, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 35, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(K, N).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
 
  - - - - 
 
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [72, 26, 26]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 67, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 69, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [72, 26, 26]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 67, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 69, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [50, 50, 50]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 67, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 69, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [50, 50, 50]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 67, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 69, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 32, 256]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 67, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 69, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 32, 256]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 67, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 69, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 1024, 1024]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 67, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 69, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 1024, 1024]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 67, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 69, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 4096, 16384]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 67, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 69, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [128, 4096, 16384]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 67, in main
-    M, K, N, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 3)
+  File "tc/tc_bench.py", line 69, in main
+    A, B = torch.randn(M, K).cuda(), torch.randn(N, K).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
 
  - - - - 
 
@@ -310,76 +330,86 @@ RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pyt
 
  - - - - 
 
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [1000]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 41, in main
-    M, _, _, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 1)
+  File "tc/tc_bench.py", line 43, in main
+    A = torch.randn(M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [1000]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 41, in main
-    M, _, _, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 1)
+  File "tc/tc_bench.py", line 43, in main
+    A = torch.randn(M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [10000]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 41, in main
-    M, _, _, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 1)
+  File "tc/tc_bench.py", line 43, in main
+    A = torch.randn(M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [10000]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 41, in main
-    M, _, _, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 1)
+  File "tc/tc_bench.py", line 43, in main
+    A = torch.randn(M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [100000]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 41, in main
-    M, _, _, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 1)
+  File "tc/tc_bench.py", line 43, in main
+    A = torch.randn(M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [100000]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 41, in main
-    M, _, _, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 1)
+  File "tc/tc_bench.py", line 43, in main
+    A = torch.randn(M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [1000000]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 41, in main
-    M, _, _, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 1)
+  File "tc/tc_bench.py", line 43, in main
+    A = torch.randn(M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [1000000]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 41, in main
-    M, _, _, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 1)
+  File "tc/tc_bench.py", line 43, in main
+    A = torch.randn(M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [10000000]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 41, in main
-    M, _, _, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 1)
+  File "tc/tc_bench.py", line 43, in main
+    A = torch.randn(M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
+THCudaCheck FAIL file=/opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu line=25 error=2 : out of memory
 [10000000]
 Traceback (most recent call last):
   File "tc/tc_bench.py", line 82, in <module>
     main()
-  File "tc/tc_bench.py", line 41, in main
-    M, _, _, _ = args.size
-ValueError: not enough values to unpack (expected 4, got 1)
+  File "tc/tc_bench.py", line 43, in main
+    A = torch.randn(M).cuda()
+RuntimeError: cuda runtime error (2) : out of memory at /opt/conda/conda-bld/pytorch_1524586445097/work/aten/src/THC/THCTensorRandom.cu:25
 
  - - - - 
 
