@@ -21,8 +21,18 @@ def build(args: argparse.Namespace, tc_str: str, entry_point: str, *inputs: torc
 
     if args.autotuner:
         if args.debug:  print("Running autotuner.")
-
-        return tc.autotune_and_compile(tc_str,
+        
+        if args.load_from_cache:
+            return tc.autotune_and_compile(tc_str,
+                                       entry_point,
+                                       *inputs,
+                                       starting_options=None,
+                                       tuner_config=tuner_config,
+                                       cache_filename=args.tuner_cache_file,
+                                       load_from_cache=args.load_from_cache,
+                                       store_to_cache=args.store_to_cache)
+        else: 
+            return tc.autotune_and_compile(tc_str,
                                        entry_point,
                                        *inputs,
                                        starting_options='naive',
@@ -30,6 +40,7 @@ def build(args: argparse.Namespace, tc_str: str, entry_point: str, *inputs: torc
                                        cache_filename=args.tuner_cache_file,
                                        load_from_cache=args.load_from_cache,
                                        store_to_cache=args.store_to_cache)
+
     elif args.load_from_cache:
         if args.debug:  print("Loading autotuned mapping options from cache.")
             
@@ -54,15 +65,15 @@ def build(args: argparse.Namespace, tc_str: str, entry_point: str, *inputs: torc
             options.unroll(args.unroll)
         if args.unrollCopyShared is not None:
             options.unrollCopyShared(args.unrollCopyShared)
-        if args.useReaOnlyCache is not None:
-            options.useReaOnlyCache(args.useReaOnlyCache)
+        if args.useReadOnlyCache is not None:
+            options.useReadOnlyCache(args.useReadOnlyCache)
         if args.matchLibraryCalls is not None:
             options.matchLibraryCalls(args.matchLibraryCalls)
         if args.fixParametersBeforeScheduling is not None:
             options.fixParametersBeforeScheduling(args.fixParametersBeforeScheduling)
         if args.outerScheduleFusionStrategy is not None:
             options.outerScheduleFusionStrategy(args.outerScheduleFusionStrategy)
-        if args.intraTileFusionStrategy is not None:
-            options.intraTileFusionStrategy(args.intraTileFusionStrategy)
+        if args.intraTileScheduleFusionStrategy is not None:
+            options.intraTileScheduleFusionStrategy(args.intraTileScheduleFusionStrategy)
 
         return tc.compile(tc_str, entry_point, options, *inputs)

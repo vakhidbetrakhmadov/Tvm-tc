@@ -25,6 +25,8 @@ def get_argument_parser():
         help='How many time to run.',
     )
 
+    ############################################################
+
     parser.add_argument(
         '--autotuner', type=lambda x: (str(x) == 'True'), default=False,
         help='Use autotuner to find best mapping options',
@@ -61,9 +63,10 @@ def get_argument_parser():
     parser.add_argument(
         '--tuner_cache_file',
         type=str,
-        default='/Tvm-tc/tc/cache',
         help='File to store tuned mapping options',
     )
+
+    ############################################################
 
     parser.add_argument(
         '--mapToBlocks', type=int, nargs='+',
@@ -82,6 +85,10 @@ def get_argument_parser():
         help='Perform loop tiling on the generated code with the given sizes. Independent of mapping to a grid of thread blocks.',
     )
     parser.add_argument(
+        '--unroll', type=int,
+        help='Perform loop unrolling on the generated code and produce at most the given number of statements.',
+    )
+    parser.add_argument(
         '--useSharedMemory', type=lambda x: (str(x) == 'True'),
         help='Create block-local copies of data in shared memory when this can leverage data reuse or global memory access coalescing.',
     )
@@ -90,15 +97,11 @@ def get_argument_parser():
         help='The amount of shared memory to use, in bytes. If not provided, TC will query the active GPU and use all available shared memory.',
     )
     parser.add_argument(
-        '--unroll', type=int,
-        help='Perform loop unrolling on the generated code and produce at most the given number of statements.',
-    )
-    parser.add_argument(
         '--unrollCopyShared', type=lambda x: (str(x) == 'True'),
         help='Also unroll the copies to and from shared memory introduced by the TC mapper. If unroll value is not provided, has no effect.',
     )
     parser.add_argument(
-        '--useReaOnlyCache', type=lambda x: (str(x) == 'True'),
+        '--useReadOnlyCache', type=lambda x: (str(x) == 'True'),
         help='Emit loads to the readonly cache when appropriate.',
     )
     parser.add_argument(
@@ -117,7 +120,7 @@ def get_argument_parser():
               by performing loop fusion and fission. Applies before tiling.',
     )
     parser.add_argument(
-        '--intraTileFusionStrategy', type=str,
+        '--intraTileScheduleFusionStrategy', type=str,
         help='Require TC to try and execute different TC expressions interleaved (Max),\
               separately (Min) or interleaved as long as sufficient parallelism is\
               exploited (Preserve3Coincident) by performing loop fusion and fission. Applies to inner loops created by tiling.',
